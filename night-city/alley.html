@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>雨夜霓虹小巷 · Three.js</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+      user-select: none;
+    }
+    canvas { display: block; cursor: grab; }
+    canvas:active { cursor: grabbing; }
+    #ui {
+      position: fixed;
+      left: 24px;
+      bottom: 20px;
+      color: #e8e2ff;
+      pointer-events: none;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+      transition: opacity 0.6s;
+    }
+    #ui h1 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 5px;
+    }
+    #ui p { margin: 2px 0; font-size: 12px; opacity: 0.75; letter-spacing: 1px; }
+    #ui a { color: #9fe8ff; pointer-events: auto; text-decoration: none; }
+    #ui.hidden { opacity: 0; }
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      background: #05040a;
+      color: #cbbcff;
+      font-size: 13px;
+      letter-spacing: 4px;
+      transition: opacity 1.2s;
+      z-index: 10;
+    }
+    #loading .bar { width: 240px; height: 2px; background: #1c1830; overflow: hidden; }
+    #loading .bar div { height: 100%; width: 0; background: linear-gradient(90deg, #ff3fd0, #4fe3ff); transition: width 0.2s; }
+    #fade { position: fixed; inset: 0; background: #000; opacity: 0; pointer-events: none; transition: opacity 0.9s; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="loading">
+    <div id="loading-text">正在载入小巷…</div>
+    <div class="bar"><div id="loading-bar"></div></div>
+  </div>
+  <div id="fade"></div>
+  <div id="ui">
+    <h1>RAINY ALLEY</h1>
+    <p>拖拽 环顾四周 · 滚轮/W S 前后移动 · A D 左右移动</p>
+    <p>空格 暂停/继续漫步 · R 开关雨 · M 雨声 · H 隐藏说明</p>
+    <p><a href="./index.html">← 返回城市全景</a></p>
+  </div>
+  <script type="module" src="./alley/main.js"></script>
+</body>
+</html>

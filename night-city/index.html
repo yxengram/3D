@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>夜幕下的繁华都市 · Three.js</title>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", sans-serif;
+    }
+    canvas { display: block; }
+    #info {
+      position: fixed;
+      left: 24px;
+      top: 20px;
+      color: #cfe3ff;
+      pointer-events: none;
+      user-select: none;
+    }
+    #info h1 {
+      margin: 0 0 6px;
+      font-size: 22px;
+      letter-spacing: 6px;
+      font-weight: 600;
+      color: #fff;
+      text-shadow: 0 0 8px #00e5ff, 0 0 18px #ff2bd6;
+    }
+    #info p {
+      margin: 2px 0;
+      font-size: 13px;
+      opacity: 0.72;
+      letter-spacing: 1px;
+    }
+    #info a {
+      color: #9fe8ff;
+      text-decoration: none;
+      pointer-events: auto;
+    }
+    #loading {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: #9fd8ff;
+      letter-spacing: 4px;
+      font-size: 15px;
+      background: #05060c;
+      transition: opacity 0.8s;
+      z-index: 10;
+    }
+    #loading .bar { width: 240px; height: 2px; background: #141a2e; overflow: hidden; }
+    #loading .bar div { height: 100%; width: 0; background: linear-gradient(90deg, #ff2bd6, #00e5ff); transition: width 0.2s; }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="info">
+    <h1>NIGHT METROPOLIS</h1>
+    <p>左键拖拽旋转 · 滚轮缩放 · 右键平移 · 空格键 暂停/继续自动环绕</p>
+    <p>镜头预设：1 全景 · 2 街道 · 3 楼顶 · 4 地标塔</p>
+    <p><a href="./alley.html">走进雨夜小巷 →</a></p>
+  </div>
+  <div id="loading">
+    <div id="loading-text">正在载入材质…</div>
+    <div class="bar"><div id="loading-bar"></div></div>
+  </div>
+  <script type="module" src="./city/main.js"></script>
+</body>
+</html>
