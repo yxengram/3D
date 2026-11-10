@@ -459,6 +459,8 @@ export function build(ctx) {
       const roof = kit.cylBase(0.05, 0.38, 0.22, 6); s(roof, 1.02, '#efece0'); s(kit.cylBase(0.27, 0.39, 0.04, 6), 1.0, '#d3d7cb');
       s(kit.sphere(0.075, 7, 5), 1.28, '#f4f2e6'); s(kit.cylBase(0.0, 0.05, 0.08, 6), 1.33, '#f4f2e6');
       put(plantL, smooth(kit.sphere(0.12, 8, 5)), M.clone().multiply(kit.xf({ pos: [0.14, 1.09, -0.08], scale: [1.2, 0.42, 1.05] })), P.mossDeep);
+      const fire = new THREE.Vector3(0, 0.9, 0).applyMatrix4(M), ph = lx * 3.1; // night
+      ctx.shared.lamps.push({ pos: fire.toArray(), r: 5, color: '#ffb057', power: 0.72, halo: 0.95, lift: 0.3, k: (t) => 0.84 + 0.16 * Math.sin(t * 5.7 + ph) * Math.sin(t * 2.1 + ph * 1.3) });
     };
     lantern(BW + 0.42, 2.0, 0, 0.3); lantern(-BW - 0.42, -2.05, 0.15, 1.1);
   }

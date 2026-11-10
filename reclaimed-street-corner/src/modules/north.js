@@ -449,6 +449,8 @@ export function build(ctx) {
     for (const p of lanternParts(s)) { const g = p.g; stones.add(g, stoneMat, { matrix: new THREE.Matrix4().copy(m0).multiply(kit.xf({ pos: p.pos, rot: p.rot || [0, 0, 0], scale: p.scale || 1 })), color: p.col }); }
     const s2 = anchor(x, z, y, yaw, 1.5); for (const a of [0, Q, 2 * Q, 3 * Q]) { const f = s2.sub({ rot: [0, a, 0] }); f.rect(-0.1 * s, 0.1 * s, 0.86 * s, 1.1 * s, 0.172 * s, 'flat', '#4b5a5a'); f.rect(-0.1 * s, 0.1 * s, 0.86 * s, 0.95 * s, 0.173 * s, 'flat', '#e8c777'); }
     clumpW([x, y + 0.14, z], 0.3, 0.17, 6, { s: 0.2, core: false });
+    const ph = x * 2.3 + z; // night: a flame nobody lit
+    ctx.shared.lamps.push({ pos: [x, y + 0.96 * s, z], r: 5, color: '#ffb057', power: 0.72, halo: 1.0 * s, lift: 0.3, k: (t) => 0.84 + 0.16 * Math.sin(t * 6.1 + ph) * Math.sin(t * 2.3 + ph * 1.7) });
   }
   lantern(-28.1, TORII.z - 1.35, 1.16); lantern(-28.1, TORII.z + 1.45, 1.16, { yaw: 0.26 });
   lantern(-31.0, -37.4, 1.05, { yaw: 0.5 });

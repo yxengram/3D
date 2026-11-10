@@ -289,6 +289,7 @@ export function build(ctx) {
     // lamp on a bracket, swinging slightly
     const bracket = f.sub({ pos: [1, 2.3, 0.1] }); bracket.box(-0.03, 0.03, -0.2, 0.2, -0.08, 0, 'worn', P.metalDark); bracket.beam([0, 0.18, 0], [0, 0.18, 0.5], 0.04, 0.04, 'worn', P.metalDark);
     const lamp = kit.cylBase(0.13, 0.1, 0.34, 6); lamp.translate(0, -0.36, 0); motion.add(lamp, f.mx({ pos: [1, 2.48, 0.6] }), { color: P.rust, dir: [1, 0, 0.2], amp: 0.05, weight: () => 1, freq: 1.3, ph: 0.9 }); const glass = kit.sphere(0.075, 6, 4); glass.translate(0, -0.2, 0); motion.add(glass, f.mx({ pos: [1, 2.48, 0.6] }), { color: P.fadedRed, dir: [1, 0, 0.2], amp: 0.05, weight: () => 1, freq: 1.3, ph: 0.9 });
+    { const p = f.w([1, 2.27, 0.6]); ctx.shared.lamps.push({ pos: [p.x, p.y, p.z], r: 4.6, color: '#ff9c5a', power: 0.55, halo: 0.85, lift: 0.3, k: (t) => 0.88 + 0.12 * Math.sin(t * 4.3 + 0.7) * Math.sin(t * 1.9) }); } // night: the keeper's lamp
     // bench and a stack of old sleepers
     { const bk = e10.back; bk.box(-0.55, 0.55, 0.42, 0.48, 0.06, 0.41, 'wood', '#c8a884'); bk.box(-0.5, -0.4, 0, 0.42, 0.08, 0.39, 'wood', '#86664c'); bk.box(0.4, 0.5, 0, 0.42, 0.08, 0.39, 'wood', '#86664c'); }
     for (let i = 0; i < 3; i++) for (let k = 0; k < 3 - i; k++) S.box(1.85 + k * 0.32 + i * 0.16, 2.11 + k * 0.32 + i * 0.16, i * 0.2, i * 0.2 + 0.2, -0.7, 1.05, 'wood', '#5e4a3c');

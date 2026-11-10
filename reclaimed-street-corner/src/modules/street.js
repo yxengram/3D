@@ -659,6 +659,9 @@ export function build(ctx) {
   function vending() {
     const s = STREET.vending, st = at(s.x, SW, s.z, s.yaw), Wd = 1.3, Hg = 2.05, D = 0.96, red = '#c9705c', redD = '#b05a4a';
     const fz = D / 2;
+    // night: the display still has power. A tube that hums, and drops out for a moment now and then.
+    ctx.shared.lamps.push({ pos: st.w([-0.14, 1.3, fz + 0.8]).toArray(), at: st.w([-0.14, 1.4, fz + 0.03]).toArray(), r: 4.6, color: '#d4ecff', power: 0.62, halo: 1.25, lift: 0.3,
+      k: (t) => (Math.sin(t * 0.83) * Math.sin(t * 0.31 + 1) > 0.93 ? 0.35 + 0.3 * Math.sin(t * 41) : 0.95 + 0.05 * Math.sin(t * 17)) });
     st.add(kit.boxBase(Wd, 0.1, D), 'rust', { color: '#b4876a' });
     st.add(kit.boxBase(0.05, Hg - 0.1, D), worn, { pos: [-Wd / 2 + 0.025, 0.1, 0], color: red });
     st.add(kit.boxBase(0.05, Hg - 0.1, D), worn, { pos: [Wd / 2 - 0.025, 0.1, 0], color: red });
@@ -1248,7 +1251,7 @@ export function build(ctx) {
   let tt = fr.range(40, 60); // one early flash for whoever is watching, then minutes apart: a ghost of power, not a blinker
   for (let i = 0; i < 240; i++) { events.push({ t: tt, lens: fr.int(0, 2), d: fr.range(0.26, 0.34) }); tt += fr.range(150, 420); }
   const period = tt + fr.range(150, 420);
-  const lampMat = ctx.toon({ color: '#ffffff', emissive: '#ffffff', emissiveIntensity: 2.2, dapple: false });
+  const lampMat = ctx.toon({ color: '#ffffff', emissive: '#ffffff', emissiveIntensity: 2.2, dapple: false, glow: true });
   const flare = new THREE.Mesh(new THREE.CircleGeometry(0.15, 18), lampMat);
   const q0 = new Q().setFromRotationMatrix(flick.head.m); flare.quaternion.copy(q0); flare.visible = false; flare.castShadow = false;
   ctx.noOutline(flare); group.add(flare);
@@ -1257,7 +1260,10 @@ export function build(ctx) {
     g.fillStyle = l; g.fillRect(0, 0, w, w);
   }, { repeat: false });
   const glow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, blending: THREE.AdditiveBlending, transparent: true, depthWrite: false, opacity: 0.8 }));
-  glow.scale.setScalar(1.15); glow.visible = false; ctx.noOutline(glow); group.add(glow);
+  glow.scale.setScalar(1.15); glow.visible = false; ctx.noOutline(glow); group.add(glow); glow.material.userData.nightKeep = true;
+  // After dark the signal does what a controller with nobody to answer to does: it blinks amber. The lens is its own halo; the lamp slot lights the pole and the road under it.
+  const AMBER = 1, blink = (t) => Math.min(1, Math.max(0, Math.sin(t * 3.6) * 3 + 0.6));
+  ctx.shared.lamps.push({ pos: [flick.lens[AMBER].x, flick.lens[AMBER].y - 0.35, flick.lens[AMBER].z], r: 6.5, color: flick.colors[AMBER], power: 0.8, halo: 0, k: blink });
   const stutter = [1, 0.1, 0.85, 1, 0.25, 0.95, 0.55, 0];
   const lensCol = new THREE.Color();
   let cursor = 0;
@@ -1270,6 +1276,14 @@ export function build(ctx) {
       if (s.axis.includes('z')) s.g.rotation.z = w * 0.7;
     }
     strandSwing(t);
+    if (ctx.shared.uNight.value > 0.5) {
+      const k = blink(t);
+      flare.visible = glow.visible = k > 0.05;
+      lensCol.set(flick.colors[AMBER]);
+      lampMat.color.copy(lensCol); lampMat.emissive.copy(lensCol); lampMat.emissiveIntensity = 3.2 * k;
+      flare.position.copy(flick.lens[AMBER]); glow.position.copy(flick.lens[AMBER]); glow.material.color.copy(lensCol); glow.material.opacity = 0.9 * k;
+      return;
+    }
     const tm = t % period;
     if (cursor > 0 && events[cursor - 1].t > tm) cursor = 0;
     while (cursor < events.length - 1 && events[cursor].t + events[cursor].d < tm) cursor++;

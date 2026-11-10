@@ -741,19 +741,27 @@ export function build(ctx) {
     const cord = cap(0.32, 0.008, 0.1), top = cap(0.25, 0.08, 0.045), bot = cap(-0.25, 0.08, 0.045);
     const g = kit.merge([body, top, bot, cord]); g.translate(0, -0.38, 0); return g;
   })();
-  const lmesh = new THREE.InstancedMesh(lg, ctx.toon({ color: '#ffffff', vertexColors: true, dapple: false, translucent: 0.9, emissive: '#3a2a12', emissiveIntensity: 0.6 }), lanterns.length);
+  const lmat = ctx.toon({ color: '#ffffff', vertexColors: true, dapple: false, translucent: 0.9, emissive: '#3a2a12', emissiveIntensity: 0.6, glow: true });
+  const lmesh = new THREE.InstancedMesh(lg, lmat, lanterns.length);
   lmesh.name = 'west-lanterns'; lmesh.castShadow = false; lmesh.receiveShadow = false; lmesh.frustumCulled = false;
   const lc = new THREE.Color(); lanterns.forEach((l, i) => { lmesh.setColorAt(i, lc.set(l.c)); l.ph = l.p[0] * 3.1 + l.p[2]; l.ph2 = l.p[0] * 1.7 - l.p[2]; }); lmesh.instanceColor.needsUpdate = true; lmesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage); group.add(lmesh);
   const _m = new THREE.Matrix4(), _q = new THREE.Quaternion(), _e = new THREE.Euler(), _p = new THREE.Vector3(), _s = new THREE.Vector3();
   const animLanterns = (t) => lanterns.forEach((l, i) => { const g = ctx.wind(t, l.p[0], l.p[2]); _e.set(0.03 * Math.sin(t * 1.1 + l.ph) + g * 0.055, 0, 0.034 * Math.sin(t * 0.93 + l.ph2) + g * 0.035); _q.setFromEuler(_e); lmesh.setMatrixAt(i, _m.compose(_p.set(l.p[0], l.p[1], l.p[2]), _q, _s.setScalar(l.s))); });
   animLanterns(0);
   rig.update(0);
+  // night: the paper lanterns burn. The material's emissive carries the paper's own glow; the pools of light they throw are lamp slots at each cluster's centre.
+  const E_DAY = new THREE.Color('#3a2a12'), E_NIGHT = new THREE.Color('#ff9440');
+  { const strings = lanterns.filter((l) => l.s !== 1.36), inn = lanterns.filter((l) => l.s === 1.36), xs = strings.map((l) => l.p[0]), x0 = Math.min(...xs), x1 = Math.max(...xs);
+    const pool = (list, r, power, ph) => { if (!list.length) return; const c = [0, 1, 2].map((i) => list.reduce((a, l) => a + l.p[i], 0) / list.length); ctx.shared.lamps.push({ pos: [c[0], c[1] - 2.2, c[2]], r, color: '#ff9c4a', power, halo: 0, k: (t) => 0.92 + 0.08 * Math.sin(t * 3.1 + ph) }); };
+    for (let i = 0; i < 3; i++) pool(strings.filter((l) => l.p[0] >= x0 + (x1 - x0) * i / 3 - 1e-6 && l.p[0] <= x0 + (x1 - x0) * (i + 1) / 3 + 1e-6), 7.5, 0.42, i * 2.1);
+    pool(inn, 5, 0.5, 5); }
   const OM = 0.32;
   group.userData.tris = kitTris + skin.p.length / 9 * 2;
   return {
     group,
     update(t) {
       animLanterns(t); lmesh.instanceMatrix.needsUpdate = true; rig.update(t);
+      const n = ctx.shared.uNight.value; lmat.emissive.lerpColors(E_DAY, E_NIGHT, n); lmat.emissiveIntensity = 0.6 + 0.62 * n * n;
       wheelMesh.rotation.x = -t * OM;
       streak.offset.y = -t * 0.82;
     },

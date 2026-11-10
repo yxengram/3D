@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import * as layout from './layout.js';
 import { P } from './palette.js';
 import * as kit from './kit.js';
-import { toon, shared } from './toon.js';
+import { toon, shared, LAMP_SPAN, LAMP_Y } from './toon.js';
 import { canvasTexture, surfaceTexture } from './textures.js';
 import { waterMaterial, causticMaterial, addRipple } from './water.js';
 
@@ -82,7 +82,7 @@ export class Batch {
 
 export function makeCtx(moduleName, extras = {}) {
   return {
-    THREE, layout, P, kit, shared, name: moduleName,
+    THREE, layout, P, kit, shared, name: moduleName, lampSpan: LAMP_SPAN, lampY: LAMP_Y,
     rng: seeded(moduleName),
     seeded,
     toon, surface,

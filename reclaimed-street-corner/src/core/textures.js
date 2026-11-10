@@ -83,7 +83,8 @@ export function noiseTexture(size = 256) {
 
 /** Sky backdrop: screen-fixed painted gradient with crisp anime cumulus kept clear of the model's silhouette. The sun's glow is sunGlow(). */
 export function skyTexture() {
-  return canvasTexture(2048, 1280, (g, w, h) => {
+  const shapes = []; // every cloud's discs and ellipses, kept so the night sky can redraw the same clouds as a mask
+  const sky = canvasTexture(2048, 1280, (g, w, h) => {
     const l = g.createLinearGradient(0, 0, 0, h);
     l.addColorStop(0, P.skyTop); l.addColorStop(0.5, P.skyMid); l.addColorStop(0.82, '#e6f6ec'); l.addColorStop(1, P.skyLow);
     g.fillStyle = l; g.fillRect(0, 0, w, h);
@@ -94,11 +95,12 @@ export function skyTexture() {
         puffs.push([x, base - env * height * (0.25 + R() * 0.32), (0.22 + 0.5 * env) * height * (0.65 + R() * 0.35)]);
       }
       const draw = (color, dy) => {
+        const layer = { lit: dy !== 0, discs: [], ovals: [] }; shapes.push(layer);
         g.save(); g.fillStyle = color; g.filter = 'blur(4px)';
-        for (const [x, y, r] of puffs) { g.beginPath(); g.arc(x, y + dy, r, 0, 6.3); g.fill(); }
+        for (const [x, y, r] of puffs) { g.beginPath(); g.arc(x, y + dy, r, 0, 6.3); g.fill(); layer.discs.push([x, y + dy, r]); }
         for (let i = 0; i < 7; i++) { // a soft rounded belly instead of a ruled bottom edge
           const u = i / 6, x = cx + (u - 0.5) * width * 0.86, r = height * (0.16 + 0.1 * Math.sin(Math.PI * u) + R() * 0.05);
-          g.beginPath(); g.ellipse(x, base + dy - r * 0.4, r * 1.9, r, 0, 0, 6.3); g.fill();
+          g.beginPath(); g.ellipse(x, base + dy - r * 0.4, r * 1.9, r, 0, 0, 6.3); g.fill(); layer.ovals.push([x, base + dy - r * 0.4, r * 1.9, r]);
         }
         g.restore();
       };
@@ -106,6 +108,79 @@ export function skyTexture() {
     };
     cloud(w * 0.1, h * 0.71, 430, 120); cloud(w * 0.89, h * 0.62, 340, 90); cloud(w * 0.05, h * 0.3, 210, 46); cloud(w * 0.96, h * 0.86, 380, 80);
   }, { repeat: false, filter: false });
+  // The same clouds at half size: red is the shaded body, green the lit cap that sits 13 px higher.
+  sky.userData.cloudMask = canvasTexture(1024, 640, (g, w, h) => {
+    g.fillStyle = '#000'; g.fillRect(0, 0, w, h); g.scale(0.5, 0.5); g.globalCompositeOperation = 'lighter'; g.filter = 'blur(4px)';
+    for (const layer of shapes) {
+      g.fillStyle = layer.lit ? '#00ff00' : '#ff0000';
+      for (const [x, y, r] of layer.discs) { g.beginPath(); g.arc(x, y, r, 0, 6.3); g.fill(); }
+      for (const [x, y, rx, ry] of layer.ovals) { g.beginPath(); g.ellipse(x, y, rx, ry, 0, 0, 6.3); g.fill(); }
+    }
+  }, { srgb: false, repeat: false, filter: false });
+  return sky;
+}
+
+/**
+ * The night sky: a camera-fixed layer over the day sky, like sunGlow. It repaints the gradient, redraws the day's clouds from their mask, and adds stars and the moon.
+ * Stars and clouds are a painted backdrop in the sky texture's own frame; the moon rides where the sun's glow does, so it stays on the lit side of the model.
+ * aim(camera, night, t) places the moon and sets the fade; the mesh hides itself by day.
+ */
+export function nightSky(sky) {
+  const c = (hex) => new THREE.Color(hex);
+  const u = {
+    tMask: { value: sky.userData.cloudMask }, uXf: { value: sky.matrix }, uNight: { value: 0 }, uTime: { value: 0 },
+    uMoon: { value: new THREE.Vector3(0.8, 0.84, 1) }, uAspect: { value: 1 }, uCellPx: { value: 20 },
+    cTop: { value: c('#0a1238') }, cMid: { value: c('#152c66') }, cLow: { value: c('#27507f') }, cBot: { value: c('#4a7f9e') },
+    cCloud: { value: c('#1f3468') }, cCloudLit: { value: c('#5c7fb6') },
+  };
+  const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), new THREE.ShaderMaterial({
+    uniforms: u,
+    vertexShader: 'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
+    fragmentShader: /* glsl */`
+      uniform sampler2D tMask; uniform mat3 uXf; uniform float uNight,uTime,uAspect,uCellPx; uniform vec3 uMoon,cTop,cMid,cLow,cBot,cCloud,cCloudLit; varying vec2 vUv;
+      float h1(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+      vec2 h2(vec2 p){ return fract(sin(vec2(dot(p,vec2(269.5,183.3)),dot(p,vec2(113.5,271.9))))*43758.5453); }
+      float stars(vec2 suv,float cells,float px,float gate){
+        vec2 g=suv*vec2(1.6,1.)*cells, id=floor(g), f=fract(g);
+        float pick=h1(id+7.3); if(pick>gate) return 0.;
+        vec2 at=.2+.6*h2(id); float size=.75+1.5*pow(h1(id+3.1),5.), r=px*size*cells/90./uCellPx;
+        float tw=.72+.28*sin(uTime*(.7+2.2*h1(id+9.7))+h1(id+1.9)*6.283);
+        return smoothstep(r,r*.45,length(f-at))*(.45+.55*size/2.25)*tw;
+      }
+      void main(){
+        vec2 suv=(uXf*vec3(vUv,1.)).xy; float y=suv.y;
+        vec3 col=mix(cBot,cLow,smoothstep(.0,.2,y)); col=mix(col,cMid,smoothstep(.16,.55,y)); col=mix(col,cTop,smoothstep(.5,1.,y));
+        vec2 m=texture2D(tMask,suv).rg; float cloud=max(m.r,m.g);
+        float st=stars(suv,90.,1.05,.13)+stars(suv+.37,37.,1.5,.1);
+        st*=smoothstep(.08,.5,y)*(1.-cloud);
+        col+=vec3(.8,.88,1.)*st*1.05;
+        // moon: a flat disc with two maria, a halo, and the clouds in front of it
+        vec2 d=(vUv-uMoon.xy)*vec2(uAspect,1.); float l=length(d), R=.034;
+        vec3 halo=vec3(.42,.6,1.)*(exp(-l*8.)*.3+exp(-l*30.)*.4)*uMoon.z;
+        float disc=smoothstep(R,R-.0018,l);
+        float mare=max(smoothstep(.013,.011,length(d-vec2(-.009,.009))),max(smoothstep(.009,.0075,length(d-vec2(.011,-.003))),smoothstep(.006,.0045,length(d-vec2(-.003,-.016)))));
+        vec3 moon=mix(vec3(1.08,1.07,.93),vec3(.86,.89,.86),mare);
+        col+=halo*(1.-.5*cloud);
+        col=mix(col,moon,disc*uMoon.z*(1.-.92*cloud));
+        col=mix(col,cCloud,m.r*.92); col=mix(col,cCloudLit+halo*.6,m.g*.9);
+        gl_FragColor=vec4(col,uNight);
+      }`,
+    blending: THREE.CustomBlending, blendSrc: THREE.SrcAlphaFactor, blendDst: THREE.OneMinusSrcAlphaFactor, depthTest: false, depthWrite: false,
+  }));
+  mesh.material.userData.nightKeep = true;
+  mesh.frustumCulled = false; mesh.renderOrder = -900; mesh.layers.set(1); mesh.visible = false; // straight after the sun's glow, before all geometry
+  const sunH = Math.hypot(SUN_DIR[0], SUN_DIR[2]);
+  mesh.aim = (camera, night, t, heightPx) => {
+    mesh.visible = night > 0.001;
+    if (!mesh.visible) return;
+    const e = camera.matrixWorld.elements, rl = Math.hypot(e[0], e[2]) || 1, rx = e[0] / rl, rz = e[2] / rl;
+    const side = (rx * SUN_DIR[0] + rz * SUN_DIR[2]) / sunH, ahead = (rz * SUN_DIR[0] - rx * SUN_DIR[2]) / sunH, phi = Math.atan2(side, ahead);
+    // A quarter turn puts the moon at 0.8 across, where the day's glow sits at hero; behind the camera it has left the frame on one side and comes back on the other.
+    u.uMoon.value.set(0.5 + 0.191 * phi * Math.min(1, 1.6 / camera.aspect + 0.25), 0.845, 1);
+    u.uNight.value = night; u.uTime.value = t; u.uAspect.value = camera.aspect;
+    u.uCellPx.value = heightPx / (sky.repeat.y * 90);
+  };
+  return mesh;
 }
 
 /**

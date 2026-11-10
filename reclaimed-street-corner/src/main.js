@@ -4,7 +4,7 @@ import { SUN_DIR, BASE, HERO_CAM, BUILDING, TREE, TOWN, RAIL, STREET, WRECK, MEA
 import { P } from './core/palette.js';
 import { shared, initShared } from './core/toon.js';
 import { bakeGobo } from './core/gobo.js';
-import { skyTexture, sunGlow } from './core/textures.js';
+import { skyTexture, sunGlow, nightSky } from './core/textures.js';
 import { createPost } from './core/post.js';
 import { makeCtx } from './core/ctx.js';
 
@@ -30,6 +30,7 @@ const MODULES = {
   east: () => import('./modules/east.js'),
   south: () => import('./modules/south.js'),
   woods: () => import('./modules/woods.js'),
+  night: () => import('./modules/night.js'), // last: it reads the lamps the others registered
 };
 
 const Q = new URLSearchParams(location.search);
@@ -107,6 +108,9 @@ const sky = skyTexture();
 scene.background = sky;
 const glow = sunGlow(sky);
 scene.add(glow);
+glow.material.userData.nightKeep = true;
+const stars = nightSky(sky);
+scene.add(stars);
 
 // How far the viewer can get: everything else about the far plane follows from these.
 const HERO_DIST = Math.hypot(...HERO_CAM.pos.map((c, i) => c - HERO_CAM.target[i]));
@@ -416,7 +420,8 @@ sun.shadow.map = new THREE.WebGLRenderTarget(SHADOW_RES, SHADOW_RES, { format: T
 sun.shadow.map.texture.name = 'sun.shadowColor';
 sun.shadow.map.depthTexture = Object.assign(new THREE.DepthTexture(SHADOW_RES, SHADOW_RES, THREE.FloatType), { name: 'sun.shadowMap', format: THREE.DepthFormat, compareFunction: THREE.LessEqualCompare, minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter });
 scene.add(sun, sun.target);
-scene.add(new THREE.HemisphereLight('#b6ecf2', '#7fb4b4', 1.5));
+const hemi = new THREE.HemisphereLight('#b6ecf2', '#7fb4b4', 1.5);
+scene.add(hemi);
 
 const updaters = [];
 const only = Q.get('only')?.split(',');
@@ -447,7 +452,67 @@ stats.loadMs.buildAll = Math.round(performance.now() - loadT0 - stats.loadMs.imp
 // Lights must stay in the render list during the layered ink passes, or every material recompiles per frame.
 scene.traverse((o) => { if (o.isLight) o.layers.enableAll(); });
 
-const composer = createPost(renderer, scene, camera);
+// ── Night ─────────────────────────────────────────────────────────────────────────────────────────────
+// One number, 0 by day and 1 at night, eased over a few seconds. The moon stands where the sun does, so the baked shadow map and the leaf dapples serve both.
+// Lit materials follow the two lights; unlit ones (water, mist, shafts, spray) are multiplied by shared.uUnlit; the bounce-light emissives and the backlit leaf glow by uEmis and uBack.
+// No UI: N, or a double click / double tap, switches; ?night starts there.
+const DAY = { sun: sun.color.clone(), sunI: sun.intensity, sky: hemi.color.clone(), ground: hemi.groundColor.clone(), hemiI: hemi.intensity };
+const DUSK = { sun: new THREE.Color('#ff9d5c'), sky: new THREE.Color('#8f8fd0'), ground: new THREE.Color('#6a6f9c') };
+const NIGHT = { sun: new THREE.Color('#a9c4ff'), sunI: 1.18, sky: new THREE.Color('#3857a8'), ground: new THREE.Color('#1c3170'), hemiI: 1.08, emis: [0.2, 0.28, 0.48], back: [0.1, 0.17, 0.34], unlit: [0.2, 0.3, 0.48] };
+const NIGHT_SECONDS = 2.8, lerp3 = (v, to, e) => v.set(1 + (to[0] - 1) * e, 1 + (to[1] - 1) * e, 1 + (to[2] - 1) * e);
+const via = (c, a, mid, b, e) => (e < 0.5 ? c.lerpColors(a, mid, e * 2 * 0.55) : c.lerpColors(a, mid, 0.55).lerp(b, e * 2 - 1)); // through a brief dusk
+let nightTarget = Q.has('night') && Q.get('night') !== '0' ? 1 : 0, nightRaw = -1, nightE = 0;
+let composer = null;
+const localLights = [];
+scene.traverse((o) => { if (o.isPointLight || o.isSpotLight) localLights.push({ light: o, base: o.intensity }); });
+const applyNight = (raw) => {
+  nightRaw = raw; const e = nightE = raw * raw * (3 - 2 * raw);
+  via(sun.color, DAY.sun, DUSK.sun, NIGHT.sun, e); sun.intensity = THREE.MathUtils.lerp(DAY.sunI, NIGHT.sunI, e);
+  via(hemi.color, DAY.sky, DUSK.sky, NIGHT.sky, e); via(hemi.groundColor, DAY.ground, DUSK.ground, NIGHT.ground, e); hemi.intensity = THREE.MathUtils.lerp(DAY.hemiI, NIGHT.hemiI, e);
+  shared.uNight.value = e; lerp3(shared.uEmis.value, NIGHT.emis, e); lerp3(shared.uBack.value, NIGHT.back, e); lerp3(shared.uUnlit.value, NIGHT.unlit, e);
+  for (const l of localLights) l.light.intensity = l.base * (1 - 0.62 * e); // the rooms' warm fill is daylight bounced indoors; a little of it stays
+  composer?.setNight(e);
+};
+const setNight = (on, instant = false) => { nightTarget = on ? 1 : 0; if (instant) applyNight(nightTarget); };
+const toggleNight = () => { nightTarget = 1 - nightTarget; };
+addEventListener('keydown', (e) => { if ((e.key === 'n' || e.key === 'N') && !e.metaKey && !e.ctrlKey && !e.altKey && !e.repeat) toggleNight(); });
+{ // two quick taps in one place, with no drag between them; a pinch or an orbit never counts
+  const el = renderer.domElement; let downAt = 0, downX = 0, downY = 0, lastTap = -1e9, lastX = 0, lastY = 0, fingers = 0;
+  el.addEventListener('pointerdown', (e) => { fingers++; downAt = e.timeStamp; downX = e.clientX; downY = e.clientY; if (fingers > 1) lastTap = -1e9; });
+  el.addEventListener('pointercancel', () => { fingers = Math.max(0, fingers - 1); lastTap = -1e9; });
+  el.addEventListener('pointerup', (e) => {
+    fingers = Math.max(0, fingers - 1);
+    if ((e.pointerType === 'mouse' && e.button !== 0) || e.timeStamp - downAt > 260 || Math.hypot(e.clientX - downX, e.clientY - downY) > 8) { lastTap = -1e9; return; }
+    if (e.timeStamp - lastTap < 400 && Math.hypot(e.clientX - lastX, e.clientY - lastY) < 36) { lastTap = -1e9; toggleNight(); } else { lastTap = e.timeStamp; lastX = e.clientX; lastY = e.clientY; }
+  });
+}
+// Every unlit material takes the night tint at the very end of its fragment shader. Night's own lights (userData.nightKeep) and depth-only helpers are left alone.
+{
+  const done = new Set(), END = /}\s*$/, tint = '  gl_FragColor.rgb*=uUnlit;\n}', gone = '  gl_FragColor.rgb*=uUnlit*(1.-uNight);\n}'; // sunlit dust has no business in the dark
+  scene.traverse((o) => {
+    for (const m of [].concat(o.material || [])) {
+      if (done.has(m)) continue; done.add(m);
+      if (m.userData.nightKeep || m.colorWrite === false) continue;
+      if (m.isShaderMaterial && !m.isRawShaderMaterial) {
+        if (!m.fragmentShader.includes('gl_FragColor') || m.fragmentShader.includes('uUnlit')) continue;
+        m.uniforms.uUnlit = shared.uUnlit; m.uniforms.uNight = shared.uNight;
+        m.fragmentShader = m.fragmentShader.replace(/void\s+main\s*\(/, 'uniform vec3 uUnlit; uniform float uNight;\nvoid main(').replace(END, o.name === 'dust' ? gone : tint);
+        m.needsUpdate = true;
+      } else if (m.isMeshBasicMaterial || m.isSpriteMaterial || m.isPointsMaterial || m.isLineBasicMaterial) {
+        const before = m.onBeforeCompile, key = m.customProgramCacheKey();
+        m.onBeforeCompile = (sh, r) => {
+          before.call(m, sh, r); sh.uniforms.uUnlit = shared.uUnlit;
+          sh.fragmentShader = sh.fragmentShader.replace(/void\s+main\s*\(/, 'uniform vec3 uUnlit;\nvoid main(').replace(END, tint);
+        };
+        m.customProgramCacheKey = () => `${key}|unlit|${before.toString()}`;
+        m.needsUpdate = true;
+      }
+    }
+  });
+}
+
+composer = createPost(renderer, scene, camera);
+applyNight(nightTarget);
 const applySize = () => {
   renderer.setPixelRatio(pixelRatio); composer.setPixelRatio(pixelRatio);
   renderer.setSize(innerWidth, innerHeight); composer.setSize(innerWidth, innerHeight);
@@ -491,10 +556,12 @@ function frame(stepDt) {
   t = frozen ?? t + dt;
   shared.uTime.value = t;
   for (const u of updaters) { try { u.update(t, dt); } catch (e) { console.error(u.name, e); updaters.splice(updaters.indexOf(u), 1); } }
+  if (nightRaw !== nightTarget) applyNight(nightTarget > nightRaw ? Math.min(nightTarget, nightRaw + dt / NIGHT_SECONDS) : Math.max(nightTarget, nightRaw - dt / NIGHT_SECONDS));
   steerCamera(stepDt ?? dt);
   shownPos.copy(camera.position);
   fitNear();
-  glow.aim(camera);
+  glow.aim(camera); glow.material.uniforms.uI.value *= 1 - nightE;
+  stars.aim(camera, nightE, t, renderer.domElement.height);
   composer.render(dt);
   camera.position.copy(userPos);
   if (frozen === null) adaptResolution(now, gap);
@@ -504,5 +571,5 @@ renderer.setAnimationLoop(() => frame());
 // Verification hook (no visible UI). Not used by the page itself.
 // constrain(true) runs the normal camera limits, even under ?shot; step(dt) then advances them by dt.
 // With the limits on, camera.position reads the user's pose; shown is the pose the frame was drawn from.
-window.__diorama = { scene, camera, controls, renderer, stats, sun, shadow: SHADOW, shown: shownPos, setCam, CAMS, THREE, constrain: (on) => { if (on) engage(); else hold(); }, freeze: (v) => { frozen = v; }, step: (dt, n = 1) => { for (let i = 0; i < n; i++) { const f = frozen; frozen = (f ?? t) + dt; frame(dt); } } };
+window.__diorama = { scene, camera, controls, renderer, stats, sun, setNight, toggleNight, night: () => nightE, shadow: SHADOW, shown: shownPos, setCam, CAMS, THREE, constrain: (on) => { if (on) engage(); else hold(); }, freeze: (v) => { frozen = v; }, step: (dt, n = 1) => { for (let i = 0; i < n; i++) { const f = frozen; frozen = (f ?? t) + dt; frame(dt); } } };
 requestAnimationFrame(() => requestAnimationFrame(() => { window.__ready = true; }));
