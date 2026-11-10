@@ -63,3 +63,12 @@ Iterate visually at least 3 rounds: first get forms right, then detail, then pol
 - **Depth.** The near plane follows the camera from outside the model (it is 1 over the plinth), so depth stays precise at 2× hero. Birds or spray beyond 14 units past the plinth or above y=46 can be clipped from far away.
 - **Viewer limits.** Pan box ±36, max distance 2.3× hero; a phone window fits itself by dolly.
 - Tools: `shot.mjs` (`--root versions/v2-40x40` renders an archive, `--query` adds page params), `img.mjs` (diff, crop, side-by-side, contact sheet), `gpumem.mjs` (tally of what the page asked WebGL for), `perf.mjs`, `shadow-fit.mjs`.
+
+## Night
+`main.js` owns one number, `shared.uNight` (0 day, 1 night), eased over about 3 s. **N**, or a double click / double tap, switches; `?night` starts there; `__diorama.setNight(on, instant)` for tools. There is still no UI.
+- The moon stands where the sun does, so the baked shadow map and the dapples serve both. Only the two lights' colours and strengths change.
+- Lit (toon) materials need nothing. Their `emissive` is treated as daylight bounce and dims with `shared.uEmis`; pass `glow: true` to `toon()` when the emissive is a real light source.
+- Unlit materials (ShaderMaterial, MeshBasicMaterial, sprites, points) get `gl_FragColor.rgb *= uUnlit` appended by main.js after all modules build. Set `material.userData.nightKeep = true` to opt out (a lamp's own glow).
+- A lamp that burns at night: `ctx.shared.lamps.push({ pos: [x, y, z], r, color, power, halo, lift, at, k: (t) => 0..1 })` while building. `night.js` (built last) bakes all of them into `shared.uLampMap`, a 256² top-down map the toon shader reads once per fragment, and draws the halos. The light is unshadowed and reaches about 4 units above and below the lamp. Do not add per-fragment light loops or real PointLights: 16 lamps in the toon shader cost 30 fps.
+- `night.js` also owns the fireflies. The night sky (gradient, the day's clouds from a mask, stars, moon) is `nightSky()` in `core/textures.js`.
+- Check a view at night with `node tools/shot.mjs --cams hero --query night`; frame rate with `node tools/perf.mjs 2 1440 900 night`.

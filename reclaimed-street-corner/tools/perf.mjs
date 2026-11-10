@@ -1,4 +1,4 @@
-// Real-time fps probe of the shipped page. node tools/perf.mjs [dpr=2] [w=1440] [h=900]
+// Real-time fps probe of the shipped page. node tools/perf.mjs [dpr=2] [w=1440] [h=900] [query, e.g. night]
 import { chromium } from 'playwright-core';
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path'; import os from 'node:os';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +10,7 @@ const cache = path.join(os.homedir(), 'Library/Caches/ms-playwright'); const dir
 const exe = ['chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing', 'chrome-mac/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing', 'chrome-mac/Chromium.app/Contents/MacOS/Chromium'].map((p) => path.join(cache, dir, p)).find(fs.existsSync);
 const b = await chromium.launch({ executablePath: exe, headless: true, args: ['--use-angle=metal', '--enable-webgl', '--ignore-gpu-blocklist', '--headless=new', '--disable-frame-rate-limit', '--disable-gpu-vsync'] });
 const p = await b.newPage({ viewport: { width: W, height: H }, deviceScaleFactor: dpr });
-const t0 = Date.now(); await p.goto(`http://localhost:${server.address().port}/index.html`);
+const t0 = Date.now(); await p.goto(`http://localhost:${server.address().port}/index.html${process.argv[5] ? '?' + process.argv[5] : ''}`);
 await p.waitForFunction('window.__ready===true', null, { timeout: 180000 }); const load = Date.now() - t0;
 const r = await p.evaluate(async () => {
   const d = window.__diorama, c = d.renderer.getContext();

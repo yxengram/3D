@@ -30,6 +30,10 @@ for (let i = 0; i < 6; i++) {
     report.camsMissing = await p.evaluate((n) => n.filter((c) => !window.__diorama.CAMS[c]), ring);
     await p.setViewportSize({ width: 1280, height: 800 });
     for (const c of ring) { await p.evaluate(async (c) => { const d = window.__diorama; d.setCam(c); d.step(0); d.step(0); await new Promise((r) => setTimeout(r, 300)); }, c); await p.screenshot({ path: path.join(out, `cam-${c}.png`) }); }
+    // Night: the N key switches with no UI, the fade completes, and N brings the day back.
+    await p.evaluate(() => window.__diorama.setCam('hero')); await p.keyboard.press('n'); await new Promise((r) => setTimeout(r, 3600));
+    report.night = await p.evaluate(() => window.__diorama.night()); await p.screenshot({ path: path.join(out, 'night.png') });
+    await p.keyboard.press('n'); await new Promise((r) => setTimeout(r, 3600)); report.dayAgain = await p.evaluate(() => window.__diorama.night());
   }
   if (i === 0) { // turning a phone re-fits the camera while nobody has touched it
     const reach = () => p.evaluate(() => { const d = window.__diorama; return +d.camera.position.distanceTo(d.controls.target).toFixed(1); });

@@ -150,19 +150,19 @@ class FinalPass extends Pass {
   constructor() {
     super();
     this.quad = new FullScreenQuad(new THREE.ShaderMaterial({
-      uniforms: { tDiffuse: { value: null } },
+      uniforms: { tDiffuse: { value: null }, uNight: { value: 0 } },
       vertexShader: 'varying vec2 vUv; void main(){vUv=uv;gl_Position=vec4(position.xy,0.,1.);}',
       fragmentShader: /* glsl */`
-        uniform sampler2D tDiffuse; varying vec2 vUv;
+        uniform sampler2D tDiffuse; uniform float uNight; varying vec2 vUv;
         vec3 soft(vec3 c){ return mix(c,1.-exp(-(c-.8)/.2*1.)*.2,step(.8,c)); } // keep mids faithful, shoulder highlights
         void main(){
           vec3 c=texture2D(tDiffuse,vUv).rgb;
           c=soft(max(c,0.));
           float l=dot(c,vec3(.2126,.7152,.0722));
           c+= (1.-smoothstep(.0,.35,l))*vec3(-.004,.012,.018);   // teal lift in the shadows
-          c*= mix(vec3(1.),vec3(1.03,1.0,.95),smoothstep(.5,1.,l)); // warm highlights
+          c*= mix(vec3(1.),vec3(1.03,1.0,.95),smoothstep(.5,1.,l)*(1.-uNight)); // warm highlights, by day
           c=mix(vec3(l),c,1.07);
-          vec2 d=vUv-.5; c*=1.-dot(d,d)*.3;
+          vec2 d=vUv-.5; c*=1.-dot(d,d)*(.3+.28*uNight);
           gl_FragColor=vec4(c,1.);
           #include <colorspace_fragment>
         }`,
@@ -186,8 +186,11 @@ export function createPost(renderer, scene, camera) {
   composer.renderTarget1.samples = 0; composer.renderTarget1.depthBuffer = false;
   composer.addPass(new RenderPass(scene, camera));
   composer.addPass(new ToonEdgePass(scene, camera, s.x, s.y));
-  composer.addPass(new UnrealBloomPass(new THREE.Vector2(s.x / 2, s.y / 2), 0.2, 0.5, 1.12));
-  composer.addPass(new FinalPass());
+  const bloom = new UnrealBloomPass(new THREE.Vector2(s.x / 2, s.y / 2), 0.2, 0.5, 1.12), final = new FinalPass();
+  composer.addPass(bloom);
+  composer.addPass(final);
+  /** Night: lamps, fireflies and the moon are the only things above 1, so they may bloom more freely; the vignette closes in a little. */
+  composer.setNight = (n) => { bloom.strength = 0.2 + 0.42 * n; bloom.radius = 0.5 + 0.22 * n; bloom.threshold = 1.12 - 0.2 * n; final.quad.material.uniforms.uNight.value = n; };
   // The composer read its size from the drawing-buffer-sized target, so re-derive it in CSS pixels + pixel ratio.
   composer.setPixelRatio(renderer.getPixelRatio());
   composer.setSize(innerWidth, innerHeight);
