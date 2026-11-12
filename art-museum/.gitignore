@@ -1,0 +1,7 @@
+node_modules/
+.venv/
+raw/
+build/
+dist/
+.shots/
+__pycache__/

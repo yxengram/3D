@@ -1,0 +1,146 @@
+[
+ {
+  "file": "assets/art/p01.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original abstract painting, the painted canvas surface filling the entire image edge to edge. Large gestural abstraction in oil on canvas: broad sweeping brush gestures made with wide house-painter brushes in deep ultramarine blue, vermilion red and raw sienna brown over a warm off-white ground. Energetic diagonal and arcing strokes crossing the whole canvas, with thin drips running down, dry-brush drags, scraped-back passages revealing underlayers, a few splatters, areas of bare off-white ground left to breathe. Visible bristle marks, thick impasto ridges and canvas weave. Balanced asymmetrical composition, museum-quality mid-century abstract expressionist vocabulary but an original composition. Even, flat, shadowless diffuse lighting, perfectly frontal orthographic view. No frame, no wall, no border, no margin, no signature, no text, no watermark.",
+  "post": "generated 1536x1024 webp; trimmed 15/10 px canvas-edge rim; Lanczos to 1536x1024; webp q88",
+  "raw": "raw/paintA/p01-20261112-093648.webp",
+  "px": [
+   1536,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.498,
+   0.2807,
+   0.1911
+  ]
+ },
+ {
+  "file": "assets/art/p02.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original abstract colour-field painting, the painted canvas surface filling the entire image edge to edge. Luminous atmospheric colour field in thin layered oil glazes on canvas: soft hazy fields of warm rose pink and saffron yellow-orange that glow and drift into each other with feathered, cloudy transitions, split by one single off-centre vertical rift of deep maroon placed about one third from the left, running from the top edge to the bottom edge, its edges slightly ragged and bleeding into the surrounding colour. Subtle variations of stain density, soft brush scumbling, visible fine canvas weave showing through the thin paint. Calm, contemplative, museum-quality, original composition. Even, flat, shadowless diffuse lighting, perfectly frontal orthographic view. No frame, no wall, no border, no margin, no signature, no text, no watermark.",
+  "post": "generated 1536x1024 png; trimmed 6/4 px; Lanczos to 1024x683; webp q88",
+  "raw": "raw/paintA/p02-20261112-092624.png",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.7409,
+   0.1671,
+   0.058
+  ]
+ },
+ {
+  "file": "assets/art/p03.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original abstract painting in portrait format, the painted canvas surface filling the entire image edge to edge. Biomorphic abstraction in oil on canvas: a loose cluster of rounded, pebble-like, seed-like and gourd-like organic forms of varied sizes in teal, mustard yellow and coral, floating on a dove-grey ground, some overlapping, some just touching, tied together by thin wandering black line drawing made with a fine brush — looping contours, tendrils and connecting threads that pass across and between the forms. Purely abstract: no faces, no eyes, no stars, no figures, no animals. Clearly hand-painted: opaque matte oil colour with visible brushstrokes following each shape, slightly uneven hand-drawn edges, the grey ground scumbled in several close tones with earlier layers showing through, fine canvas weave and faint craquelure visible up close. Balanced asymmetrical composition, a few forms running off the edges of the canvas. Museum-quality mid-century modernist vocabulary, but an original composition. Even, flat, shadowless diffuse lighting, perfectly frontal orthographic view. No frame, no wall, no border, no margin, no signature, no text, no watermark.",
+  "post": "generated 1024x1536 webp (QA pass; replaces the earlier code-composed fallback); trimmed 8/12 px canvas-edge rim; Lanczos to 683x1024; webp q88",
+  "raw": "raw/paintA/p03-20261112-094911.webp",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.3626,
+   0.2148,
+   0.1136
+  ]
+ },
+ {
+  "file": "assets/art/p04.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original hard-edge geometric abstract painting in square format, the painted canvas surface filling the entire image edge to edge. Interlocking arcs, half-circles, quarter-circles and full circles of different sizes in flat opaque red, warm yellow, cobalt blue and black on a cream ground. Crisp taped edges, shapes overlapping and cut by each other so colours switch where forms intersect, a dynamic asymmetrical composition with large shapes running off the edges of the canvas. Acrylic on canvas: perfectly flat matte colour, but with faint roller texture, fine canvas weave and tiny ridges of paint along the taped edges visible up close. Museum-quality, original composition. Even, flat, shadowless diffuse lighting, perfectly frontal orthographic view. No frame, no wall, no border, no margin, no signature, no text, no letters, no watermark.",
+  "post": "generated 1024x1024 png; trimmed 8 px; Lanczos to 1024x1024; webp q88",
+  "raw": "raw/paintA/p04-20261112-092815.png",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.5918,
+   0.3099,
+   0.1714
+  ]
+ },
+ {
+  "file": "assets/art/p05.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A layout sheet with two completely separate, unrelated museum scans of paintings placed one above the other, like two image files stacked in a catalogue layout. A single straight horizontal band of pure flat white (#FFFFFF), about 3 percent of the image height, with perfectly sharp straight edges, runs across the full width exactly at mid-height and separates them. Each scan is a wide landscape-format rectangle that fills its half completely: it touches the left edge, the right edge and the outer (top or bottom) edge of the image and ends exactly at the white band. No frames, no margins, no drop shadows, no wall, no captions, no text, no signatures, no watermark. Both are photographed perfectly frontally in even, flat, soft diffuse light.\n\nUPPER scan — an abstracted coastal landscape painted entirely in thick palette-knife impasto oil paint: broad horizontal slabs and wedges of paint suggesting a pale overcast sky, a slate-blue sea, sage-green headlands and dunes, and a band of sand-coloured beach, simplified to near-abstract planes with a high horizon. Palette limited to slate blue, sage green and sand beige with small touches of chalk white and warm grey. Heavy buttery knife strokes with crisp ridges, scraped areas showing underpainting, wet-in-wet smears. Quiet, windswept mood. No figures, no boats.\n\nLOWER scan — by a different hand, in a completely different style: a cubist-inspired fragmented still life in matte, chalky oil paint: a tilted table top, a pitcher, a bowl of fruit (pears and apples) and a stringed instrument resembling a mandolin, broken into overlapping angular facets and planes seen from several viewpoints at once, with a few curved contours. Muted earth tones — ochre, umber, burnt sienna, warm grey, cream — set against passages of deep teal. Dark contour lines, some hatched and stippled facets, visible brushstrokes. No letters, no newspaper lettering.\n\nBoth are original, museum-quality compositions.",
+  "post": "upper panel of one 1024x1408 webp generation holding two stacked 3:2 scans (rows 0-688; lower panel is p08); cropped 1018x679; Lanczos to 1024x683; webp q88",
+  "raw": "raw/paintA/p05_p08_sheet-20261112-093904.webp",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.3954,
+   0.3773,
+   0.3316
+  ]
+ },
+ {
+  "file": "assets/art/p06.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original contemporary abstract painting in portrait format, the painted surface filling the entire image edge to edge. Ink-wash-inspired abstraction: a few bold sweeping black ink strokes made with a very large brush — wet pooling blacks, dry flying-white streaks where the brush ran out of ink, soft grey washes bleeding at the edges — arranged with generous empty space on a warm paper-toned ground the colour of aged cream rice paper. Sparse accents of mineral malachite green and cinnabar red: a small washed patch of green and two or three short red marks. Purely abstract, no characters, no calligraphy, no writing, no seals, no stamps. Visible paper fibre texture and subtle ink bloom. Serene, powerful, museum-quality, original composition. Even, flat, shadowless diffuse lighting, perfectly frontal orthographic view. No frame, no mount, no scroll borders, no wall, no margin, no signature, no text, no watermark.",
+  "post": "generated 1024x1536 png; trimmed 4/6 px; Lanczos to 683x1024; webp q88",
+  "raw": "raw/paintA/p06-20261112-093009.png",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.5419,
+   0.4167,
+   0.2597
+  ]
+ },
+ {
+  "file": "assets/art/p07.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A flat frontal museum scan of an original minimalist painting in square format, the painted surface filling the entire image edge to edge. White-on-white relief: the whole canvas covered in thick white oil paint applied with a knife and comb into a subtle, slightly irregular hand-made grid of small squares — low ridges and shallow furrows of paint that read as a quiet gridded texture, with tiny tonal shifts between warm white, cool white and pale ivory. One single thin, hand-ruled graphite pencil line runs horizontally across the full width, slightly above the centre, faint grey and delicately uneven. Extremely restrained and calm; the texture is revealed only by very soft, low-contrast raking light, with no strong shadows. Museum-quality, original composition. Perfectly frontal orthographic view. No frame, no wall, no border, no margin, no signature, no text, no watermark.",
+  "post": "generated 1024x1024 png; trimmed 4 px; Lanczos to 1024x1024; webp q88",
+  "raw": "raw/paintA/p07-20261112-093106.png",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.7765,
+   0.7762,
+   0.7615
+  ]
+ },
+ {
+  "file": "assets/art/p08.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A layout sheet with two completely separate, unrelated museum scans of paintings placed one above the other, like two image files stacked in a catalogue layout. A single straight horizontal band of pure flat white (#FFFFFF), about 3 percent of the image height, with perfectly sharp straight edges, runs across the full width exactly at mid-height and separates them. Each scan is a wide landscape-format rectangle that fills its half completely: it touches the left edge, the right edge and the outer (top or bottom) edge of the image and ends exactly at the white band. No frames, no margins, no drop shadows, no wall, no captions, no text, no signatures, no watermark. Both are photographed perfectly frontally in even, flat, soft diffuse light.\n\nUPPER scan — an abstracted coastal landscape painted entirely in thick palette-knife impasto oil paint: broad horizontal slabs and wedges of paint suggesting a pale overcast sky, a slate-blue sea, sage-green headlands and dunes, and a band of sand-coloured beach, simplified to near-abstract planes with a high horizon. Palette limited to slate blue, sage green and sand beige with small touches of chalk white and warm grey. Heavy buttery knife strokes with crisp ridges, scraped areas showing underpainting, wet-in-wet smears. Quiet, windswept mood. No figures, no boats.\n\nLOWER scan — by a different hand, in a completely different style: a cubist-inspired fragmented still life in matte, chalky oil paint: a tilted table top, a pitcher, a bowl of fruit (pears and apples) and a stringed instrument resembling a mandolin, broken into overlapping angular facets and planes seen from several viewpoints at once, with a few curved contours. Muted earth tones — ochre, umber, burnt sienna, warm grey, cream — set against passages of deep teal. Dark contour lines, some hatched and stippled facets, visible brushstrokes. No letters, no newspaper lettering.\n\nBoth are original, museum-quality compositions.",
+  "post": "lower panel of one 1024x1408 webp generation holding two stacked 3:2 scans (rows 716-1407; upper panel is p05); cropped 1018x679; Lanczos to 1024x683; webp q88",
+  "raw": "raw/paintA/p05_p08_sheet-20261112-093904.webp",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.2377,
+   0.1474,
+   0.0791
+  ]
+ }
+]

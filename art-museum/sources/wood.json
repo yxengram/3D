@@ -1,0 +1,105 @@
+[
+ {
+  "file": "assets/tex/parquet.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": [
+   "(unknown: raw/wood/src_oak_parquet-20261112-064114.png was left by an earlier interrupted run, prompt and model not recorded)",
+   "Seamless flat texture photograph of a sheet of plain light European oak veneer, pale natural blond-beige colour (not yellow, not orange), satin matt finish, filling the entire frame edge to edge. Quarter-sawn straight grain running exactly horizontally from left to right: fine even lines with subtle natural tone variation, tiny open pores and a few faint medullary ray flecks. No knots, no cathedral arches, no joints, no separate planks. The area shown is about 1.8 m wide by 1.2 m high. Strictly frontal orthographic view, perfectly even diffuse flat lighting, no shadows, no highlights, no vignette, no perspective, no text, no border."
+  ],
+  "post": "flatten both oak sources, grade to honey oak; herringbone composed in code at 3x supersampling: 102 planks 600x100 mm at 45 deg, each plank its own crop (65 % src_oak_parquet, 35 % src_oak_veneer, random flips), crop means normalised then tone +-6 %, (stratified per row of 17 planks, shuffle with least large-scale clumping), ~1 mm dark hairline joints; lattice-exact tile 17*(0.1*sqrt2) x 3*(0.6*sqrt2) m; 3x box downsample to 1024; set_mean 150",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.4042,
+   2.5456
+  ],
+  "mean_linear": [
+   0.5052,
+   0.3234,
+   0.1562
+  ]
+ },
+ {
+  "file": "assets/tex/walnut_slats.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Seamless flat texture photograph of a large sheet of natural American black walnut wood veneer with an oiled matte finish, filling the entire frame edge to edge. Straight, fairly even grain running exactly vertically from top to bottom, with natural variation in tone across the width: bands of chocolate brown, medium warm brown and a few slightly lighter streaks. No knots, no cathedral arches, no pale sapwood, no board joints, no planks. The sheet shown is about 1.6 m wide by 2.4 m tall, so the grain lines are fine and closely spaced. Strictly frontal orthographic view, perfectly flat even diffuse lighting, no shadows, no highlights, no gloss reflections, no vignette, no perspective, no text, no border.",
+  "post": "walnut veneer source: vertical drift removed, made periodic along the grain (top/bottom cross-fade), hue regraded slightly; 24 slats 30 mm + 20 mm black felt composed in code at 4x supersampling (felt gap centred on the tile border), each slat its own column strip of the source with its own vertical offset, tone +-8 %, rounded profile shading (centre 1.0, edges 0.70); 4x box downsample; wood scaled so the mean of the WHOLE tile incl. the black felt is 91 (slat faces alone 130, felt 43)",
+  "px": [
+   512,
+   1024
+  ],
+  "tile_m": [
+   1.2,
+   2.4
+  ],
+  "mean_linear": [
+   0.2307,
+   0.1232,
+   0.0751
+  ]
+ },
+ {
+  "file": "assets/tex/oak.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Seamless flat texture photograph of a sheet of plain light European oak veneer, pale natural blond-beige colour (not yellow, not orange), satin matt finish, filling the entire frame edge to edge. Quarter-sawn straight grain running exactly horizontally from left to right: fine even lines with subtle natural tone variation, tiny open pores and a few faint medullary ray flecks. No knots, no cathedral arches, no joints, no separate planks. The area shown is about 1.8 m wide by 1.2 m high. Strictly frontal orthographic view, perfectly even diffuse flat lighting, no shadows, no highlights, no vignette, no perspective, no text, no border.",
+  "post": "centre crop 1468x1024, flatten 0.14, contrast-preserving border cross-fade (14 % band across the grain, 40 % band along it -> 881x881), LANCZOS to 512, set_mean 165; grain along u",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   1.2,
+   1.2
+  ],
+  "mean_linear": [
+   0.5367,
+   0.3832,
+   0.2473
+  ]
+ },
+ {
+  "file": "assets/tex/bronze.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Seamless flat texture of dark anodised bronze architectural sheet metal, deep brown-bronze colour, with a very fine straight brushed hairline finish running exactly vertically from top to bottom, almost perfectly uniform across the whole frame, matte, filling the frame edge to edge. Strictly frontal orthographic view, perfectly even diffuse lighting, no reflections, no highlights, no gradients, no hot spots, no vignette, no scratches, no dents, no seams, no screws, no text, no border.",
+  "post": "flatten 0.08, contrast-preserving cross-fade (14 % band across the brushing, full-height fade along it), LANCZOS to 256, faint periodic vertical brushing noise added (about +-2.5 %), streaks straightened within 8-24 px of the top/bottom border (keeps the WebP wrap seam below the codec noise), set_mean 60",
+  "px": [
+   256,
+   256
+  ],
+  "tile_m": [
+   1.0,
+   1.0
+  ],
+  "mean_linear": [
+   0.076,
+   0.0454,
+   0.0231
+  ]
+ },
+ {
+  "file": "assets/tex/leather.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Seamless flat texture of dark cognac-brown full-grain upholstery leather, fine tight natural pebble grain, uniform colour, matte, filling the entire frame edge to edge. The area shown is large, about 60 cm by 60 cm, so the grain is very small and even everywhere. No wrinkles, no creases, no folds, no stitching, no seams, no scratches, no stains. Strictly top-down orthographic view, perfectly even diffuse flat lighting, no shadows, no highlights, no sheen, no vignette, no text, no border.",
+  "post": "flatten 0.07, contrast-preserving border cross-fade 0.14, per-channel evening of everything coarser than the grain (gaussian sigma 10 px, wrap), per-channel regrade from rust to cognac brown, LANCZOS to 512, set_mean 80",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   1.0,
+   1.0
+  ],
+  "mean_linear": [
+   0.2053,
+   0.0672,
+   0.0291
+  ]
+ }
+]
