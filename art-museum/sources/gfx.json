@@ -1,0 +1,535 @@
+[
+ {
+  "file": "assets/gfx/labels.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Italic",
+   "Helvetica Neue Medium",
+   "Helvetica Neue Regular",
+   "PingFang SC Medium",
+   "PingFang SC Regular",
+   "PingFang SC Semibold"
+  ],
+  "uses": [
+   "raw/paintA/meta.json",
+   "raw/paintB/meta.json"
+  ],
+  "px": [
+   1600,
+   1024
+  ],
+  "mode": "RGB",
+  "shown_m": [
+   0.25,
+   0.2
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 61512,
+  "note": "Atlas 5 columns x 4 rows, cell 320x256 px = one 0.25 x 0.20 m wall label. Cell i (row-major, row 0 at the TOP of the image, column 0 left) = p01..p16 for i = 0..15, cell 16 = m01, cells 17-19 = plain card colour #F4F2EC. Card fills the whole cell (no border), text margin 22 px. Dimensions are h x w in cm.",
+  "atlas": {
+   "cols": 5,
+   "rows": 4,
+   "cell_px": [
+    320,
+    256
+   ],
+   "cell_m": [
+    0.25,
+    0.2
+   ],
+   "row0": "top"
+  },
+  "card_colour": "#F4F2EC",
+  "cells": [
+   {
+    "cell": 0,
+    "col": 0,
+    "row": 0,
+    "id": "p01",
+    "uv_rect_px": [
+     0,
+     0,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 1,
+    "col": 1,
+    "row": 0,
+    "id": "p02",
+    "uv_rect_px": [
+     320,
+     0,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 2,
+    "col": 2,
+    "row": 0,
+    "id": "p03",
+    "uv_rect_px": [
+     640,
+     0,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 3,
+    "col": 3,
+    "row": 0,
+    "id": "p04",
+    "uv_rect_px": [
+     960,
+     0,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 4,
+    "col": 4,
+    "row": 0,
+    "id": "p05",
+    "uv_rect_px": [
+     1280,
+     0,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 5,
+    "col": 0,
+    "row": 1,
+    "id": "p06",
+    "uv_rect_px": [
+     0,
+     256,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 6,
+    "col": 1,
+    "row": 1,
+    "id": "p07",
+    "uv_rect_px": [
+     320,
+     256,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 7,
+    "col": 2,
+    "row": 1,
+    "id": "p08",
+    "uv_rect_px": [
+     640,
+     256,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 8,
+    "col": 3,
+    "row": 1,
+    "id": "p09",
+    "uv_rect_px": [
+     960,
+     256,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 9,
+    "col": 4,
+    "row": 1,
+    "id": "p10",
+    "uv_rect_px": [
+     1280,
+     256,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 10,
+    "col": 0,
+    "row": 2,
+    "id": "p11",
+    "uv_rect_px": [
+     0,
+     512,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 11,
+    "col": 1,
+    "row": 2,
+    "id": "p12",
+    "uv_rect_px": [
+     320,
+     512,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 12,
+    "col": 2,
+    "row": 2,
+    "id": "p13",
+    "uv_rect_px": [
+     640,
+     512,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 13,
+    "col": 3,
+    "row": 2,
+    "id": "p14",
+    "uv_rect_px": [
+     960,
+     512,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 14,
+    "col": 4,
+    "row": 2,
+    "id": "p15",
+    "uv_rect_px": [
+     1280,
+     512,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 15,
+    "col": 0,
+    "row": 3,
+    "id": "p16",
+    "uv_rect_px": [
+     0,
+     768,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 15.5,
+     "small": 13.5
+    }
+   },
+   {
+    "cell": 16,
+    "col": 1,
+    "row": 3,
+    "id": "m01",
+    "uv_rect_px": [
+     320,
+     768,
+     320,
+     256
+    ],
+    "sizes_px": {
+     "artist": 18,
+     "title_zh": 24,
+     "title_en": 18,
+     "small": 13.5
+    }
+   }
+  ]
+ },
+ {
+  "file": "assets/gfx/title.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Light",
+   "PingFang SC Regular"
+  ],
+  "uses": [],
+  "px": [
+   1200,
+   1300
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   2.4,
+   2.6
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 68884,
+  "note": "Vinyl lettering #2B2B2B on transparent, left aligned, 48 px margins. Intro: 114 Chinese characters (4 lines), 69 English words (6 lines).",
+  "colour": "#2B2B2B",
+  "text_zh": "本展自馆藏中遴选十六件作品，勾勒二十世纪中叶至今的一条线索：从挥洒淋漓的姿态抽象、澄明的色域与硬边几何，到重新回望山水的水墨与矿物设色。形是结构，色是气息；二者之间，是画家一次次的取舍与试探。愿你放慢脚步，在一幅画前多停留片刻。",
+  "text_en": "Between Form and Colour gathers sixteen works from the collection, tracing a path from the gestural abstraction of the 1950s through colour fields and hard-edged geometry to recent paintings that return to ink and mineral pigment. Form gives a picture its structure; colour gives it breath. Between the two lie the choices and hesitations of each painter. Take your time, and let one painting hold you a little longer."
+ },
+ {
+  "file": "assets/gfx/text.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Light",
+   "PingFang SC Regular"
+  ],
+  "uses": [],
+  "px": [
+   800,
+   900
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   1.6,
+   1.8
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 41320,
+  "note": "Wall text #2B2B2B on transparent, left aligned, 44 px margins. 92 Chinese characters (4 lines), 58 English words (6 lines).",
+  "colour": "#2B2B2B",
+  "text_zh": "看一幅画，不妨先退后几步，让整体的形与色在眼中安定下来；再慢慢走近，看笔触的方向、颜料的厚薄与画布的纹理。光线也在参与：日光缓缓移动，同一幅画会呈现不同的冷暖。请给每件作品多一点时间。",
+  "text_en": "Begin from a distance and let the whole picture settle; then step closer to follow the direction of a brushstroke, the weight of the paint, the weave of the canvas. Light takes part as well: as daylight moves through the room, the same painting turns warmer or cooler. Give each work a little more time than you planned."
+ },
+ {
+  "file": "assets/gfx/way.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Light",
+   "PingFang SC Regular"
+  ],
+  "uses": [],
+  "px": [
+   1500,
+   500
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   3.0,
+   1.0
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 13586,
+  "note": "Wayfinding #2B2B2B on transparent: text block on the left, line arrow pointing RIGHT at the right end (+u of the texture = viewer's right; do not mirror the quad). 50 px margins.",
+  "colour": "#2B2B2B"
+ },
+ {
+  "file": "assets/gfx/desk.webp",
+  "source": "composed",
+  "fonts": [
+   "Optima Regular",
+   "Songti SC Bold"
+  ],
+  "uses": [],
+  "px": [
+   1600,
+   320
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   4.0,
+   0.8
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 10828,
+  "note": "Dark bronze #3A2E24 lettering on transparent, centred, widely tracked (English set in tracked capitals).",
+  "colour": "#3A2E24"
+ },
+ {
+  "file": "assets/gfx/name.webp",
+  "source": "composed",
+  "fonts": [
+   "Optima Regular",
+   "Songti SC Bold"
+  ],
+  "uses": [],
+  "px": [
+   2048,
+   342
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   9.0,
+   1.5
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 21836,
+  "note": "Facade lock-up, dark bronze #2E241C on transparent: Chinese name left, thin vertical rule, tracked capitals in three lines to its right, both blocks the same height; 44 px side margins.",
+  "colour": "#2E241C"
+ },
+ {
+  "file": "assets/gfx/banner_a.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Medium",
+   "PingFang SC Regular"
+  ],
+  "uses": [
+   "assets/art/p01.webp"
+  ],
+  "px": [
+   512,
+   1920
+  ],
+  "mode": "RGB",
+  "shown_m": [
+   1.6,
+   6.0
+  ],
+  "webp": "lossy q92",
+  "bytes": 296854,
+  "note": "Vertical facade banner. Upper two thirds: vertical slice of p01 (x 600..1010 of 1536, full height, Lanczos x1.25); lower third: solid deep ultramarine #1A2A7E block with white text.",
+  "block_colour": "#1A2A7E",
+  "crop_px": [
+   600,
+   0,
+   1010,
+   1024
+  ]
+ },
+ {
+  "file": "assets/gfx/banner_b.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Regular"
+  ],
+  "uses": [
+   "assets/art/p16.webp"
+  ],
+  "px": [
+   512,
+   1920
+  ],
+  "mode": "RGB",
+  "shown_m": [
+   1.6,
+   6.0
+  ],
+  "webp": "lossy q92",
+  "bytes": 238976,
+  "note": "Vertical facade banner. Warm off-white ground #F3EFE6; upper 1000 px: vertical slice of p16 (x 940..1464 of 1536, full height); dark #2B2B2B text below.",
+  "ground_colour": "#F3EFE6",
+  "crop_px": [
+   940,
+   0,
+   1464,
+   1024
+  ]
+ }
+]

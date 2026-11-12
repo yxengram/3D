@@ -1,0 +1,177 @@
+[
+ {
+  "file": "assets/tex/sky.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Wide photograph of sky only, looking level toward the horizon with the sun behind the viewer and out of frame. The bottom edge of the image is the level horizon, the top edge is high overhead. Late afternoon about 90 minutes before sunset: clear blue sky, deeper saturated blue toward the top, paling smoothly to a warm pale peach-cream haze along the very bottom edge. Many scattered small soft fair-weather cumulus clouds distributed evenly across the whole width, none of them large; they get smaller, flatter and more numerous toward the bottom (far distance). Thin wispy high cirrus streaks in the upper part. The clouds are softly lit with warm golden-cream light and have cool blue-grey bases. No sun disc, no glare spot, no lens flare, no rays. Absolutely no ground, no land, no sea, no mountains, no trees, no buildings, no birds, no aircraft, no text. Even exposure across the full width, no vignette. Photorealistic, natural colours, sharp cloud detail.",
+  "post": "three 1536x1024 generations (same prompt) each resized to 1280x768 = 120 deg + 30 deg overlap; clear-sky background equalised across the three (per-row target colour + smooth additive offset field from cloud-free pixels); joined at all three joins incl. the wrap along a min-cost seam through clear sky inside the 256 px overlap (8 px feather); saturation -22 % towards the horizon; bottom 8 % faded to a uniform haze colour, top 15 % to a uniform zenith blue; WebP q90",
+  "px": [
+   3072,
+   768
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.2218,
+   0.295,
+   0.4651
+  ],
+  "raw": [
+   "sky_1-20261112-092835.png",
+   "sky_2-20261112-092914.png",
+   "sky_3-20261112-092957.png"
+  ],
+  "generation_args": "size 1536x1024, three separate generations with the same prompt",
+  "haze_srgb": [
+   200,
+   171,
+   153
+  ],
+  "zenith_srgb": [
+   19,
+   85,
+   156
+  ],
+  "layout": "u = azimuth (360 deg, periodic), v: bottom row = horizon, top row = zenith; light on the clouds is azimuth-neutral (no sun side)"
+ },
+ {
+  "file": "assets/tex/tree_a.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A single mature deciduous tree with a broad rounded crown, shown in straight side elevation (orthographic, eye level, no perspective). The whole tree is visible: the entire crown and the trunk down to its base, with a small empty margin at the top and the sides. The trunk base is exactly at the bottom centre of the image and is cut off flat at ground level where it touches the bottom edge. Soft even overcast daylight with no strong sun side, natural mid-green summer foliage, a few small gaps in the crown showing branches. The tree is isolated on a perfectly flat, uniform, pure magenta (#FF00FF) background that fills the whole image. No ground, no grass, no soil, no roots spreading, no shadow, no other plants, no text. Photorealistic.",
+  "post": "native alpha from the generator (background transparent); alpha levels 0.15..0.80 -> saturation x0.95, gain (1.0, 1.0, 1.0) -> premultiplied Lanczos scale x0.971, trunk centre moved to x=512, base on bottom edge, margin 24 px -> bleed_rgb -> lossy WebP q88 with exact RGB under alpha",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.1334,
+   0.1638,
+   0.0477
+  ],
+  "raw": "tree_a-20261112-064607.png",
+  "generation_args": "size 1024x1024, background transparent",
+  "mean_linear_opaque": [
+   0.1022,
+   0.1318,
+   0.0364
+  ]
+ },
+ {
+  "file": "assets/tex/tree_b.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A single mature linden (lime) tree with a tall, upright, egg-shaped oval crown, clearly taller than wide, shown in straight side elevation (orthographic, eye level, no perspective), isolated cut-out on a fully transparent background, for use as an architectural-visualisation tree billboard. The whole tree is visible with a small empty margin at the top and at both sides. The trunk is vertical, centred horizontally, and its base is cut off flat exactly at the bottom-centre edge of the image: no ground, no grass, no soil, no roots, no shadow. Soft, even overcast daylight from all sides: no sunny side, no dark side, no strong highlights. Dense foliage in natural mid greens (not neon, not yellow-green), with a few small gaps where branches show through. Photorealistic, sharp leaf detail, clean edges, no fringe, no glow, no text.",
+  "post": "native alpha from the generator (background transparent); alpha levels 0.15..0.80 -> saturation x0.85, gain (1.0, 1.0, 1.0) -> premultiplied Lanczos scale x0.984, trunk centre moved to x=512, base on bottom edge, margin 24 px -> bleed_rgb -> lossy WebP q88 with exact RGB under alpha",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.0838,
+   0.1286,
+   0.029
+  ],
+  "raw": "tree_b-20261112-092701.png",
+  "generation_args": "size 1024x1024, background transparent",
+  "mean_linear_opaque": [
+   0.0849,
+   0.129,
+   0.0334
+  ]
+ },
+ {
+  "file": "assets/tex/tree_c.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A single slender young field maple tree about six metres tall, as newly planted on a city plaza: thin straight vertical trunk, narrow light airy oval crown with fine branching, shown in straight side elevation (orthographic, eye level, no perspective), isolated cut-out on a fully transparent background, for use as an architectural-visualisation tree billboard. The whole tree is visible with a small empty margin at the top; the tree is much taller than wide. The trunk is centred horizontally and its base is cut off flat exactly at the bottom-centre edge of the image: no ground, no grass, no soil, no roots, no stake, no shadow. Soft, even overcast daylight from all sides: no sunny side, no dark side, no strong highlights. Fresh foliage in natural mid greens (not neon, not yellow-green), with gaps where thin branches show through. Photorealistic, sharp leaf detail, clean edges, no fringe, no glow, no text.",
+  "post": "native alpha from the generator (background transparent); alpha levels 0.15..0.60 -> saturation x0.8, gain (0.93, 0.97, 1.05) -> premultiplied Lanczos scale x0.985, trunk centre moved to x=512, base on bottom edge, margin 24 px -> bleed_rgb -> lossy WebP q88 with exact RGB under alpha",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.1074,
+   0.1705,
+   0.038
+  ],
+  "raw": "tree_c-20261112-093039.png",
+  "generation_args": "size 1024x1024, background transparent",
+  "mean_linear_opaque": [
+   0.1076,
+   0.1707,
+   0.0381
+  ]
+ },
+ {
+  "file": "assets/tex/treeline.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "A distant mixed deciduous tree line seen from far away in straight side elevation (orthographic, no perspective): one continuous unbroken horizontal band of many tree crowns of varying heights and species (oak, ash, linden, poplar, a few darker conifers) running across the full width of the image from the left edge to the right edge, with an irregular bumpy top silhouette. Isolated cut-out on a fully transparent background: everything above the trees is transparent. The band of trees occupies only the bottom third of the image; the upper two thirds are empty and transparent. The foliage mass is completely solid and opaque all the way down to the bottom edge of the image: no trunks visible, no ground, no grass, no field, no fence, no buildings, no shadows. Trees are small in the frame (about forty crowns across the width). Slightly hazy, soft, desaturated grey-greens as if seen through several hundred metres of late-afternoon air, soft even light. Photorealistic, clean edges, no fringe, no glow, no text.",
+  "post": "native alpha (background transparent); alpha levels 0.15..0.80; baked-in pale sky flecks in the crowns painted over with the surrounding foliage colour (alpha kept solid, no holes); crop of the top 176 rows of the band; wrap by min-cost seam through a 128 px overlap of both ends; periodic Lanczos upscale x1.455 to 2048x256; bottom rows forced opaque; bleed_rgb; lossy WebP q88 with exact RGB under alpha",
+  "px": [
+   2048,
+   256
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.1841,
+   0.2073,
+   0.163
+  ],
+  "raw": "treeline-20261112-093135.png",
+  "generation_args": "size 1536x1024, background transparent",
+  "mean_linear_opaque": [
+   0.1674,
+   0.1928,
+   0.153
+  ]
+ },
+ {
+  "file": "assets/tex/lawn.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Top-down orthographic photograph of a freshly mown garden lawn, camera looking straight down, covering an area about 4 metres across. Uniform dense fine-bladed turf with an even texture from edge to edge: no mowing stripes, no clumps, no bare patches, no weeds, no clover, no flowers, no fallen leaves, no objects. Flat even overcast light, no shadows, no highlights, no vignette, no perspective. Natural medium grass green, slightly muted, not neon. The grass fills the entire frame.",
+  "post": "flatten(0.10) -> make_tileable(band 0.10) -> resize 1024 -> periodic flatten -> saturation x0.5, slight de-yellow -> set_mean 105",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   4,
+   4
+  ],
+  "mean_linear": [
+   0.1534,
+   0.2305,
+   0.0856
+  ],
+  "raw": "lawn-20261112-064405.png",
+  "generation_args": "size 1024x1024",
+  "scene_adjust": "tools/tex/final_adjust.py (scene side, not part of this group) replaces assets/tex/lawn.webp by a 512x512 version (contrast x0.9, saturation x0.78, mean sRGB 96) and keeps this group's 1024x1024 output in raw/final_adjust/orig/lawn.webp; px and mean_linear in this entry describe the group output"
+ },
+ {
+  "file": "assets/tex/hedge.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Frontal orthographic close-up photograph of the flat clipped face of a boxwood hedge, covering an area about 1.5 metres across. Dense small oval boxwood leaves packed tightly, evenly sheared flat surface, even texture from edge to edge with no gaps, no deep dark holes, no visible branches, no flowers. Soft flat overcast light, no shadows, no glossy highlights, no vignette, no perspective. Natural dark-to-mid green. The foliage fills the entire frame.",
+  "post": "flatten(0.10) -> 2x2 quilt of four 760 px corner crops (two mirrored) joined along min-cost seams (140 px overlap) -> wrap on both axes by seam cut -> periodic Lanczos resize to 512 -> periodic flatten -> saturation x0.62 -> set_mean 80",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   1.5,
+   1.5
+  ],
+  "mean_linear": [
+   0.0963,
+   0.176,
+   0.0482
+  ],
+  "raw": "hedge-20261112-064456.png",
+  "generation_args": "size 1024x1024"
+ }
+]

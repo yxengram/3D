@@ -1,0 +1,98 @@
+[
+ {
+  "id": "p01",
+  "file": "assets/art/p01.webp",
+  "title_zh": "潮汐来信",
+  "title_en": "Letters from the Tide",
+  "artist": "Ilse Varnholt",
+  "year": 1958,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 2.7,
+  "h_m": 1.8
+ },
+ {
+  "id": "p02",
+  "file": "assets/art/p02.webp",
+  "title_zh": "暮色之隙",
+  "title_en": "Rift at Dusk",
+  "artist": "顾闻笙 Gu Wensheng",
+  "year": 1971,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 2.4,
+  "h_m": 1.6
+ },
+ {
+  "id": "p03",
+  "file": "assets/art/p03.webp",
+  "title_zh": "浮游的午后",
+  "title_en": "Drifting Afternoon",
+  "artist": "Tomás Erdély",
+  "year": 1964,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.2,
+  "h_m": 1.8
+ },
+ {
+  "id": "p04",
+  "file": "assets/art/p04.webp",
+  "title_zh": "四色轨道",
+  "title_en": "Orbits in Four Colours",
+  "artist": "Henrik Solvang",
+  "year": 1967,
+  "medium_zh": "布面丙烯",
+  "medium_en": "Acrylic on canvas",
+  "w_m": 1.4,
+  "h_m": 1.4
+ },
+ {
+  "id": "p05",
+  "file": "assets/art/p05.webp",
+  "title_zh": "岬角·退潮",
+  "title_en": "Headland, Ebb Tide",
+  "artist": "Moira Kelleghan",
+  "year": 1983,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.8,
+  "h_m": 1.2
+ },
+ {
+  "id": "p06",
+  "file": "assets/art/p06.webp",
+  "title_zh": "行云",
+  "title_en": "Passing Clouds",
+  "artist": "陆青岚 Lu Qinglan",
+  "year": 2009,
+  "medium_zh": "纸本水墨设色",
+  "medium_en": "Ink and mineral pigment on paper",
+  "w_m": 1.0,
+  "h_m": 1.5
+ },
+ {
+  "id": "p07",
+  "file": "assets/art/p07.webp",
+  "title_zh": "静默之格 第七号",
+  "title_en": "Grid of Silence No. 7",
+  "artist": "韩素微 Han Suwei",
+  "year": 1996,
+  "medium_zh": "布面油画、石墨",
+  "medium_en": "Oil and graphite on canvas",
+  "w_m": 1.2,
+  "h_m": 1.2
+ },
+ {
+  "id": "p08",
+  "file": "assets/art/p08.webp",
+  "title_zh": "水罐、梨与琴",
+  "title_en": "Pitcher, Pears and Strings",
+  "artist": "Émile Vautrin",
+  "year": 1951,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 2.1,
+  "h_m": 1.4
+ }
+]

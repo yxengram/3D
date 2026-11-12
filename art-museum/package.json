@@ -1,0 +1,19 @@
+{
+  "name": "art-museum",
+  "private": true,
+  "version": "1.0.0",
+  "description": "three.js art museum with fully baked lighting",
+  "type": "module",
+  "scripts": {
+    "build": "node tools/bundle.mjs",
+    "perf": "node tools/perf.mjs",
+    "shots": "node tools/shot.mjs --cams all --out .shots/check"
+  },
+  "dependencies": {
+    "three": "^0.187.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "playwright-core": "^1.65.0"
+  }
+}

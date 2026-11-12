@@ -1,0 +1,164 @@
+[
+ {
+  "file": "assets/art/p09.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original expressionist oil painting of a single seated figure, abstracted and simplified: a person sitting on a plain wooden chair, hands resting in the lap, head slightly tilted, face reduced to a few planes with no detailed features. Bold non-naturalistic colour: the skin in viridian green and lemon yellow, the clothing in crimson and violet, the background in broad slabs of orange and deep turquoise. Thick dark Prussian-blue-black outlines around every form, drawn with a loaded brush. Vigorous visible brushwork, thick impasto ridges, canvas weave showing through in thinly painted areas. Vertical format. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p09-20261112-093059.webp",
+  "post": "trim 4 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.2358,
+   0.116,
+   0.0898
+  ]
+ },
+ {
+  "file": "assets/art/p10.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original optical abstract painting in acrylic on canvas, square format. Hundreds of fine, evenly spaced parallel curved lines sweep across the whole surface in gentle S-shaped waves; a second set of fine curved lines at a slightly different curvature overlaps the first, producing a shimmering moire interference pattern that seems to vibrate and bulge. Only two colours: deep indigo blue lines and saturated orange lines on an indigo and orange ground, crisp hand-painted edges with very slight irregularities, matte paint, faint canvas weave visible. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p10-20261112-092740.png",
+  "post": "trim 4 px off every edge; Lanczos resize to 1024x1024; WebP q88",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.3943,
+   0.0731,
+   0.0793
+  ]
+ },
+ {
+  "file": "assets/art/p11.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original abstract oil painting of a city at night, horizontal format. A loose grid of small lit windows — rows of little rectangular dabs in amber, warm yellow and pale orange — covers the centre of the canvas and gradually dissolves towards the edges into large, soft-edged blocks and slabs of deep cobalt blue, ultramarine and midnight blue-black, with a few broad amber and burnt-orange blocks glowing among them. No recognisable buildings, no skyline silhouette, no sky, no street: only the rhythm of windows breaking apart into colour blocks. Thick square brush strokes and palette-knife patches, layered paint with visible ridges, some scumbled thin passages where canvas weave shows. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p11-20261112-093215.webp",
+  "post": "trim 4 px off every edge; centre crop to 3:2; Lanczos resize to 1024x683; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.1512,
+   0.0694,
+   0.1094
+  ]
+ },
+ {
+  "file": "assets/art/p12.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A flat frontal museum scan showing two different, unrelated abstract paintings side by side. Each painting fills exactly one half of the image from top to bottom; they meet along one straight vertical line at the exact centre of the image, with no gap, no margin, no frame and no border between them or around them. Each painting's composition is centred within its own half. LEFT HALF: a collage-like composition on board — overlapping torn-paper shapes with ragged, fibrous torn edges and a few crisp stencilled forms (simple leaf, disc and crescent silhouettes sprayed through a stencil, with soft overspray), in matte ochre, black and pale blue on an off-white paper ground; layered, slightly wrinkled glued paper, dry matte gouache, absolutely no letters or numbers. RIGHT HALF: an oil painting of a tall totem of five rough, slightly irregular rectangles stacked one above another up the centre, in earthy reds — iron oxide, brick red, burnt sienna — and dense matte blacks over a warm umber and smoky grey ground; paint heavily layered and scraped back with a blade so earlier layers show as ragged scars, dry-brush drags, thick impasto ridges. Even diffuse light, no wall, no shadow, no signature, no text, no lettering, no watermark.",
+  "raw": "raw/paintB/p12_p15_pair-20261112-093722.webp",
+  "post": "one 1536x1024 generation holds p12 (left half) and p15 (right half); crop x=22..756 y=4..1020 (734x1016: the whole half, clear of the seam at x=768, so that the leaf sprig, disc and crescent are all complete); non-uniform Lanczos resize to 683x1024 (horizontal squeeze 7.7 % relative to vertical); WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.3718,
+   0.2675,
+   0.1822
+  ]
+ },
+ {
+  "file": "assets/art/p13.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original lyrical abstract painting, horizontal format: thinned acrylic paint poured and stained onto unprimed raw beige cotton canvas. Large floating translucent veils of colour — magenta, turquoise and lemon yellow — drift across the surface, overlapping so that new hues appear where they cross (violet, green, orange), with soft feathered bleeding edges, tide lines where the pours dried, and a few thin runs. Generous areas of bare raw canvas remain around and between the veils, its woven texture clearly visible. Airy, weightless, luminous, no hard shapes, no brush drawing. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p13-20261112-093322.webp",
+  "post": "trim 4 px off every edge; centre crop to 3:2; Lanczos resize to 1024x683; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.7104,
+   0.4725,
+   0.3463
+  ]
+ },
+ {
+  "file": "assets/art/p14.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original quiet dreamlike oil painting, square format. A perfectly flat, empty plain meets the sky at a low, straight horizon. Above the plain float a few simple geometric solids — a sphere, a cone, a cube and a slender cylinder — hovering motionless at different heights, each casting a long, soft painted shadow that stretches across the ground. Everything is in night blues: deep indigo sky grading to a paler band of blue-grey at the horizon, slate-blue ground, the solids in muted blue-greys with one pale moon-white sphere. Smooth, patient, matte brushwork with fine visible strokes and faint canvas weave; still, silent, mysterious mood. No people, no buildings, no stars. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p14-20261112-093419.webp",
+  "post": "trim 4 px off every edge; Lanczos resize to 1024x1024; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.0483,
+   0.0867,
+   0.1687
+  ]
+ },
+ {
+  "file": "assets/art/p15.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A flat frontal museum scan showing two different, unrelated abstract paintings side by side. Each painting fills exactly one half of the image from top to bottom; they meet along one straight vertical line at the exact centre of the image, with no gap, no margin, no frame and no border between them or around them. Each painting's composition is centred within its own half. LEFT HALF: a collage-like composition on board — overlapping torn-paper shapes with ragged, fibrous torn edges and a few crisp stencilled forms (simple leaf, disc and crescent silhouettes sprayed through a stencil, with soft overspray), in matte ochre, black and pale blue on an off-white paper ground; layered, slightly wrinkled glued paper, dry matte gouache, absolutely no letters or numbers. RIGHT HALF: an oil painting of a tall totem of five rough, slightly irregular rectangles stacked one above another up the centre, in earthy reds — iron oxide, brick red, burnt sienna — and dense matte blacks over a warm umber and smoky grey ground; paint heavily layered and scraped back with a blade so earlier layers show as ragged scars, dry-brush drags, thick impasto ridges. Even diffuse light, no wall, no shadow, no signature, no text, no lettering, no watermark.",
+  "raw": "raw/paintB/p12_p15_pair-20261112-093722.webp",
+  "post": "one 1536x1024 generation holds p12 (left half) and p15 (right half); crop x=796..1479 (683x1024, clear of the seam at x=768); trim 4 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.1484,
+   0.0559,
+   0.0287
+  ]
+ },
+ {
+  "file": "assets/art/p16.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original monumental abstract painting of mountains and water, horizontal format, in mineral pigments and ink on a large canvas. Layer upon layer of overlapping mountain ridgelines sweep across the whole width, reduced to bold abstract bands and jagged silhouettes: ridges of malachite green, ridges of azurite blue, ridges of dense ink black with wet ink washes bleeding at their edges, and ridges and mist bands of burnished gold leaf and gold pigment. In the lower third the ridges give way to a calm horizontal expanse of water suggested by pale gold and thin blue washes with a few black ink strokes. Granular mineral-pigment texture, pooled and crackled colour, splashed ink, flecks of gold. Grand, serene, contemporary, entirely non-photographic. No sun, no moon, no trees, no boats, no buildings, no seals, no calligraphy. The image shows only the painted surface, photographed perfectly frontally like a flat museum scan under even diffuse light, the painting filling the image edge to edge. No frame, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/p16-20261112-093522.webp",
+  "post": "trim 4 px off every edge; centre crop to 3:2; Lanczos resize to 1536x1024; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   1536,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.3376,
+   0.2793,
+   0.1995
+  ]
+ },
+ {
+  "file": "assets/art/m01.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A large hand-woven wool tapestry seen perfectly frontally and flat, horizontal format, the woven surface filling the image edge to edge. Abstract composition of broad interlocking shapes — big curved lobes, arches, wedges and bars that lock into one another like a puzzle — in terracotta, ochre, cream and deep blue, with flat areas of colour and crisp woven edges that step slightly along the weave. The weave is clearly visible everywhere: fine horizontal ribs of weft, slight colour variation of hand-dyed yarn within each shape, small slits and hatching where colours meet. Matte wool, even flat diffuse lighting, no folds, no wrinkles, no fringe, no hanging rod, no wall, no shadow, no signature, no text, no lettering, no watermark, no border.",
+  "raw": "raw/paintB/m01-20261112-093624.webp",
+  "post": "trim 4 px off every edge; centre crop to 3:2; Lanczos resize to 1536x1024; WebP q88 (raw generation saved as WebP, not PNG: PNG replies failed in the image tool)",
+  "px": [
+   1536,
+   1024
+  ],
+  "tile_m": null,
+  "mean_linear": [
+   0.4402,
+   0.2006,
+   0.1058
+  ]
+ }
+]

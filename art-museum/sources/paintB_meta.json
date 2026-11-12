@@ -1,0 +1,110 @@
+[
+ {
+  "id": "p09",
+  "file": "assets/art/p09.webp",
+  "title_zh": "坐着的人（绿与紫）",
+  "title_en": "Seated Figure in Green and Violet",
+  "artist": "Marit Halvorsrud",
+  "year": 1957,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.2,
+  "h_m": 1.8
+ },
+ {
+  "id": "p10",
+  "file": "assets/art/p10.webp",
+  "title_zh": "振荡 第7号",
+  "title_en": "Oscillation No. 7",
+  "artist": "Tomás Echeverri Lund",
+  "year": 1966,
+  "medium_zh": "布面丙烯",
+  "medium_en": "Acrylic on canvas",
+  "w_m": 1.5,
+  "h_m": 1.5
+ },
+ {
+  "id": "p11",
+  "file": "assets/art/p11.webp",
+  "title_zh": "万窗灯火",
+  "title_en": "Ten Thousand Windows",
+  "artist": "沈以澄 Shen Yicheng",
+  "year": 1988,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.8,
+  "h_m": 1.2
+ },
+ {
+  "id": "p12",
+  "file": "assets/art/p12.webp",
+  "title_zh": "撕纸与新月",
+  "title_en": "Torn Paper with Crescent",
+  "artist": "Odile Brennecke",
+  "year": 1972,
+  "medium_zh": "综合材料（纸本拼贴、水粉、镂版喷绘，裱于木板）",
+  "medium_en": "Mixed media (paper collage, gouache and stencil on board)",
+  "w_m": 1.0,
+  "h_m": 1.5
+ },
+ {
+  "id": "p13",
+  "file": "assets/art/p13.webp",
+  "title_zh": "浮纱",
+  "title_en": "Drifting Veils",
+  "artist": "Aroha Tindall",
+  "year": 1974,
+  "medium_zh": "布面丙烯（未涂底画布）",
+  "medium_en": "Acrylic on unprimed canvas",
+  "w_m": 2.4,
+  "h_m": 1.6
+ },
+ {
+  "id": "p14",
+  "file": "assets/art/p14.webp",
+  "title_zh": "静夜几何",
+  "title_en": "Geometry of a Quiet Night",
+  "artist": "陆霁川 Lu Jichuan",
+  "year": 1995,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.2,
+  "h_m": 1.2
+ },
+ {
+  "id": "p15",
+  "file": "assets/art/p15.webp",
+  "title_zh": "赤土图腾",
+  "title_en": "Red Earth Totem",
+  "artist": "Kofi Asare-Whitlock",
+  "year": 1961,
+  "medium_zh": "布面油画",
+  "medium_en": "Oil on canvas",
+  "w_m": 1.2,
+  "h_m": 1.8
+ },
+ {
+  "id": "p16",
+  "file": "assets/art/p16.webp",
+  "title_zh": "层峦·金碧",
+  "title_en": "Layered Ridges in Gold and Blue-Green",
+  "artist": "顾青岚 Gu Qinglan",
+  "year": 2019,
+  "medium_zh": "布面矿物颜料、水墨、金箔",
+  "medium_en": "Mineral pigments, ink and gold leaf on canvas",
+  "w_m": 3.0,
+  "h_m": 2.0
+ },
+ {
+  "id": "m01",
+  "file": "assets/art/m01.webp",
+  "title_zh": "合流",
+  "title_en": "Confluence",
+  "artist": "Paloma Iturralde Sanz",
+  "year": 1978,
+  "medium_zh": "手工羊毛挂毯",
+  "medium_en": "Hand-woven wool tapestry",
+  "w_m": 5.4,
+  "h_m": 3.6
+ }
+]

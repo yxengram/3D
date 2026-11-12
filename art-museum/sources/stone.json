@@ -1,0 +1,122 @@
+[
+ {
+  "file": "assets/tex/travertine.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of one single continuous slab of honed ivory-beige travertine, vein-cut, seen perfectly frontally like a flatbed scan (orthographic, no perspective). The image shows an area about 3.6 m wide by 2.4 m high of uninterrupted stone: fine horizontal sedimentary veining and soft linear banding in ivory, cream and pale beige running left to right across the whole image, with sparse tiny cement-filled pits. Matte honed finish, subtle low contrast, fine natural detail. Perfectly even, shadowless diffuse lighting: no highlights, no reflections, no shadows, no vignette, the same brightness from corner to corner. No joints, no seams, no panel lines, no tile edges, no cracks, no stains, no text. The stone fills the image edge to edge.",
+  "post": "src_travertine-20261112-092611.png: mild de-gradient; 8 different 512x256 crops (1.2x0.6 m, native scale, some mirrored) stacked 2x4, per-panel mean equalised then +-4% brightness; 5 mm (2.13 px, antialiased) dark joints centred on panel edges and tile border; mean set to 200",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.4,
+   2.4
+  ],
+  "mean_linear": [
+   0.6998,
+   0.6008,
+   0.4701
+  ]
+ },
+ {
+  "file": "assets/tex/paving.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of flamed (thermally roughened) warm-grey granite, seen from straight above like a flatbed scan (orthographic, no perspective). The image shows about 1.2 m by 1.2 m of one continuous uninterrupted stone surface: fine, uniform speckled grain of 2 to 4 mm crystals in warm mid grey, pale grey, a little beige and small dark flecks; matte rough flamed finish, low contrast, very even all over with no large patches or veins. Perfectly even, shadowless diffuse lighting: no highlights, no sparkle, no shadows, no vignette, the same brightness from corner to corner. No joints, no seams, no tiles, no cracks, no stains, no text. The stone fills the image edge to edge.",
+  "post": "src_granite-20261112-092655.png: flatten, scale x0.42, contrast x0.8; 32 pavers 256x128 px (0.6x0.3 m) = random rotated/mirrored crops, running bond (odd rows offset 128 px), +-5% brightness per paver; 4 mm (1.7 px, antialiased) sand-grey joints centred on tile border; mean set to 150",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.4,
+   2.4
+  ],
+  "mean_linear": [
+   0.3549,
+   0.3108,
+   0.2749
+  ]
+ },
+ {
+  "file": "assets/tex/terrazzo.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of a polished fine-chip terrazzo floor seen from straight above like a flatbed scan (orthographic, no perspective). The image shows about 1.25 m by 1.25 m of one continuous uninterrupted surface: a warm light-grey cement matrix evenly scattered with many small angular marble chips, each only 5 to 20 mm across (the largest chip is smaller than one sixtieth of the image width, several thousand chips in the image). Chip colours: mostly ivory and off-white, some ochre and honey, some charcoal, and a few terracotta. Even random distribution with no clusters and no large stones. Perfectly even, shadowless diffuse lighting: no reflections, no gloss highlights, no shadows, no vignette, the same brightness from corner to corner. No divider strips, no joints, no seams, no cracks, no text. The terrazzo fills the image edge to edge.",
+  "post": "src_terrazzo-20261112-092803.png: flatten; periodic 2688 px quilt of 16 random rotated/mirrored 800 px crops (noisy hard seams), periodic flatten, Lanczos to 1024 (chips ~5-20 mm at 2.2 m), saturation x0.8; brass strip 3 px on every edge; mean set to 185",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.2,
+   2.2
+  ],
+  "mean_linear": [
+   0.5855,
+   0.5009,
+   0.4148
+  ]
+ },
+ {
+  "file": "assets/tex/concrete.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of smooth fair-faced cast architectural concrete, seen perfectly frontally like a flatbed scan (orthographic, no perspective). The image shows about 3 m by 3 m of one continuous uninterrupted wall surface: light warm grey, very smooth, with subtle soft cloudy mottling and a few scattered tiny air pores (pinholes 1 to 3 mm). Matte, low contrast, even all over. Perfectly even, shadowless diffuse lighting: no highlights, no shadows, no vignette, the same brightness from corner to corner. No panel lines, no formwork joints, no tie holes, no cracks, no stains, no streaks, no drips, no text. The concrete fills the image edge to edge.",
+  "post": "src_concrete-20261112-092923.png: flatten (sigma 22%, strength 0.8), make_tileable band 12%, periodic flatten, periodic Lanczos to 1024, row/column band removal, detail amplitude evened along rows/columns (restores the contrast lost in the cross-fade band), contrast x1.35, mean set to 165",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   3,
+   3
+  ],
+  "mean_linear": [
+   0.3976,
+   0.3801,
+   0.3521
+  ]
+ },
+ {
+  "file": "assets/tex/gravel.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of pale grey roof ballast gravel seen from straight above (orthographic top-down, no perspective). The image shows about 1.7 m by 1.7 m of a flat, level bed of loose rounded washed pebbles, each stone 2 to 4 cm across, so roughly 55 stones fit across the image width; densely packed several layers deep and completely covering the surface. Colours: pale grey and off-white with a few beige and mid-grey stones, matte and dry. Even size and even distribution all over, no large rocks. Overcast, shadowless diffuse lighting: no direct sun, no cast shadows, no highlights, no vignette, the same brightness from corner to corner; only soft darker gaps between the stones. No leaves, no debris, no plants, no edges, no text. The gravel fills the image edge to edge.",
+  "post": "src_gravel-20261112-093025.png: flatten; periodic 2592 px quilt of 36 random rotated/mirrored 528 px crops (noisy hard seams), periodic flatten, Lanczos to 512 (stones 2-4 cm at 3 m); mean set to 160",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   3,
+   3
+  ],
+  "mean_linear": [
+   0.3781,
+   0.3687,
+   0.3591
+  ]
+ },
+ {
+  "file": "assets/tex/plaster.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of a white painted gallery wall, seen perfectly frontally like a flatbed scan (orthographic, no perspective). The image shows about 2 m by 2 m of smooth plaster painted matte warm white with a paint roller: almost perfectly uniform, with only a very faint, fine, even roller stipple (slight orange-peel texture) that is barely visible. Perfectly even, shadowless diffuse lighting: no highlights, no shadows, no gradient, no vignette, the same brightness from corner to corner. No marks, no scuffs, no cracks, no joints, no brush strokes, no objects, no text. The wall fills the image edge to edge.",
+  "post": "src_plaster-20261112-093139.png: flatten (sigma 6%), make_tileable band 12%, periodic flatten, periodic Lanczos to 512, row/column band removal, detail amplitude evened along rows/columns (restores the contrast lost in the cross-fade band); luminance detail rescaled to 1.1% relative std on a fixed warm-white tint (236,233,227); mean 232; WebP q90",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   2,
+   2
+  ],
+  "mean_linear": [
+   0.8426,
+   0.8149,
+   0.7706
+  ]
+ }
+]
