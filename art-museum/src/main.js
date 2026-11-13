@@ -85,7 +85,7 @@ async function main() {
   // ---------------------------------------------------------------------------------------------- materials + meshes
   const M = makeMaterials({ J, tex, lm, renderer, B });
   const root = gltf.scene; scene.add(root);
-  let water = null; const stats = { meshes: 0 };
+  let water = null; const stats = { meshes: 0 }, medMeshes = [];
   root.traverse((o) => {
     if (!o.isMesh) return;
     const [name, zone] = o.material.name.split('@'); const z = zone || (o.name.match(/^(ext|lobby|gallery)/) || [])[1] || o.parent.name.split('_')[0];
@@ -93,7 +93,22 @@ async function main() {
     o.matrixAutoUpdate = false; o.updateMatrix();
     if (J.mats[name].kind === 'decal' || J.mats[name].kind === 'glass') o.renderOrder = 5;
     if (name === 'water') water = o;
+    if (z === 'med') medMeshes.push(o);
   });
+  // The medieval hall can only be seen from inside it or from the lobby (through its doorway). Everywhere else it is not drawn at all
+  // and a dark panel stands in the doorway, so the exterior and the modern gallery cost exactly what they did before the hall existed.
+  let medPlug = null;
+  if (J.zones.med && J.portals && J.portals.med) {
+    const q = J.portals.med, zb = J.zones.med;
+    medPlug = new THREE.Mesh(new THREE.PlaneGeometry(q[1] - q[0] + 0.9, 3.8), new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(0.004, 0.009, 0.010), fog: false }));
+    medPlug.rotation.y = Math.PI / 2; medPlug.position.set(zb[3] + 0.06, 1.9, -(q[0] + q[1]) / 2); scene.add(medPlug);
+    for (const m of medMeshes) m.visible = false;                 // starts hidden: nothing of the hall is uploaded to the GPU until it is needed
+    medPlug.userData.door = new THREE.Box3(new THREE.Vector3(zb[3] - 0.2, 0, -q[1] - 0.5), new THREE.Vector3(J.zones.lobby[0] + 0.2, 3.9, -q[0] + 0.5));
+  }
+  // Its textures (about 65 MB) are uploaded one per frame once the visitor starts walking, so there is no hitch at the doorway and
+  // someone who only orbits the exterior never pays for them.
+  const medWarm = []; let warmStarted = false;
+  const frustum = new THREE.Frustum(), pv = new THREE.Matrix4();
   // reflecting pool: planar reflection at reduced resolution, only rendered while the pool can be in view
   if (water) {
     water.geometry.computeBoundingBox(); const bb = water.geometry.boundingBox; const size = bb.getSize(new THREE.Vector3()), c = bb.getCenter(new THREE.Vector3());
@@ -106,15 +121,21 @@ async function main() {
 
   // ---------------------------------------------------------------------------------------------- controls, views, exposure
   const ctl = new Controls({ camera, dom: canvas, J, B });
-  const EXPO = { ext: 0.23, lobby: 0.62, gallery: 0.95 };
+  const EXPO = { ext: 0.23, lobby: 0.62, gallery: 0.95, med: 1.55 };
   for (const k of Object.keys(EXPO)) if (Q.has('exp_' + k)) EXPO[k] = +Q.get('exp_' + k);
-  const PORTAL = J.walk.find((r) => r[0] < J.zones.gallery[0] && r[2] > J.zones.gallery[0] && r[2] - r[0] < 5) || [0, 6.15, 0, 9.25];   // walkable strip through the lobby/gallery wall
+  const ROOMS = ['gallery', 'med'].filter((r) => J.zones[r]);          // rooms entered from the lobby through one doorway each
   const zoneOf = (p) => {   // soft membership of the camera in the interior zones -> exposure; hard label -> tab
     const inBox = (b, m) => { const dx = Math.max(b[0] - p.x, p.x - b[3], 0), dz = Math.max(b[1] + p.z, -p.z - b[4], 0), dy = Math.max(p.y - b[5], 0); return 1 - Math.min(1, Math.hypot(dx, dz, dy) / m); };
-    let g = inBox(J.zones.gallery, 3); const y = -p.z, gx = J.zones.gallery[0];
-    if (p.x < gx) g *= 1 - Math.min(1, Math.max(PORTAL[1] - y, y - PORTAL[3], 0));     // the gallery only "leaks" into the lobby through the portal
-    const l = inBox(J.zones.lobby, 5) * (1 - g);
-    return { g, l, e: Math.max(0, 1 - g - l), zone: p.x > gx - 0.2 && g > 0 ? 'gallery' : l >= 0.5 ? 'lobby' : 'plaza' };
+    const y = -p.z, w = {}; let sum = 0, zone = null;
+    for (const r of ROOMS) {
+      const b = J.zones[r], q = (J.portals || {})[r]; let g = inBox(b, 3);
+      const outside = p.x < b[0] || p.x > b[3];
+      if (outside && q) g *= 1 - Math.min(1, Math.max(q[0] - y, y - q[1], 0));        // a room only "leaks" into the lobby through its doorway
+      w[r] = g; sum += g; if (g > 0 && p.x > b[0] - 0.2 && p.x < b[3] + 0.2) zone = r;
+    }
+    if (sum > 1) for (const r of ROOMS) w[r] /= sum;
+    const l = inBox(J.zones.lobby, 5) * (1 - Math.min(1, sum));
+    return { w, l, e: Math.max(0, 1 - Math.min(1, sum) - l), zone: zone || (l >= 0.5 ? 'lobby' : 'plaza') };
   };
   let expo = EXPO.ext;
   const ui = setupUI(ctl);
@@ -132,18 +153,29 @@ async function main() {
 
   function step(dt, noRender) {
     M.time.value += dt; ctl.update(dt);
-    const z = zoneOf(camera.position), target = z.e * EXPO.ext + z.l * EXPO.lobby + z.g * EXPO.gallery;
+    const z = zoneOf(camera.position); let target = z.e * EXPO.ext + z.l * EXPO.lobby; for (const r of ROOMS) target += z.w[r] * EXPO[r];
     if (SHOT || dt === 0 || ctl.jumped) { expo = target; ctl.jumped = false; } else expo += (target - expo) * (1 - Math.exp(-dt * 2.2));
     renderer.toneMappingExposure = expo;
     // Each zone was lit for its own exposure. Seen from another zone it is pulled part of the way back (like the eye's local
     // adaptation), so the plaza is not a white-out from the lobby and the lobby is not a black box from the plaza.
     const k = (zn) => Math.pow(EXPO[zn] / expo, 0.4), ge = k('ext');
-    M.setZoneGain({ ext: ge, lobby: k('lobby'), gallery: k('gallery') });
+    M.setZoneGain({ ext: ge, lobby: k('lobby'), gallery: k('gallery'), med: k('med') });
     skyUniforms.uSkyGain.value = SKY_GAIN * ge; skyUniforms.uHaze.value.copy(HAZE).multiplyScalar(ge); scene.fog.color.copy(HAZE).multiplyScalar(ge);
     if (ring) ring.material.color.copy(RING).multiplyScalar(ge);
     const low = camera.position.y < 3.0;                             // eye level: trees stay solid; orbit: a tree in the lens' way dissolves
     M.treeFade.value.set(low ? 0.5 : 7.0, low ? 1.3 : 10.5);
-    if (M.mirror) M.mirror.visible = z.e > 0.35 || z.l > 0.3;       // never needed from inside the gallery
+    if (M.mirror) M.mirror.visible = z.e > 0.35 || z.l > 0.3;       // never needed from inside the galleries
+    if (medPlug) {
+      const lb = J.zones.lobby, p = camera.position, near = p.x > lb[0] - 1 && p.x < lb[3] + 6 && -p.z > lb[1] - 6 && -p.z < lb[4] + 1 && p.y < lb[5];
+      let show = z.w.med > 0;
+      if (!show && near) { pv.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse); frustum.setFromProjectionMatrix(pv); show = frustum.intersectsBox(medPlug.userData.door); }   // from the lobby: only while the doorway is in view
+      if (show === medPlug.visible) { medPlug.visible = !show; for (const m of medMeshes) m.visible = show; }
+      if (!warmStarted && (ctl.mode === 'walk' || show)) {
+        warmStarted = true; const seen = new Set();
+        for (const m of medMeshes) for (const k of ['map', 'lightMap', 'alphaMap']) { const t = m.material[k]; if (t && !seen.has(t)) { seen.add(t); medWarm.push(t); } }
+      }
+      if (medWarm.length && !noRender) renderer.initTexture(medWarm.pop());
+    }
     ui.sync(z.zone);
     if (!noRender) renderer.render(scene, camera);
   }
@@ -181,10 +213,10 @@ function setupUI(ctl) {
   let shown = null, timer = 0, curTab = null;
   const show = (k) => { if (shown === k || SHOT) return; shown = k; hint.textContent = HINT[k]; hint.classList.add('on'); clearTimeout(timer); timer = setTimeout(() => hint.classList.remove('on'), 6500); };
   tabs.forEach((b) => b.addEventListener('click', (e) => { ctl.setView(b.dataset.view); if (e.detail > 0) b.blur(); }));     // mouse clicks give the keyboard back to the scene
-  window.addEventListener('keydown', (e) => { if (e.repeat || e.metaKey || e.ctrlKey || e.altKey) return; const v = { 1: 'exterior', 2: 'lobby', 3: 'gallery' }[e.key]; if (v) ctl.setView(v); });
+  window.addEventListener('keydown', (e) => { if (e.repeat || e.metaKey || e.ctrlKey || e.altKey) return; const v = { 1: 'exterior', 2: 'lobby', 3: 'gallery', 4: 'medieval' }[e.key]; if (v) ctl.setView(v); });
   if (SHOT) document.getElementById('ui').style.display = 'none';
   return { sync(zone) {
-    const cur = ctl.mode === 'orbit' ? 'exterior' : zone;
+    const cur = ctl.mode === 'orbit' ? 'exterior' : zone === 'med' ? 'medieval' : zone;
     if (cur !== curTab) { curTab = cur; tabs.forEach((b) => { const on = b.dataset.view === cur; b.classList.toggle('on', on); b.setAttribute('aria-pressed', String(on)); }); }
     show(ctl.mode === 'orbit' ? 'exterior' : 'walk');
   } };

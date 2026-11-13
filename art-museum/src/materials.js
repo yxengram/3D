@@ -23,11 +23,11 @@ vec3 skyColor(vec3 d, float disc) {
   return c;
 }`;
 
-const GLOW = { laylight: 2.4, lamp: 5.0 };
+const GLOW = { laylight: 2.4, lamp: 5.0, cove: 1.2 };
 const GAIN = { tree_a: 3.1, tree_b: 3.1, tree_c: 3.1, gfx_name: 1.0 };
 
 export function makeMaterials({ J, tex, lm, renderer, B }) {
-  const cache = new Map(), time = { value: 0 }, litByZone = { ext: [], lobby: [], gallery: [] }, cutouts = [], treeFade = { value: new THREE.Vector2(6, 12) };
+  const cache = new Map(), time = { value: 0 }, litByZone = { ext: [], lobby: [], gallery: [], med: [] }, cutouts = [], treeFade = { value: new THREE.Vector2(6, 12) };
   const env = {};
   for (const z of ['lobby', 'gallery']) {
     const b = J.zones[z];
@@ -105,7 +105,7 @@ export function makeMaterials({ J, tex, lm, renderer, B }) {
     switch (d.kind) {
       case 'lit': {
         const L = lm[zone];
-        m = new THREE.MeshBasicMaterial({ color: t ? (d.tint ? lin(d.tint) : 0xffffff) : lin(d.color), map: t, lightMap: L || null, lightMapIntensity: L ? J.lm[zone].range * Math.PI : 1 });
+        m = new THREE.MeshBasicMaterial({ color: t ? (d.tint ? lin(d.tint) : 0xffffff) : lin(d.color), map: t, alphaTest: d.alpha && t ? 0.5 : 0, lightMap: L || null, lightMapIntensity: L ? J.lm[zone].range * Math.PI : 1 });
         if (d.reflect) reflective(m, d);
         if (name === 'lawn') lawnNoise(m);
         if (L && litByZone[zone]) litByZone[zone].push(m);
@@ -176,7 +176,7 @@ export function makeMaterials({ J, tex, lm, renderer, B }) {
   const api = { get, time, waterShader, mirror: null, env, treeFade, setZoneGain,
     captureEnv(scene) {
       const was = api.mirror ? api.mirror.visible : false; if (api.mirror) api.mirror.visible = false;
-      setZoneGain({ ext: 1, lobby: 1, gallery: 1 }); for (const z of Object.keys(env)) env[z].uEnvOn.value = 0;
+      setZoneGain({ ext: 1, lobby: 1, gallery: 1, med: 1 }); for (const z of Object.keys(env)) env[z].uEnvOn.value = 0;
       for (const z of Object.keys(env)) {
         if (env[z].rt) env[z].rt.dispose();
         const rt = new THREE.WebGLCubeRenderTarget(z === 'lobby' ? 256 : 128, { type: THREE.HalfFloatType, generateMipmaps: true, minFilter: THREE.LinearMipmapLinearFilter });

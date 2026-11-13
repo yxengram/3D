@@ -1,7 +1,7 @@
 # The museum. Metres, Z up, X east, Y north. Lobby interior X[-11,11] Y[0,15.4]; gallery interior X[11.4,37.4] Y[1,15]; plaza to the south.
 import math, random, json, os
 import lib as L
-from lib import box, quad, plane_z, picture, prism, cyl, obox, plate, rod, bar, mesh, walk, block
+from lib import box, quad, plane_z, picture, prism, cyl, obox, plate, rod, bar, mesh, walk, block, sweep_x
 from mathutils import Vector
 
 M = 2.2                      # structural module
@@ -10,10 +10,34 @@ LH, LS = 10.0, 10.8          # lobby: underside of ribs, underside of slab
 GX0, GX1, GY0, GY1, GH = 11.4, 37.4, 1.0, 15.0, 5.6
 PY0, PY1, PH = 5.7, 9.7, 3.6  # portal lobby -> gallery
 SKY = (-4.4, 6.6, 4.4, 11.0)  # skylight opening in the lobby roof
+# medieval gallery: a vaulted hall in the west wing, entered from the lobby through a pointed stone doorway under the mezzanine
+MX0, MX1, MY0, MY1 = -31.0, -11.8, 10.5, 16.5     # interior
+MSP, MR = 4.2, 4.2                                 # springing height and arc radius of the pointed barrel vault (span 6 m)
+QY0, QY1, QSP, QR = 12.2, 14.8, 1.8, 2.0           # doorway: jambs, springing, arc radius
 SUN_AZ, SUN_EL = 112.0, 30.0
 META = json.load(open(os.path.join(L.ROOT, 'assets', 'art', 'paintings.json'))) if os.path.exists(os.path.join(L.ROOT, 'assets', 'art', 'paintings.json')) else []
 LABEL_GRID = (5, 4)          # label atlas cells (columns, rows); cell index = order in HANG + m01 last
+LABEL_GRID_MED = (4, 3)
 SPOTS = []                   # (name, pos, target, watts, angle) collected while hanging pictures
+
+
+def pointed(y0, y1, zs, r, n=9, inset=0.0):
+    """Pointed arch as a polyline [(y, z)] from (y0, zs) over the apex to (y1, zs): two arcs of radius r centred on the springing line.
+    inset > 0 gives the concentric inner arch (rib soffits)."""
+    ym = (y0 + y1) / 2; cl, cr, rr = y0 + r, y1 - r, r - inset
+    tm = math.acos((cl - ym) / rr); t0 = math.acos(min(1.0, r / rr * 0 + (cl - (y0 + inset)) / rr)) if inset else 0.0
+    left = [(cl - rr * math.cos(t0 + (tm - t0) * i / n), zs + rr * math.sin(t0 + (tm - t0) * i / n)) for i in range(n + 1)]
+    return left + [(2 * ym - y, z) for y, z in left[-2::-1]]
+
+
+def door_wall(name, x, facing_x, ya, yb, ztop, mat, zone, lm=1.0):
+    """Wall face in the plane X = x between ya..yb, 0..ztop with the pointed doorway cut out; three polygons sharing edges = one lightmap chart."""
+    arch = pointed(QY0, QY1, QSP, QR, 10)
+    v = [(x, ya, 0), (x, QY0, 0), (x, QY0, QSP), (x, QY0, ztop), (x, ya, ztop),            # 0-4 south part
+         (x, QY1, 0), (x, yb, 0), (x, yb, ztop), (x, QY1, ztop), (x, QY1, QSP)]             # 5-9 north part
+    ai = list(range(len(v), len(v) + len(arch) - 2)); v += [(x, y, z) for y, z in arch[1:-1]]
+    f = [(0, 1, 2, 3, 4), (5, 6, 7, 8, 9), tuple([2] + ai + [9, 8, 3])]
+    return mesh(name, v, f, mat, zone, lm, outward=(x - facing_x, (ya + yb) / 2, ztop / 2))
 
 
 def bench(name, x0, y0, x1, y1, zone):
@@ -27,7 +51,12 @@ def lobby():
     Z = 'lobby'
     plane_z('lob_floor', LX0, LY0, LX1, LY1, 0, 'terrazzo', Z)
     # walls (inner faces). West: stone, north: slats below the mezzanine + plaster above, east: plaster with the portal
-    box('lob_wW', (LX0 - 0.4, LY0, 0), (LX0, LY1, LS), 'travertine', Z, only='x+ y-')
+    box('lob_wW', (LX0 - 0.4, LY0, 0), (LX0, LY1, LS), 'travertine', Z, only='y-')
+    door_wall('lob_wW_in', LX0, 1, LY0, LY1, LS, 'travertine', Z)                        # inner face with the pointed doorway to the medieval gallery
+    sweep_x('med_door', [(QY0, 0)] + pointed(QY0, QY1, QSP, QR, 10) + [(QY1, 0)], MX1, LX0, 'med_stone', Z, toward=((QY0 + QY1) / 2, 1.0))
+    plane_z('med_door_floor', MX1, QY0, LX0, QY1, 0, 'med_stone', Z)
+    picture('gfx_medsign', (LX0, (QY0 + QY1) / 2, 3.94), 'E', 2.0, 0.25, 'gfx_medsign', Z, off=0.012)
+    walk(MX1 - 0.6, QY0 + 0.35, LX0 + 0.8, QY1 - 0.35)
     box('lob_wN_lo', (LX0, LY1, 0), (LX1, LY1 + 0.4, 4.2), 'slats', Z, only='y-')
     box('lob_wN_hi', (LX0, LY1, 4.6), (LX1, LY1 + 0.4, LS), 'plaster', Z, only='y-')
     box('lob_wE_s', (LX1, LY0, 0), (LX1 + 0.4, PY0, LS), 'plaster', Z, only='x- y-')
@@ -158,32 +187,34 @@ HANG = [
 P1X, P2X, PT = 17.0, 27.0, 0.5   # partitions: west face x, thickness
 WALLS = {  # wall -> (facing, plane coordinate, axis along the wall)
     'N': ('S', GY1), 'S': ('N', GY0), 'E': ('W', GX1), 'W': ('E', GX0), 'P1W': ('W', P1X), 'P1E': ('E', P1X + PT), 'P2W': ('W', P2X), 'P2E': ('E', P2X + PT),
+    'MN': ('S', MY1), 'MS': ('N', MY0), 'MW': ('E', MX0),
 }
 NRM = {'N': Vector((0, 1, 0)), 'S': Vector((0, -1, 0)), 'E': Vector((1, 0, 0)), 'W': Vector((-1, 0, 0))}
 
 
-def hang(idx, pid, wall, s, w, h, frame, zone='gallery', zc=1.56, track_z=5.12, spot_w=560.0):
+def hang(idx, pid, wall, s, w, h, frame, zone='gallery', zc=1.56, track_z=5.12, spot_w=560.0, dist=2.2, labels=('labels', LABEL_GRID), off=0.045, nspots=None, col=(1.0, 0.94, 0.86)):
     facing, plane = WALLS[wall]; n = NRM[facing]; t, up = L._frame(n)
     c = Vector((s, plane, zc)) if facing in 'NS' else Vector((plane, s, zc))
-    picture(pid, tuple(c), facing, w, h, pid, zone, off=0.045)
+    picture(pid, tuple(c), facing, w, h, pid, zone, off=off)
     fw, fd = 0.035, 0.06
     def fbox(name, u0, u1, v0, v1, rot=False):
         a = c + t * u0 + up * v0; b = c + t * u1 + up * v1 + n * fd
         box(name, tuple(a), tuple(b), frame, zone, lm=0.6, skip={'N': 'y-', 'S': 'y+', 'E': 'x-', 'W': 'x+'}[facing], uvrot=rot)
-    fbox(pid + '_fl', -w / 2 - fw, -w / 2, -h / 2 - fw, h / 2 + fw, True); fbox(pid + '_fr', w / 2, w / 2 + fw, -h / 2 - fw, h / 2 + fw, True)
-    fbox(pid + '_ft', -w / 2, w / 2, h / 2, h / 2 + fw); fbox(pid + '_fb', -w / 2, w / 2, -h / 2 - fw, -h / 2)
+    if frame:   # shaped panels bring their own carved frame in the image
+        fbox(pid + '_fl', -w / 2 - fw, -w / 2, -h / 2 - fw, h / 2 + fw, True); fbox(pid + '_fr', w / 2, w / 2 + fw, -h / 2 - fw, h / 2 + fw, True)
+        fbox(pid + '_ft', -w / 2, w / 2, h / 2, h / 2 + fw); fbox(pid + '_fb', -w / 2, w / 2, -h / 2 - fw, -h / 2)
     # label to the viewer's right
-    gx, gy = LABEL_GRID; cx, cy = idx % gx, idx // gx
+    (lmat, (gx, gy)) = labels; cx, cy = idx % gx, idx // gx
     lc = c + t * (w / 2 + 0.34) + up * (1.22 - zc)
-    picture(pid + '_label', tuple(lc), facing, 0.25, 0.20, 'labels', zone, off=0.008, uvrect=(cx / gx, 1 - (cy + 1) / gy, (cx + 1) / gx, 1 - cy / gy), lm=1.5)
+    picture(pid + '_label', tuple(lc), facing, 0.25, 0.20, lmat, zone, off=0.008, uvrect=(cx / gx, 1 - (cy + 1) / gy, (cx + 1) / gx, 1 - cy / gy), lm=1.5)
     # spots on the track 2.2 m in front of the wall
-    k = 2 if w >= 2.3 else 1; dist = math.hypot(2.2, track_z - zc); diag = math.hypot(w / k, h) / 2
-    ang = min(70, math.degrees(2 * math.atan(diag / dist)) * 1.15 + 5)
+    k = nspots or (2 if w >= 2.3 else 1); dd = math.hypot(dist, track_z - zc); diag = math.hypot(w / k, h) / 2
+    ang = min(70, math.degrees(2 * math.atan(diag / dd)) * 1.15 + 5)
     for j in range(k):
         o = (j - (k - 1) / 2) * w / k
-        p = c + n * 2.2 + t * o; p.z = track_z; tg = c + t * o * 0.8
+        p = c + n * dist + t * o; p.z = track_z; tg = c + t * o * 0.8
         d = (tg - p).normalized()
-        SPOTS.append(('spot_%s_%d' % (pid, j), tuple(p + d * 0.25), tuple(tg), spot_w * (w * h / k) ** 0.5 / 1.3, ang, (1.0, 0.94, 0.86)))   # lamp sits just outside the housing mouth
+        SPOTS.append(('spot_%s_%d' % (pid, j), tuple(p + d * 0.25), tuple(tg), spot_w * (w * h / k) ** 0.5 / 1.3, ang, col))   # lamp sits just outside the housing mouth
         rod('fx_%s_%d' % (pid, j), tuple(p + Vector((0, 0, 0.06))), tuple(p + d * 0.2), 0.045, 'fixture', zone, segs=8)
         rod('fxs_%s_%d' % (pid, j), tuple(p + Vector((0, 0, 0.06))), tuple(p + Vector((0, 0, 0.1))), 0.012, 'fixture', zone, segs=4, caps=False)
 
@@ -231,6 +262,68 @@ def gallery():
 
 
 # ---------------------------------------------------------------------------------------------------------------------
+# (id, wall, coordinate along the wall, width, height, centre height, frame material or None for shaped panels)
+MED = [
+    ('md01', 'MW', 13.5, 3.9, 2.6, 2.68, None), ('md02', 'MN', -23.0, 1.5, 2.25, 1.95, None), ('md03', 'MN', -16.6, 1.3, 1.95, 1.80, None), ('md04', 'MS', -23.0, 1.35, 0.9, 1.60, None),
+    ('md05', 'MN', -13.4, 0.7, 1.05, 1.60, 'gilt'), ('md06', 'MN', -26.2, 0.7, 1.05, 1.60, 'gilt'), ('md07', 'MS', -16.6, 1.1, 1.65, 1.65, 'gilt'), ('md08', 'MS', -26.75, 0.5, 0.75, 1.55, 'black'),
+    ('md09', 'MS', -25.65, 0.5, 0.75, 1.55, 'black'), ('md10', 'MN', -19.8, 1.8, 1.2, 1.65, 'black'), ('md11', 'MS', -19.8, 2.1, 0.7, 1.60, 'gilt'),
+]
+
+
+def medieval():
+    Z = 'med'; S = 'med_stone'; ym = (MY0 + MY1) / 2
+    vault = pointed(MY0, MY1, MSP, MR, 10); apex = max(z for _, z in vault)
+    plane_z('med_floor', MX0, MY0, MX1, MY1, 0, 'med_floor', Z)
+    # walls: dark below the springing line, lime-washed lunettes above; the east wall carries the doorway
+    box('med_wN', (MX0, MY1, 0), (MX1, MY1 + 0.4, MSP), 'med_wall', Z, only='y-'); box('med_wS', (MX0, MY0 - 0.4, 0), (MX1, MY0, MSP), 'med_wall', Z, only='y+')
+    box('med_wW', (MX0 - 0.4, MY0, 0), (MX0, MY1, MSP), 'med_wall', Z, only='x+')
+    door_wall('med_wE', MX1, -1, MY0, MY1, MSP, 'med_wall', Z)
+    for nm, x, fx in (('med_lunW', MX0, 1), ('med_lunE', MX1, -1)):
+        mesh(nm, [(x, y, z) for y, z in vault], [tuple(range(len(vault)))], 'med_vault', Z, outward=(x - fx, ym, MSP + 1))
+    sweep_x('med_vault', vault, MX0, MX1, 'med_vault', Z, toward=(ym, MSP))
+    # stone: plinth, cornice at the springing line (it hides the light strip that washes the vault), ribs on wall shafts
+    for sd, ya, yb, yc in (('n', MY1 - 0.05, MY1, MY1 - 0.30), ('s', MY0, MY0 + 0.05, MY0 + 0.30)):
+        hid = 'y+' if sd == 'n' else 'y-'
+        box('med_plinth' + sd, (MX0, ya, 0), (MX1, yb, 0.5), S, Z, skip='z- x- x+ ' + hid, lm=0.8)
+        box('med_cornice' + sd, (MX0, min(yc, MY1 if sd == 'n' else MY0), MSP - 0.18), (MX1, max(yc, MY1 if sd == 'n' else MY0), MSP), S, Z, skip='x- x+ ' + hid, lm=0.8)
+        ca, cb = (MY1 - 0.24, MY1 - 0.08) if sd == 'n' else (MY0 + 0.08, MY0 + 0.24)
+        plane_z('med_cove' + sd, MX0 + 0.1, ca, MX1 - 0.1, cb, MSP + 0.012, 'cove', Z)
+    inner = pointed(MY0, MY1, MSP, MR, 10, inset=0.22)
+    for k in range(1, 6):
+        x = MX1 - 3.2 * k
+        sweep_x('med_rib%d' % k, inner, x - 0.15, x + 0.15, S, Z, toward=(ym, MSP))
+        for sgn in (-1, 1):
+            xv = x + sgn * 0.15; nn = len(vault)
+            v = [(xv, y, z) for y, z in vault] + [(xv, y, z) for y, z in inner]
+            mesh('med_ribs%d_%d' % (k, sgn), v, [(i, i + 1, nn + i + 1, nn + i) for i in range(nn - 1)], S, Z, outward=(x, ym, MSP + 1), lm=0.8)
+        box('med_shaftn%d' % k, (x - 0.15, MY1 - 0.12, 0), (x + 0.15, MY1, MSP - 0.18), S, Z, skip='y+ z- z+', lm=0.8)
+        box('med_shafts%d' % k, (x - 0.15, MY0, 0), (x + 0.15, MY0 + 0.12, MSP - 0.18), S, Z, skip='y- z- z+', lm=0.8)
+    # dais and altar block at the west end
+    box('med_step1', (MX0, MY0, 0), (MX0 + 3.0, MY1, 0.15), S, Z, skip='z- x- y- y+'); box('med_step2', (MX0, 11.3, 0.15), (MX0 + 2.0, 15.7, 0.30), S, Z, skip='z- x-')
+    box('med_altar', (MX0, 11.45, 0.30), (MX0 + 0.75, 15.55, 1.30), S, Z, skip='z- x-')
+    # one slim track along the axis of the hall (a modern insertion), a cross piece for the altarpiece, two iron ring lights hung from it
+    tz = 5.6
+    box('med_track', (MX0 + 3.3, ym - 0.02, tz - 0.02), (MX1 - 0.5, ym + 0.02, tz + 0.02), 'fixture', Z); box('med_trackx', (MX0 + 3.33, ym - 1.6, tz - 0.02), (MX0 + 3.37, ym + 1.6, tz + 0.02), 'fixture', Z)
+    for k in range(1, 6):
+        x = MX1 - 3.2 * k; rod('med_tr%d' % k, (x, ym, tz), (x, ym, apex - 0.22), 0.006, 'fixture', Z, segs=4, caps=False)
+    for n_, x in enumerate((MX1 - 6.4, MX1 - 12.8)):
+        cz, cr, seg = 4.35, 0.85, 14
+        pts = [(x + cr * math.cos(2 * math.pi * i / seg), ym + cr * math.sin(2 * math.pi * i / seg), cz) for i in range(seg)]
+        for i in range(seg):
+            bar('med_ring%d_%d' % (n_, i), pts[i], pts[(i + 1) % seg], 0.03, 0.07, 'iron', Z, lm=0.5)
+            if i % 2 == 0: cyl('med_bulb%d_%d' % (n_, i), pts[i][0], pts[i][1], cz + 0.04, cz + 0.16, 0.022, 'lamp', Z, segs=6, caps='t')
+        for i in (0, 5, 9): rod('med_chain%d_%d' % (n_, i), pts[i], (x, ym, tz - 0.02), 0.005, 'fixture', Z, segs=4, caps=False)
+        L.point('med_ring%d' % n_, (x, ym, cz + 0.12), 38, (1.0, 0.72, 0.42), 0.25)
+    # the works
+    for i, (pid, wall, s, w, h, zc, fr) in enumerate(MED):
+        hero = pid == 'md01'
+        hang(i, pid, wall, s, w, h, fr, zone=Z, zc=zc, track_z=tz - 0.1, spot_w=520.0, dist=2.95 if not hero else 2.95 - 0.38, labels=('labels_med', LABEL_GRID_MED),
+             off=0.40 if hero else (0.06 if fr is None else 0.045), nspots=3 if hero else None, col=(1.0, 0.90, 0.76))
+    picture('gfx_medtitle', (MX1 - 1.6, MY0, 1.95), 'N', 2.2, 2.0, 'gfx_medtitle', Z, off=0.012)
+    bench('mb1', MX1 - 6.0, ym - 0.35, MX1 - 3.8, ym + 0.35, Z); bench('mb2', MX1 - 12.4, ym - 0.35, MX1 - 10.2, ym + 0.35, Z)
+    walk(MX0 + 3.35, MY0 + 0.45, MX1 - 0.4, MY1 - 0.45)
+
+
 def tree(name, x, y, h, mat, rot=0.0):
     """Billboard tree: three crossed cards. The trunk position goes into the spare LM UV set so the runtime can fade a whole tree at once."""
     w = h * 0.5
@@ -247,7 +340,17 @@ def exterior():
     # west wing
     box('ww', (-33.4, -5.5, 0), (-11.4, 18, 8), T, Z, skip='z- z+ x+')
     quad('ww_e', [(-11.4, -5.5, 0), (-11.4, 0, 0), (-11.4, 0, 8), (-11.4, -5.5, 8)], T, Z, outward=(-20, -3, 4))
-    plane_z('ww_top', -33.4, -5.5, -11.4, 18, 8, 'gravel', Z, lm=0.6)
+    ny0, ny1, nx0, nx1, ez, rz = MY0 - 0.4, MY1 + 0.4, MX0 - 0.4, -11.4, 8.5, 10.5      # nave volume: eaves and ridge
+    for n, (a, b, c, d) in enumerate([(-33.4, -5.5, -11.4, ny0), (-33.4, ny1, -11.4, 18), (-33.4, ny0, nx0, ny1)]):
+        plane_z('ww_top%d' % n, a, b, c, d, 8, 'gravel', Z, lm=0.6)
+    ymn = (ny0 + ny1) / 2
+    quad('nave_ws', [(nx0, ny0, 8), (nx1, ny0, 8), (nx1, ny0, ez), (nx0, ny0, ez)], T, Z, outward=(-20, ymn, 8.2), lm=0.8)
+    quad('nave_wn', [(nx0, ny1, 8), (nx1, ny1, 8), (nx1, ny1, ez), (nx0, ny1, ez)], T, Z, outward=(-20, ymn, 8.2), lm=0.8)
+    quad('nave_rs', [(nx0, ny0, ez), (nx1, ny0, ez), (nx1, ymn, rz), (nx0, ymn, rz)], 'zinc', Z, outward=(-20, ymn, 8.2), lm=0.7)
+    quad('nave_rn', [(nx0, ny1, ez), (nx1, ny1, ez), (nx1, ymn, rz), (nx0, ymn, rz)], 'zinc', Z, outward=(-20, ymn, 8.2), lm=0.7)
+    quad('nave_gable', [(nx0, ny0, 8), (nx0, ny1, 8), (nx0, ny1, ez), (nx0, ymn, rz), (nx0, ny0, ez)], T, Z, outward=(-20, ymn, 8.2))
+    oc = [(nx0 - 0.03, ymn + 0.5 * math.cos(2 * math.pi * i / 16), 9.05 + 0.5 * math.sin(2 * math.pi * i / 16)) for i in range(16)]
+    mesh('nave_oculus', oc, [tuple(range(16))], 'glass_dark', Z, outward=(-20, ymn, 9.05))
     quad('ww_win', [(-24, -5.53, 5.0), (-13, -5.53, 5.0), (-13, -5.53, 6.2), (-24, -5.53, 6.2)], 'glass_dark', Z)
     for n, (a, b, c, d) in enumerate([(-24.06, -12.94, 4.94, 5.0), (-24.06, -12.94, 6.2, 6.26), (-24.06, -24, 5.0, 6.2), (-13, -12.94, 5.0, 6.2)]):
         box('ww_wf%d' % n, (a, -5.58, c), (b, -5.5, d), 'bronze', Z, skip='y+')
@@ -353,11 +456,13 @@ def lights(scale=1.0):
 def info():
     L.INFO.update(dict(
         sun=list(L.sun_dir(SUN_AZ, SUN_EL)), eye=1.62,
-        zones=dict(lobby=[LX0, LY0, 0, LX1, LY1, LS], gallery=[GX0, GY0, 0, GX1, GY1, GH]),
-        views=dict(exterior=dict(target=[3, 3, 4.5], pos=[36, -58, 15]), lobby=dict(pos=[0.6, 2.4, 1.62], look=[-2.5, 12, 4.4]), gallery=dict(pos=[13.0, 7.7, 1.62], look=[17, 7.3, 1.6])),
+        zones=dict(lobby=[LX0, LY0, 0, LX1, LY1, LS], gallery=[GX0, GY0, 0, GX1, GY1, GH], med=[MX0, MY0, 0, MX1, MY1, 8.3]),
+        portals=dict(gallery=[PY0 + 0.45, PY1 - 0.45], med=[QY0 + 0.35, QY1 - 0.35]),
+        views=dict(exterior=dict(target=[3, 3, 4.5], pos=[36, -58, 15]), lobby=dict(pos=[0.6, 2.4, 1.62], look=[-2.5, 12, 4.4]), gallery=dict(pos=[13.0, 7.7, 1.62], look=[17, 7.3, 1.6]),
+                   medieval=dict(pos=[-13.3, 13.5, 1.62], look=[-31, 13.5, 2.5])),
         hang=[dict(id=h[0], wall=h[1], s=h[2], w=h[3], h=h[4]) for h in HANG], label_grid=list(LABEL_GRID),
     ))
 
 
 def build():
-    lobby(); gallery(); exterior(); info()
+    lobby(); gallery(); medieval(); exterior(); info()

@@ -36,7 +36,7 @@
 | `tex/lawn.webp` | GPT-Image 生成 | 512×512 | 入场景后：饱和度 ×0.78、均值 96，缩到 512px |
 | `tex/hedge.webp` | GPT-Image 生成 | 512×512 |  |
 
-## 画作 p01–p08
+## 现代展厅画作 p01–p08
 
 | 文件 | 来源 | 像素 | 说明 |
 | --- | --- | --- | --- |
@@ -49,7 +49,7 @@
 | `art/p07.webp` | GPT-Image 生成 | 1024×1024 |  |
 | `art/p08.webp` | GPT-Image 生成 | 1024×683 |  |
 
-## 画作 p09–p16、挂毯 m01
+## 现代展厅画作 p09–p16、挂毯 m01
 
 | 文件 | 来源 | 像素 | 说明 |
 | --- | --- | --- | --- |
@@ -76,9 +76,41 @@
 | `gfx/banner_a.webp` | 代码排版（系统字体） | 512×1920 |  |
 | `gfx/banner_b.webp` | 代码排版（系统字体） | 512×1920 |  |
 
+## 中世纪展厅画作 md01–md11
+
+| 文件 | 来源 | 像素 | 说明 |
+| --- | --- | --- | --- |
+| `art/md01.webp` | GPT-Image 生成 | 1536×1024 |  |
+| `art/md02.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md03.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md04.webp` | GPT-Image 生成 | 1024×683 |  |
+| `art/md05.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md06.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md07.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md08.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md09.webp` | GPT-Image 生成 | 683×1024 |  |
+| `art/md10.webp` | GPT-Image 生成 | 1024×683 |  |
+| `art/md11.webp` | GPT-Image 生成 | 1024×341 |  |
+
+## 中世纪展厅材质
+
+| 文件 | 来源 | 像素 | 说明 |
+| --- | --- | --- | --- |
+| `tex/med_wall.webp` | GPT-Image 生成 | 512×512 |  |
+| `tex/med_floor.webp` | 生成原图 + 代码合成 | 1024×1024 |  |
+| `tex/med_stone.webp` | 生成原图 + 代码合成 | 1024×1024 |  |
+
+## 中世纪展厅文字与展签（代码排版）
+
+| 文件 | 来源 | 像素 | 说明 |
+| --- | --- | --- | --- |
+| `gfx/labels_med.webp` | 代码排版（系统字体） | 1280×768 |  |
+| `gfx/medtitle.webp` | 代码排版（系统字体） | 1100×1000 |  |
+| `gfx/medsign.webp` | 代码排版（系统字体） | 1600×200 |  |
+
 ## 其他
 
 - 光照贴图 `lm_ext.webp`、`lm_lobby.webp`、`lm_gallery.webp`：Blender 5.2 Cycles 烘焙（本项目脚本 `tools/bl/`），OIDN 降噪。
 - 模型 `scene.glb`：`tools/bl/scene.py` 程序化生成。
 - 运行库：three.js r187（MIT）。
-- 画作的作者姓名、标题、年份均为虚构。
+- 画作的作者姓名、标题、年份均为虚构；中世纪展厅的作品是按中世纪绘画的形式和技法新作的图像，不是任何现存作品的复制或临摹。

@@ -2,7 +2,8 @@
    python3 tools/sources.py"""
 import json, os, shutil
 R = os.path.abspath(os.path.join(os.path.dirname(__file__), '..')); os.makedirs(os.path.join(R, 'sources'), exist_ok=True)
-GROUPS = [('stone', '石材 / 混凝土 / 墙面'), ('wood', '木材 / 金属 / 皮革'), ('nature', '天空 / 树木 / 草地'), ('paintA', '画作 p01–p08'), ('paintB', '画作 p09–p16、挂毯 m01'), ('gfx', '文字与平面（代码排版）')]
+GROUPS = [('stone', '石材 / 混凝土 / 墙面'), ('wood', '木材 / 金属 / 皮革'), ('nature', '天空 / 树木 / 草地'), ('paintA', '现代展厅画作 p01–p08'), ('paintB', '现代展厅画作 p09–p16、挂毯 m01'), ('gfx', '文字与平面（代码排版）'),
+          ('medart', '中世纪展厅画作 md01–md11'), ('medtex', '中世纪展厅材质'), ('medgfx', '中世纪展厅文字与展签（代码排版）')]
 ADJ = {'tex/concrete.webp': '入场景后：大尺度云斑减到 30%，保留细颗粒', 'tex/lawn.webp': '入场景后：饱和度 ×0.78、均值 96，缩到 512px', 'tex/sky.webp': '入场景后：缩到 2048×512',
        'tex/tree_a.webp': '入场景后：缩到 768px', 'tex/tree_b.webp': '入场景后：缩到 768px', 'tex/tree_c.webp': '入场景后：缩到 768px'}
 KIND = {'generated': 'GPT-Image 生成', 'composed': '代码合成'}
@@ -18,7 +19,7 @@ for g, title in GROUPS:
     out += ['## ' + title, '', '| 文件 | 来源 | 像素 | 说明 |', '| --- | --- | --- | --- |']
     for e in m:
         f = e['file'].replace('assets/', ''); kind = KIND.get(e.get('source'), e.get('source'))
-        if g == 'gfx': kind = '代码排版（系统字体）'
+        if g in ('gfx', 'medgfx'): kind = '代码排版（系统字体）'
         elif e.get('source') == 'composed': kind = '生成原图 + 代码合成'
         px = '×'.join(str(v) for v in (e.get('px') or []))
         note = ADJ.get(f, '')
@@ -26,5 +27,5 @@ for g, title in GROUPS:
         out.append('| `%s` | %s | %s | %s |' % (f, kind, px, note))
     out.append('')
 out += ['## 其他', '', '- 光照贴图 `lm_ext.webp`、`lm_lobby.webp`、`lm_gallery.webp`：Blender 5.2 Cycles 烘焙（本项目脚本 `tools/bl/`），OIDN 降噪。',
-        '- 模型 `scene.glb`：`tools/bl/scene.py` 程序化生成。', '- 运行库：three.js r187（MIT）。', '- 画作的作者姓名、标题、年份均为虚构。', '']
+        '- 模型 `scene.glb`：`tools/bl/scene.py` 程序化生成。', '- 运行库：three.js r187（MIT）。', '- 画作的作者姓名、标题、年份均为虚构；中世纪展厅的作品是按中世纪绘画的形式和技法新作的图像，不是任何现存作品的复制或临摹。', '']
 open(os.path.join(R, 'SOURCES.md'), 'w').write('\n'.join(out)); print('SOURCES.md', len(out), 'lines')
