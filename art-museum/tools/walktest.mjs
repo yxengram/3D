@@ -22,13 +22,15 @@ await p.keyboard.down('KeyW'); await wait(1500); await p.keyboard.up('KeyW'); aw
 await p.mouse.move(640, 400); await p.mouse.down(); await p.mouse.move(440, 400, { steps: 8 }); await p.mouse.up(); await wait(400); R.afterDrag = await state();
 await p.mouse.click(640, 620); await wait(2500); R.afterClickMove = await state();
 await p.screenshot({ path: path.join(root, '.shots', 'ui_lobby.png') });
+await p.keyboard.press('4'); await wait(900); R.medieval = await state();
+await p.screenshot({ path: path.join(root, '.shots', 'ui_medieval.png') });
 await p.keyboard.press('3'); await wait(900); R.gallery = await state(); await p.mouse.wheel(0, -500); await wait(500); R.galleryZoom = await state();
 await p.screenshot({ path: path.join(root, '.shots', 'ui_gallery.png') });
 // route check: every 0.25 m along plaza -> door -> lobby -> portal -> gallery must be walkable; and walls must block
 R.route = await p.evaluate(() => {
-  const c = window.__museum.ctl; const pts = [[0, -30], [0, -8], [0, -3], [0, 2], [6, 7.7], [10.5, 7.7], [12.5, 7.7], [15, 7.7], [15, 3], [24, 3], [24, 12.5], [34, 12.5], [34, 8]]; const bad = [];
+  const c = window.__museum.ctl; const pts = [[0, -30], [0, -8], [0, -3], [0, 2], [6, 7.7], [10.5, 7.7], [12.5, 7.7], [15, 7.7], [15, 3], [24, 3], [24, 12.5], [34, 12.5], [34, 3], [15, 3], [15, 7.7], [8, 7.7], [1.5, 8], [1.5, 12.75], [-8, 12.75], [-10, 13.5], [-12.5, 13.5], [-13.5, 15.2], [-27.4, 15.2], [-27.4, 12]]; const bad = [];
   for (let i = 0; i + 1 < pts.length; i++) { const [a, b] = [pts[i], pts[i + 1]]; const n = Math.ceil(Math.hypot(b[0] - a[0], b[1] - a[1]) / 0.25); for (let k = 0; k <= n; k++) { const x = a[0] + (b[0] - a[0]) * k / n, y = a[1] + (b[1] - a[1]) * k / n; if (!c.free(x, -y)) bad.push([+x.toFixed(2), +y.toFixed(2)]); } }
-  const blocked = [[-11.2, 5], [11.2, 3], [17.2, 8], [0, 15.6], [25, -8], [5, -0.05], [-9, 6], [-6, 10.4], [37.6, 8], [22, 8]].filter(([x, y]) => c.free(x, -y));
+  const blocked = [[-11.2, 5], [11.2, 3], [17.2, 8], [0, 15.6], [25, -8], [5, -0.05], [-9, 6], [-6, 10.4], [37.6, 8], [22, 8], [-11.4, 11], [-11.4, 15.2], [-29, 13.5], [-20, 17], [-17, 13.5]].filter(([x, y]) => c.free(x, -y));
   return { unwalkable: bad.slice(0, 6), shouldBeBlockedButFree: blocked };
 });
 // walk physically from the lobby start to the gallery with the keyboard-free goal mechanism

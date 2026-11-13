@@ -20,7 +20,7 @@ body.ready #ui{opacity:1}
 #hint{font-size:12px;letter-spacing:.08em;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.55);opacity:0;transition:opacity .8s}
 #hint.on{opacity:.82}
 #tabs{display:flex;gap:2px;padding:3px;border-radius:999px;background:rgba(18,19,22,.42);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);pointer-events:auto}
-#tabs button{all:unset;cursor:pointer;font-size:13px;letter-spacing:.18em;padding:7px 16px 7px 18px;border-radius:999px;color:rgba(255,255,255,.72);transition:background .25s,color .25s}
+#tabs button{all:unset;cursor:pointer;font-size:13px;letter-spacing:.14em;padding:7px 14px 7px 16px;white-space:nowrap;border-radius:999px;color:rgba(255,255,255,.72);transition:background .25s,color .25s}
 #tabs button:hover{color:#fff}
 #tabs button.on{background:rgba(255,255,255,.9);color:#1c1d20}
 #tabs button:focus-visible{outline:2px solid #fff;outline-offset:2px}
@@ -38,7 +38,7 @@ body.fail #hint{opacity:.9;font-size:14px}
 <body>
 <canvas id="c" aria-label="艺术博物馆三维场景"></canvas>
 <div id="bar"></div>
-<div id="ui"><div id="hint" aria-live="polite"></div><div id="tabs"><button data-view="exterior">外观</button><button data-view="lobby">大厅</button><button data-view="gallery">展厅</button></div></div>
+<div id="ui"><div id="hint" aria-live="polite"></div><div id="tabs"><button data-view="exterior">外观</button><button data-view="lobby">大厅</button><button data-view="gallery">现代展厅</button><button data-view="medieval">中世纪展厅</button></div></div>
 <div id="fade"></div>
 <script type="module" src="./src/main.js"></script>
 </body>

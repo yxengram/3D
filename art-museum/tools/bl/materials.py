@@ -33,6 +33,17 @@ def define():
     defmat('fixture', (0.015, 0.015, 0.015), kind='unlit')           # tracks, spot housings, wires
     defmat('water', kind='ghost')
     for t in ('tree_a', 'tree_b', 'tree_c'): defmat(t, (0.10, 0.16, 0.05), kind='cutout', tex='tex/%s.webp' % t)
+    # medieval gallery
+    defmat('med_wall', (0.020, 0.052, 0.058), (2, 2), tex='tex/med_wall.webp')
+    defmat('med_floor', (0.13, 0.075, 0.05), (2.4, 2.4), tex='tex/med_floor.webp', tint=(0.80, 0.80, 0.82))
+    defmat('med_stone', (0.42, 0.38, 0.32), (2.4, 2.4), tex='tex/med_stone.webp')
+    defmat('med_vault', (0.60, 0.55, 0.47), (2, 2), tex='tex/plaster.webp', tint=(0.93, 0.87, 0.77))   # warm limewash on the vault
+    defmat('gilt', (0.42, 0.28, 0.085)); defmat('iron', (0.022, 0.022, 0.026))
+    defmat('cove', (1.0, 0.76, 0.50), kind='emit', emit=4.5)        # hidden strip on the cornice that washes the vault
+    for i in range(1, 12): defmat('md%02d' % i, (0.38, 0.27, 0.12), kind='lit', tex='art/md%02d.webp' % i, alpha=i <= 4)   # md01-04 are shaped panels (alpha cut-out)
+    defmat('labels_med', (0.85, 0.85, 0.83), kind='lit', tex='gfx/labels_med.webp')
+    defmat('gfx_medtitle', (0.14, 0.127, 0.10), kind='decal', tex='gfx/medtitle.webp')   # cream lettering, dimmed to the room's light level (decals are unlit)
+    defmat('gfx_medsign', (0.020, 0.014, 0.010), kind='decal', tex='gfx/medsign.webp')
     # pictures
     for p in PAINTINGS + ['m01']: defmat(p, (0.35, 0.33, 0.30), kind='lit', tex='art/%s.webp' % p)
     defmat('labels', (0.85, 0.85, 0.83), kind='lit', tex='gfx/labels.webp')

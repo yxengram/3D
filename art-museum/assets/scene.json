@@ -346,6 +346,237 @@
    "tex": "tex/tree_c.webp",
    "emit": 0.0
   },
+  "med_wall": {
+   "color": [
+    0.0193,
+    0.0545,
+    0.0614
+   ],
+   "kind": "lit",
+   "tex": "tex/med_wall.webp",
+   "emit": 0.0
+  },
+  "med_floor": {
+   "color": [
+    0.21744,
+    0.08192,
+    0.049609999999999994
+   ],
+   "kind": "lit",
+   "tex": "tex/med_floor.webp",
+   "emit": 0.0,
+   "tint": [
+    0.8,
+    0.8,
+    0.82
+   ]
+  },
+  "med_stone": {
+   "color": [
+    0.492,
+    0.4219,
+    0.3368
+   ],
+   "kind": "lit",
+   "tex": "tex/med_stone.webp",
+   "emit": 0.0
+  },
+  "med_vault": {
+   "color": [
+    0.783618,
+    0.70905,
+    0.593362
+   ],
+   "kind": "lit",
+   "tex": "tex/plaster.webp",
+   "emit": 0.0,
+   "tint": [
+    0.93,
+    0.87,
+    0.77
+   ]
+  },
+  "gilt": {
+   "color": [
+    0.42,
+    0.28,
+    0.085
+   ],
+   "kind": "lit",
+   "tex": null,
+   "emit": 0.0
+  },
+  "iron": {
+   "color": [
+    0.022,
+    0.022,
+    0.026
+   ],
+   "kind": "lit",
+   "tex": null,
+   "emit": 0.0
+  },
+  "cove": {
+   "color": [
+    1.0,
+    0.76,
+    0.5
+   ],
+   "kind": "emit",
+   "tex": null,
+   "emit": 4.5
+  },
+  "md01": {
+   "color": [
+    0.4016,
+    0.2161,
+    0.0891
+   ],
+   "kind": "lit",
+   "tex": "art/md01.webp",
+   "emit": 0.0,
+   "alpha": true
+  },
+  "md02": {
+   "color": [
+    0.3301,
+    0.1596,
+    0.0635
+   ],
+   "kind": "lit",
+   "tex": "art/md02.webp",
+   "emit": 0.0,
+   "alpha": true
+  },
+  "md03": {
+   "color": [
+    0.376,
+    0.1943,
+    0.0803
+   ],
+   "kind": "lit",
+   "tex": "art/md03.webp",
+   "emit": 0.0,
+   "alpha": true
+  },
+  "md04": {
+   "color": [
+    0.3864,
+    0.1827,
+    0.0684
+   ],
+   "kind": "lit",
+   "tex": "art/md04.webp",
+   "emit": 0.0,
+   "alpha": true
+  },
+  "md05": {
+   "color": [
+    0.374,
+    0.164,
+    0.0226
+   ],
+   "kind": "lit",
+   "tex": "art/md05.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md06": {
+   "color": [
+    0.3524,
+    0.1283,
+    0.0358
+   ],
+   "kind": "lit",
+   "tex": "art/md06.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md07": {
+   "color": [
+    0.3749,
+    0.1841,
+    0.0649
+   ],
+   "kind": "lit",
+   "tex": "art/md07.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md08": {
+   "color": [
+    0.6277,
+    0.4388,
+    0.2828
+   ],
+   "kind": "lit",
+   "tex": "art/md08.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md09": {
+   "color": [
+    0.5909,
+    0.4059,
+    0.2565
+   ],
+   "kind": "lit",
+   "tex": "art/md09.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md10": {
+   "color": [
+    0.3402,
+    0.2235,
+    0.1514
+   ],
+   "kind": "lit",
+   "tex": "art/md10.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "md11": {
+   "color": [
+    0.512,
+    0.2479,
+    0.0779
+   ],
+   "kind": "lit",
+   "tex": "art/md11.webp",
+   "emit": 0.0,
+   "alpha": false
+  },
+  "labels_med": {
+   "color": [
+    0.8334,
+    0.8194,
+    0.7755
+   ],
+   "kind": "lit",
+   "tex": "gfx/labels_med.webp",
+   "emit": 0.0
+  },
+  "gfx_medtitle": {
+   "color": [
+    0.14,
+    0.127,
+    0.1
+   ],
+   "kind": "decal",
+   "tex": "gfx/medtitle.webp",
+   "emit": 0.0
+  },
+  "gfx_medsign": {
+   "color": [
+    0.02,
+    0.014,
+    0.01
+   ],
+   "kind": "decal",
+   "tex": "gfx/medsign.webp",
+   "emit": 0.0
+  },
   "p01": {
    "color": [
     0.4978,
@@ -600,17 +831,17 @@
  "lm": {
   "ext": {
    "file": "lm_ext.webp",
-   "range": 5.7402,
-   "median": 3.145,
+   "range": 5.7442,
+   "median": 3.1315,
    "res": 2048,
-   "texels_per_m": 16.7
+   "texels_per_m": 16.66
   },
   "lobby": {
    "file": "lm_lobby.webp",
-   "range": 4.6886,
-   "median": 0.5339,
+   "range": 4.6878,
+   "median": 0.5297,
    "res": 2048,
-   "texels_per_m": 36.16
+   "texels_per_m": 36.09
   },
   "gallery": {
    "file": "lm_gallery.webp",
@@ -618,9 +849,22 @@
    "median": 0.66,
    "res": 2048,
    "texels_per_m": 52.64
+  },
+  "med": {
+   "file": "lm_med.webp",
+   "range": 2.1871,
+   "median": 0.1367,
+   "res": 1024,
+   "texels_per_m": 30.53
   }
  },
  "walk": [
+  [
+   -12.4,
+   12.549999999999999,
+   -10.2,
+   14.450000000000001
+  ],
   [
    -10.55,
    0.5,
@@ -644,6 +888,12 @@
    1.45,
    36.949999999999996,
    14.55
+  ],
+  [
+   -27.65,
+   10.95,
+   -12.200000000000001,
+   16.05
   ],
   [
    -47.4,
@@ -736,6 +986,18 @@
    7.4,
    33.85,
    8.6
+  ],
+  [
+   -18.05,
+   12.9,
+   -15.350000000000001,
+   14.1
+  ],
+  [
+   -24.450000000000003,
+   12.9,
+   -21.75,
+   14.1
   ],
   [
    -11.5,
@@ -1057,12 +1319,14 @@
   ]
  ],
  "tris": {
-  "ext_fx": 224,
-  "ext_lit": 1028,
+  "ext_fx": 238,
+  "ext_lit": 1043,
   "gallery_fx": 880,
   "gallery_lit": 928,
-  "lobby_fx": 1582,
-  "lobby_lit": 2770
+  "lobby_fx": 1584,
+  "lobby_lit": 2841,
+  "med_fx": 810,
+  "med_lit": 1513
  },
  "sun": [
   0.8029647469520569,
@@ -1086,6 +1350,24 @@
    37.4,
    15.0,
    5.6
+  ],
+  "med": [
+   -31.0,
+   10.5,
+   0,
+   -11.8,
+   16.5,
+   8.3
+  ]
+ },
+ "portals": {
+  "gallery": [
+   6.15,
+   9.25
+  ],
+  "med": [
+   12.549999999999999,
+   14.450000000000001
   ]
  },
  "views": {
@@ -1123,6 +1405,18 @@
     17,
     7.3,
     1.6
+   ]
+  },
+  "medieval": {
+   "pos": [
+    -13.3,
+    13.5,
+    1.62
+   ],
+   "look": [
+    -31,
+    13.5,
+    2.5
    ]
   }
  },

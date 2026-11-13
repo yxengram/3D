@@ -1,0 +1,62 @@
+[
+ {
+  "file": "assets/tex/med_wall.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of a wall painted in deep blue-green matt distemper (limewash paint brushed over smooth plaster), seen perfectly frontally like a flatbed scan (orthographic, no perspective). The image shows about 2 m by 2 m of one continuous uninterrupted painted surface. Colour: dark muted teal blue-green, close to sRGB (38, 66, 70), the same hue everywhere. Very subtle, soft, brushy mottling left by a wide brush used in short criss-cross strokes: barely visible tone variation of only a few percent, fine and even all over, with no large patches and no streaks. Chalky dead-matt finish. Perfectly even, shadowless diffuse lighting: no highlights, no sheen, no shadows, no gradient, no vignette, the same brightness from corner to corner. No cracks, no stains, no drips, no joints, no marks, no objects, no text. The painted wall fills the image edge to edge.",
+  "post": "src_wall-20261113-055456.webp: flatten (sigma 10%), make_tileable band 12%, periodic flatten, periodic Lanczos to 512, row/column band removal, detail amplitude evened along rows/columns; luminance detail (clipped at 3.5 sigma) rescaled to 3% relative std on the fixed tint sRGB (38,66,70); mean 58; WebP q100 (lossy): at q88 the encoder flattens this +-2-level detail into 4 kB of blocks (rel. std 2.2%, visible 8 px blocking when the lightmap brightens it)",
+  "px": [
+   512,
+   512
+  ],
+  "tile_m": [
+   2,
+   2
+  ],
+  "mean_linear": [
+   0.0193,
+   0.0545,
+   0.0614
+  ]
+ },
+ {
+  "file": "assets/tex/med_floor.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of one single continuous surface of worn unglazed handmade terracotta (fired red clay, like the face of one enormous old floor tile), seen from straight above like a flatbed scan (orthographic, no perspective). The image shows about 1.2 m by 1.2 m of uninterrupted material: warm terracotta red with orange-brown and brick tones, completely matt, fine sandy grain, many small darker and paler mineral specks, soft cloudy tonal variation from firing, gentle foot wear and a few tiny pits. Even character all over with no large patches. Perfectly even, shadowless diffuse lighting: no highlights, no gloss, no shadows, no gradient, no vignette, the same brightness from corner to corner. No joints, no grout lines, no tile edges, no grid, no cracks, no stains, no objects, no text. The terracotta fills the image edge to edge. | Flat-lit albedo texture photograph of one single continuous surface of dark slate-green, almost black, unglazed floor stone (honed dark slate with a slight green cast, like the face of one enormous old floor tile), seen from straight above like a flatbed scan (orthographic, no perspective). The image shows about 1.2 m by 1.2 m of uninterrupted material: very dark greenish charcoal, completely matt, fine grain, faint cloudy tonal variation, sparse tiny paler flecks, soft dull scuffs from foot wear. Even character all over with no large patches, no veins. Perfectly even, shadowless diffuse lighting: no highlights, no gloss, no reflections, no shadows, no gradient, no vignette, the same brightness from corner to corner. No joints, no grout lines, no tile edges, no grid, no cracks, no layered cleft ridges, no stains, no objects, no text. The slate fills the image edge to edge.",
+  "post": "src_terracotta-20261113-055551.webp + src_slate-20261113-055653.webp: each flattened (sigma 12%) and scaled x0.75 (terracotta saturation x0.80, G x0.94, B x0.92: worn brick red); 64 tiles of 128 px (30 cm) in a checkerboard, every tile its own crop (32 of the 36 non-overlapping 128 px cells of each material, none used twice, random rotation/mirror), per-tile mean equalised then +-6% tone (values handed out so that light and dark tiles do not cluster) and +-1.2% warm/cool; rounded-rectangle tile outline with noise-wobbled edge and 5-10 mm worn corners, ~1 cm pale rubbed band along the edges; 4 mm (1.71 px, antialiased) pale lime joints centred on tile borders and on the texture border; tile gain iterated so the composite mean is 92",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.4,
+   2.4
+  ],
+  "mean_linear": [
+   0.2719,
+   0.1024,
+   0.0605
+  ]
+ },
+ {
+  "file": "assets/tex/med_stone.webp",
+  "source": "composed",
+  "model": "gpt-image-2.6-sunburst",
+  "prompt": "Flat-lit albedo texture photograph of one single continuous face of warm cream-grey fine-grained limestone, hand-dressed, seen perfectly frontally like a flatbed scan (orthographic, no perspective). The image shows an area about 3.6 m wide by 2.4 m high of uninterrupted stone: pale warm cream to light grey-beige, matt, fine even grain with tiny fossil specks and a few small pores, and faint fine parallel tooling marks (shallow close-set diagonal chisel strokes, each only a few millimetres wide) covering the whole surface evenly. Subtle low contrast, soft cloudy tonal variation, no large patches, no veins. Perfectly even, shadowless diffuse lighting: no highlights, no shadows, no gradient, no vignette, the same brightness from corner to corner. No joints, no mortar lines, no block edges, no courses, no cracks, no stains, no lichen, no objects, no text. The stone fills the image edge to edge.",
+  "post": "src_limestone-20261113-055748.webp: flatten (sigma 14%), detail below 1.5 px x0.55 and 1.5-5 px x0.6 (fainter tooling marks); 8 courses of 128 px (30 cm) along u, 30 blocks of 45-90 cm = non-overlapping crops at native scale (each course from its own source band, segment order shuffled, random mirrors), perpends at least 11 cm from those of the courses above and below (cyclic), per-block mean equalised then brightness varied within +-4% (normal, sigma 2.2%, clipped) and +-0.8% warm/cool, both handed out so that light/dark and warm/cool blocks do not cluster (no repeating blotch); 3 mm (1.28 px, antialiased) joints ~20% darker than the stone, centred on course borders and on the texture border, faint soiled arris; mean set to 172",
+  "px": [
+   1024,
+   1024
+  ],
+  "tile_m": [
+   2.4,
+   2.4
+  ],
+  "mean_linear": [
+   0.4919,
+   0.4219,
+   0.3368
+  ]
+ }
+]

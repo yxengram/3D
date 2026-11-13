@@ -1,0 +1,622 @@
+[
+ {
+  "file": "assets/gfx/labels_med.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Italic",
+   "Helvetica Neue Medium",
+   "Helvetica Neue Regular",
+   "PingFang SC Medium",
+   "PingFang SC Regular",
+   "PingFang SC Semibold"
+  ],
+  "px": [
+   1280,
+   768
+  ],
+  "mode": "RGB",
+  "shown_m": [
+   0.25,
+   0.2
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 66806,
+  "previews": [
+   "raw/medgfx/preview_labels_med_grey.png",
+   "raw/medgfx/preview_labels_med_white.png"
+  ],
+  "note": "Atlas 4 columns x 3 rows, cell 320x256 px = one 0.25 x 0.20 m wall label. Cell i (row-major, row 0 at the TOP of the image, column 0 left) = md01..md11 for i = 0..10, cell 11 = plain card colour #F4F2EC. Same card design as labels.webp: card fills the whole cell (no border), text margin 22 px, text #2A2A2A / small block #55524C. Lines: artist_zh, artist_en (semi-bold / medium), date zh · en, title_zh, title_en (italic), then small: medium_zh, medium_en, dimensions h x w in cm. Long English lines break by sense into two lines (after a colon, before a bracket or \"with\"/\"of\"), long Chinese titles shrink (md01 breaks before its bracket).",
+  "uses": [
+   "raw/medart/meta.json"
+  ],
+  "atlas": {
+   "cols": 4,
+   "rows": 3,
+   "cell_px": [
+    320,
+    256
+   ],
+   "cell_m": [
+    0.25,
+    0.2
+   ],
+   "row0": "top"
+  },
+  "card_colour": "#F4F2EC",
+  "cells": [
+   {
+    "cell": 0,
+    "col": 0,
+    "row": 0,
+    "id": "md01",
+    "uv_rect_px": [
+     0,
+     0,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 2,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Twisted-Column Altarpiece"
+     ],
+     "title_zh": [
+      "圣母子登座与四圣徒",
+      "（多联祭坛画）"
+     ],
+     "title_en": [
+      "Enthroned Mother and Child",
+      "with Four Saints (polyptych)"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 20,
+     "title_en": 16,
+     "small": 12.5
+    },
+    "last_baseline_px": 233.5,
+    "tightened": 3,
+    "ink_box_px": [
+     22,
+     22,
+     295,
+     234
+    ]
+   },
+   {
+    "cell": 1,
+    "col": 1,
+    "row": 0,
+    "id": "md02",
+    "uv_rect_px": [
+     320,
+     0,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 1,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Lozenge-Apron Cross"
+     ],
+     "title_zh": [
+      "彩绘木十字架"
+     ],
+     "title_en": [
+      "Painted Cross"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 196.0,
+    "tightened": 0,
+    "ink_box_px": [
+     22,
+     22,
+     261,
+     197
+    ]
+   },
+   {
+    "cell": 2,
+    "col": 2,
+    "row": 0,
+    "id": "md03",
+    "uv_rect_px": [
+     640,
+     0,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 2,
+     "title_zh": 1,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Workshop of the Master",
+      "of the Rosette Halos"
+     ],
+     "title_zh": [
+      "圣母子登座与六天使"
+     ],
+     "title_en": [
+      "Enthroned Mother and Child",
+      "with Six Angels"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 12.75
+    },
+    "last_baseline_px": 231.0,
+    "tightened": 1,
+    "ink_box_px": [
+     22,
+     22,
+     225,
+     232
+    ]
+   },
+   {
+    "cell": 3,
+    "col": 3,
+    "row": 0,
+    "id": "md04",
+    "uv_rect_px": [
+     960,
+     0,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Red-Framed Triptych"
+     ],
+     "title_zh": [
+      "便携式三联画：圣母子与二圣徒"
+     ],
+     "title_en": [
+      "Portable Triptych:",
+      "Mother and Child with Two Saints"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 19.0,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 216.0,
+    "tightened": 0,
+    "ink_box_px": [
+     22,
+     22,
+     295,
+     217
+    ]
+   },
+   {
+    "cell": 4,
+    "col": 0,
+    "row": 1,
+    "id": "md05",
+    "uv_rect_px": [
+     0,
+     256,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 1,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Pearl-Dotted Halo"
+     ],
+     "title_zh": [
+      "持书圣徒半身像"
+     ],
+     "title_en": [
+      "A Saint Holding a Book"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 196.0,
+    "tightened": 0,
+    "ink_box_px": [
+     21,
+     22,
+     235,
+     197
+    ]
+   },
+   {
+    "cell": 5,
+    "col": 1,
+    "row": 1,
+    "id": "md06",
+    "uv_rect_px": [
+     320,
+     256,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 1,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Vermilion Archangel"
+     ],
+     "title_zh": [
+      "持杖与宝球的天使长"
+     ],
+     "title_en": [
+      "Archangel with Staff and Orb"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 196.0,
+    "tightened": 0,
+    "ink_box_px": [
+     21,
+     22,
+     247,
+     197
+    ]
+   },
+   {
+    "cell": 6,
+    "col": 2,
+    "row": 1,
+    "id": "md07",
+    "uv_rect_px": [
+     640,
+     256,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Eight-Scene Vita Panel"
+     ],
+     "title_zh": [
+      "修士圣徒立像及其生平八景"
+     ],
+     "title_en": [
+      "A Friar Saint",
+      "with Eight Scenes from His Life"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 216.0,
+    "tightened": 0,
+    "ink_box_px": [
+     21,
+     23,
+     293,
+     217
+    ]
+   },
+   {
+    "cell": 7,
+    "col": 3,
+    "row": 1,
+    "id": "md08",
+    "uv_rect_px": [
+     960,
+     256,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Scribe Initial"
+     ],
+     "title_zh": [
+      "首字母装饰页：写经的修士"
+     ],
+     "title_en": [
+      "Leaf with a Historiated Initial:",
+      "A Monk Writing"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 216.0,
+    "tightened": 0,
+    "ink_box_px": [
+     21,
+     22,
+     293,
+     217
+    ]
+   },
+   {
+    "cell": 8,
+    "col": 0,
+    "row": 2,
+    "id": "md09",
+    "uv_rect_px": [
+     0,
+     512,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 1,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Strawberry Borders"
+     ],
+     "title_zh": [
+      "月历页：收割"
+     ],
+     "title_en": [
+      "Calendar Leaf: Reaping"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 196.0,
+    "tightened": 0,
+    "ink_box_px": [
+     22,
+     22,
+     246,
+     197
+    ]
+   },
+   {
+    "cell": 9,
+    "col": 1,
+    "row": 2,
+    "id": "md10",
+    "uv_rect_px": [
+     320,
+     512,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 2,
+     "title_zh": 1,
+     "title_en": 1,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Workshop of the Master",
+      "of the Star-Field Angels"
+     ],
+     "title_zh": [
+      "三位奏乐天使"
+     ],
+     "title_en": [
+      "Three Angel Musicians"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 214.0,
+    "tightened": 0,
+    "ink_box_px": [
+     22,
+     22,
+     216,
+     215
+    ]
+   },
+   {
+    "cell": 10,
+    "col": 2,
+    "row": 2,
+    "id": "md11",
+    "uv_rect_px": [
+     640,
+     512,
+     320,
+     256
+    ],
+    "lines": {
+     "artist_en": 1,
+     "title_zh": 1,
+     "title_en": 2,
+     "small": 3
+    },
+    "breaks": {
+     "artist_en": [
+      "Master of the Red-Hood Procession"
+     ],
+     "title_zh": [
+      "城门前的行列（祭坛座画）"
+     ],
+     "title_en": [
+      "Procession before a Walled Town",
+      "(predella panel)"
+     ]
+    },
+    "sizes_px": {
+     "artist_zh": 16.5,
+     "artist_en": 14.5,
+     "date": 13.5,
+     "title_zh": 22,
+     "title_en": 16,
+     "small": 13.0
+    },
+    "last_baseline_px": 216.0,
+    "tightened": 0,
+    "ink_box_px": [
+     22,
+     22,
+     279,
+     217
+    ]
+   }
+  ]
+ },
+ {
+  "file": "assets/gfx/medtitle.webp",
+  "source": "composed",
+  "fonts": [
+   "Helvetica Neue Light",
+   "Helvetica Neue Regular",
+   "PingFang SC Light",
+   "PingFang SC Regular"
+  ],
+  "px": [
+   1100,
+   1000
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   2.2,
+   2.0
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 58552,
+  "previews": [
+   "raw/medgfx/preview_medtitle_wall.png",
+   "raw/medgfx/preview_medtitle_grey.png"
+  ],
+  "note": "Lettering on transparent for the dark blue-green wall, RGB plane uniformly warm cream #E9DFC6, left aligned, 44 px margins. Intro: 98 Chinese characters incl. punctuation (88 Han, 3 lines), 68 English words (5 lines); then the plain note that works, makers and dates are fictional; footer 展厅 2 · Gallery 2.",
+  "colour": "#E9DFC6",
+  "ink_box_px": [
+   44,
+   44,
+   1056,
+   956
+  ],
+  "text_zh": "金地不是背景，而是光本身。十三至十五世纪的画师在木板上敷石膏底、贴金箔，再以蛋彩层层细笔描绘。这些画为烛光与祈祷而作：火苗摇曳，压印的光环与金地随之明灭。请先退后看整体，再走近看笔触与金上的纹样。",
+  "text_en": "A gold ground is not a background; it is light itself. Between about 1200 and 1450 painters laid gold leaf over gesso on wooden panels and built up figures in fine strokes of egg tempera. These pictures were made for candle-light and prayer, where tooled haloes flickered with the flame. Stand back for the whole, then come close for the brushwork and the patterns punched in the gold.",
+  "note_zh": "本展厅的作品均为专为这个三维场景创作的图像，作者与年代为虚构。",
+  "note_en": "The works in this room are images made for this 3D scene; makers and dates are fictional."
+ },
+ {
+  "file": "assets/gfx/medsign.webp",
+  "source": "composed",
+  "fonts": [
+   "Optima Regular",
+   "Songti SC Bold"
+  ],
+  "px": [
+   1600,
+   200
+  ],
+  "mode": "RGBA",
+  "shown_m": [
+   2.4,
+   0.3
+  ],
+  "webp": "lossless, exact=True",
+  "bytes": 8992,
+  "previews": [
+   "raw/medgfx/preview_medsign_travertine.png",
+   "raw/medgfx/preview_medsign_grey.png"
+  ],
+  "note": "One centred line on transparent, RGB plane uniformly dark bronze #3A2E24: 展厅 2 / 中世纪绘画 in Songti SC Bold (56.5 px, tracked 0.24 em), centred dot, GALLERY 2 / MEDIEVAL PAINTING in Optima capitals (39.55 px, tracked 0.20 em), all centred on the same horizontal axis; 40 px side margins.",
+  "colour": "#3A2E24",
+  "ink_box_px": [
+   42,
+   72,
+   1557,
+   128
+  ],
+  "text": "展厅 2　中世纪绘画　·　GALLERY 2　MEDIEVAL PAINTING"
+ }
+]

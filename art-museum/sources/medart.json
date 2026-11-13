@@ -1,0 +1,310 @@
+[
+ {
+  "file": "assets/art/md01.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A museum documentation photograph of a large late-medieval polyptych altarpiece, an original work in a generic early-fourteenth-century style, egg tempera and gold leaf on wooden panels in a carved gilded frame. Five tall panels stand side by side, each with a pointed cusped (trefoil) gothic arch under a steep gable: the centre panel is clearly wider and taller than the others and shows an enthroned mother in a deep blue mantle holding a child on her lap, seated on a carved throne; on each side of it are two narrower panels, each with one full-length standing saint in long robes (rose, green, ochre and grey-blue, one holding a book, one a palm branch, one a staff, one a small model of a church), all with punched gold halos. Above each of the five gables sits a small pinnacle panel with a half-length figure, topped by carved leaf finials. Along the bottom runs a low predella strip across the full width, divided into five small narrative scenes with tiny figures and buildings. All backgrounds are burnished gold leaf with tooled and punched borders. The carved gilded wooden frame has slender twisted colonnettes with small capitals between the panels, leafy crockets along the gables and a moulded base. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small paint losses. The altarpiece is wider than tall and fills almost the full width of the image. The object is shown alone as an isolated cut-out on a fully transparent background: exactly frontal, orthographic straight-on view with no perspective and no tilt, perfectly symmetrical, centred, the whole object visible with a small empty margin on all sides. Even, diffuse, shadowless documentation light: no glare, no specular glints on the gold, no cast shadow, no ground shadow, no wall, no altar table, no plinth, no label, no text, no lettering, no inscription, no watermark. Clean crisp outer edge.",
+  "gen_args": "size 1536x1024, quality high, outputFormat webp, background transparent",
+  "raw": "raw/medart/md01-20261113-055839.webp",
+  "post": "native alpha from the generator (background transparent); alpha levels 13..245 -> 0..255, everything outside the main object removed (1 components kept: 1); crop to the object 1407x1013, premultiplied Lanczos scale x0.995, centred in 1536x1024 with >= 8 px transparent margin (object box x=68..1468 y=8..1016); isolated resize-ringing specks outside the silhouette removed (alpha is one connected component); bleed_rgb, remaining transparent area filled with the nearest bled colour; lossy WebP q90 method 6 exact (RGB kept under alpha)",
+  "mode": "RGBA",
+  "px": [
+   1536,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   3.9,
+   2.6
+  ],
+  "mean_linear": [
+   0.4015,
+   0.2161,
+   0.0891
+  ],
+  "object_box_px": [
+   68,
+   8,
+   1468,
+   1016
+  ],
+  "object_m": [
+   3.555,
+   2.559
+  ],
+  "mean_linear_note": "alpha-weighted (object pixels only)"
+ },
+ {
+  "file": "assets/art/md02.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A museum documentation photograph of a large medieval painted wooden cross made to hang above an altar, an original work in a generic thirteenth-century style, egg tempera and gold leaf on wood. The panel itself is cut in the shape of a cross: a tall vertical shaft and a horizontal crossbar, with widened rectangular terminals at the top end and at the ends of both arms, a widened rectangular foot at the bottom, and two tall rectangular apron panels flanking the shaft directly below the crossbar. Painted on it is the slender, calm, stylised figure of the crucified Christ with a gold punched halo, in ochre and olive flesh tones with a white loincloth, set against a deep blue cross-shaped field edged in red. In the left and right terminals are small half-length mourning figures, in the top terminal a small half-length angel in a roundel, in the foot a small kneeling figure. The two apron panels are covered with a geometric textile pattern of diamonds and rosettes in red, dark blue and gold. Gold-leaf borders with punched ornament; a narrow raised gilded and red moulding runs around the whole outline of the cross. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small paint losses, a few old woodworm holes. The object is shown alone as an isolated cut-out on a fully transparent background: exactly frontal, orthographic straight-on view with no perspective and no tilt, symmetrical, centred, the whole cross visible with a small empty margin on all sides, taller than wide. Even, diffuse, shadowless documentation light: no glare, no specular glints on the gold, no cast shadow, no ground shadow, no wall, no hanging chains or hardware, no plinth, no label, no text, no lettering, no inscription, no title board with letters, no watermark. Clean crisp outer edge.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp, background transparent",
+  "raw": "raw/medart/md02-20261113-055944.webp",
+  "post": "native alpha from the generator (background transparent); alpha levels 13..245 -> 0..255, everything outside the main object removed (1 components kept: 1); crop to the object 1012x1521, premultiplied Lanczos scale x0.659, centred in 683x1024 with >= 8 px transparent margin (object box x=8..675 y=11..1013); isolated resize-ringing specks outside the silhouette removed (alpha is one connected component); bleed_rgb, remaining transparent area filled with the nearest bled colour; lossy WebP q90 method 6 exact (RGB kept under alpha)",
+  "mode": "RGBA",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   1.5,
+   2.25
+  ],
+  "mean_linear": [
+   0.3301,
+   0.1596,
+   0.0635
+  ],
+  "object_box_px": [
+   8,
+   11,
+   675,
+   1013
+  ],
+  "object_m": [
+   1.465,
+   2.202
+  ],
+  "mean_linear_note": "alpha-weighted (object pixels only)"
+ },
+ {
+  "file": "assets/art/md03.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A museum documentation photograph of a tall late-medieval devotional panel painting with a pointed gabled top, an original work in a generic early-fourteenth-century style, egg tempera and gold leaf on a poplar panel. The panel is a tall rectangle that ends at the top in a steep pointed gable; its engaged carved and gilded frame follows this outline, with a plain moulded profile and small carved crockets along the gable. Painted subject: an enthroned mother in a deep ultramarine-blue mantle over a rose-red dress, seated frontally on a wide carved and inlaid wooden throne with a patterned cloth of honour, holding a small child in an ochre tunic on her lap; both have large gold halos decorated with rings of punched dots and rosettes. On each side of the throne three small angels stand one above the other, in pale rose, green and lilac robes with coloured wings. The whole background is burnished gold leaf with a tooled and punched border running along the inside of the frame. Aged surface: fine network of craquelure, worn gilding with red-brown bole showing through in places, a few small paint losses and old woodworm holes in the frame. The object is shown alone as an isolated cut-out on a fully transparent background: exactly frontal, orthographic straight-on view with no perspective and no tilt, centred, the whole object visible with a small empty margin on all sides, much taller than wide. Even, diffuse, shadowless documentation light: no glare, no specular glints on the gold, no cast shadow, no ground shadow, no wall, no hanging hardware, no plinth, no label, no text, no lettering, no inscription, no watermark. Clean crisp outer edge.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp, background transparent",
+  "raw": "raw/medart/md03-20261113-055526.webp",
+  "post": "native alpha from the generator (background transparent); alpha levels 13..245 -> 0..255, everything outside the main object removed (1 components kept: 1); crop to the object 826x1523, premultiplied Lanczos scale x0.662, centred in 683x1024 with >= 8 px transparent margin (object box x=68..615 y=8..1016); isolated resize-ringing specks outside the silhouette removed (alpha is one connected component); bleed_rgb, remaining transparent area filled with the nearest bled colour; lossy WebP q90 method 6 exact (RGB kept under alpha)",
+  "mode": "RGBA",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   1.3,
+   1.95
+  ],
+  "mean_linear": [
+   0.376,
+   0.1943,
+   0.0803
+  ],
+  "object_box_px": [
+   68,
+   8,
+   615,
+   1016
+  ],
+  "object_m": [
+   1.041,
+   1.92
+  ],
+  "mean_linear_note": "alpha-weighted (object pixels only)"
+ },
+ {
+  "file": "assets/art/md04.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "A museum documentation photograph of a small portable medieval triptych shown fully open and flat, an original work in a generic fourteenth-century style, egg tempera and gold leaf on wood. Three panels joined by small iron hinges: a centre panel with a round-arched top, and two narrower hinged wings, each shaped as half of that arch so that together they would close over the centre. Centre panel: a seated mother in a dark blue mantle holding a child, with two small kneeling angels at her feet. Left wing: a standing bearded saint in a brown habit holding a book. Right wing: a standing young female saint in a green dress and red cloak holding a palm branch. Above the figures in each wing, a small half-length angel. All backgrounds are burnished gold leaf with punched halos and tooled borders. Each panel has its own engaged frame: a raised moulding painted vermilion red with gilded inner and outer edges and small gilded rosettes. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, rubbed corners, small paint losses. The opened triptych is wider than tall and fills most of the image width. The object is shown alone as an isolated cut-out on a fully transparent background: exactly frontal, orthographic straight-on view with no perspective and no tilt, the wings lying in the same plane as the centre, symmetrical, centred, the whole object visible with a small empty margin on all sides. Even, diffuse, shadowless documentation light: no glare, no specular glints on the gold, no cast shadow, no ground shadow, no wall, no table, no stand, no label, no text, no lettering, no inscription, no watermark. Clean crisp outer edge.",
+  "gen_args": "size 1536x1024, quality high, outputFormat webp, background transparent",
+  "raw": "raw/medart/md04-20261113-060035.webp",
+  "post": "native alpha from the generator (background transparent); alpha levels 13..245 -> 0..255, everything outside the main object removed (1 components kept: 1); crop to the object 1492x999, premultiplied Lanczos scale x0.668, centred in 1024x683 with >= 8 px transparent margin (object box x=14..1010 y=8..675); isolated resize-ringing specks outside the silhouette removed (alpha is one connected component); bleed_rgb, remaining transparent area filled with the nearest bled colour; lossy WebP q90 method 6 exact (RGB kept under alpha)",
+  "mode": "RGBA",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "hang_m": [
+   1.35,
+   0.9
+  ],
+  "mean_linear": [
+   0.3863,
+   0.1827,
+   0.0683
+  ],
+  "object_box_px": [
+   14,
+   8,
+   1010,
+   675
+  ],
+  "object_m": [
+   1.313,
+   0.879
+  ],
+  "mean_linear_note": "alpha-weighted (object pixels only)"
+ },
+ {
+  "file": "assets/art/md05.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original medieval Byzantine-style icon, egg tempera and gold leaf on a wooden panel, vertical format, in a generic thirteenth-century idiom. A half-length elderly bearded saint, strictly frontal and symmetrical, with a high forehead, grey hair and a long grey beard, wearing a dark olive-brown mantle over an ochre tunic with fine gold-line highlights on the folds. He holds a closed book with a jewelled red-and-gold cover against his chest with his left hand and raises his right hand in blessing. The flesh is modelled in the traditional way: olive-green underpaint with ochre and warm pink lights and fine white highlight lines. The entire background is plain burnished gold leaf; around the head a large halo marked only by rings of punched dots and small punched rosettes in the gold. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small scattered paint losses, slightly darkened varnish. The image shows only the painted surface itself, photographed perfectly frontally like a flat museum scan under even, diffuse, shadowless light, the painting filling the image edge to edge. No frame, no raised border, no wall, no margin, no shadow, no glare, no reflections or glints on the gold, no vignette, no text, no lettering, no inscription, no monogram, no watermark.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp",
+  "raw": "raw/medart/md05-20261113-055628.webp",
+  "post": "trim 4 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88",
+  "mode": "RGB",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   0.7,
+   1.05
+  ],
+  "mean_linear": [
+   0.374,
+   0.1639,
+   0.0226
+  ]
+ },
+ {
+  "file": "assets/art/md06.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original medieval Byzantine-style icon, egg tempera and gold leaf on a wooden panel, vertical format, in a generic fourteenth-century idiom. A half-length archangel, frontal, with a youthful calm face, curly brown hair bound with a white ribbon whose ends flutter beside the ears, and large wings in brown and gold with fine gold feather lines rising behind the shoulders. The archangel wears a vermilion-red mantle over a deep blue tunic with a gold-embroidered, pearl-studded collar and cuffs. In the right hand a long slender staff, in the left hand a translucent pale-blue orb marked with a simple cross-shaped ornament (no letters). The flesh is modelled with olive-green underpaint, ochre and warm pink lights and fine white highlight lines. The entire background is plain burnished gold leaf; around the head a halo marked by a punched ring of dots in the gold. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small scattered paint losses. The image shows only the painted surface itself, photographed perfectly frontally like a flat museum scan under even, diffuse, shadowless light, the painting filling the image edge to edge. No frame, no raised border, no wall, no margin, no shadow, no glare, no reflections or glints on the gold, no vignette, no text, no lettering, no inscription, no monogram, no watermark.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp",
+  "raw": "raw/medart/md06-20261113-055723.webp",
+  "post": "trim 4 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88",
+  "mode": "RGB",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   0.7,
+   1.05
+  ],
+  "mean_linear": [
+   0.3523,
+   0.1283,
+   0.0358
+  ]
+ },
+ {
+  "file": "assets/art/md07.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original medieval vita panel, egg tempera and gold leaf on a wooden panel, vertical format, in a generic late-thirteenth-century idiom. In the centre, occupying the full height, a tall standing male saint in a plain grey-brown hooded habit with a rope belt, frontal, with a short beard and a gold punched halo, holding a closed book in one hand and a small wooden cross in the other, set against burnished gold. On the left and on the right of the figure runs a vertical column of four small square narrative scenes (eight scenes in all), each framed by a red border with a thin white line: tiny figures in simple settings — the saint giving a cloak to a beggar, preaching to birds beside a tree, kneeling in prayer before a small chapel, healing a sick man in bed, calming a wolf at a town gate, crossing water in a small boat, receiving a visitor in a rocky cave, and his funeral with mourning friars. Small simple buildings with pink and green walls, rocky hills, gold skies. A red border also surrounds the whole panel. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small scattered paint losses. The image shows only the painted surface itself, photographed perfectly frontally like a flat museum scan under even, diffuse, shadowless light, the painting filling the image edge to edge. No carved frame, no wall, no margin, no shadow, no glare, no reflections or glints on the gold, no vignette, no text, no lettering, no inscription, no captions, no watermark.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp",
+  "raw": "raw/medart/md07-20261113-060133.webp",
+  "post": "trim 4 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88",
+  "mode": "RGB",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   1.1,
+   1.65
+  ],
+  "mean_linear": [
+   0.3749,
+   0.1841,
+   0.0649
+  ]
+ },
+ {
+  "file": "assets/art/md08.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original illuminated manuscript leaf on vellum from a large medieval choir or prayer book, in a generic early-fourteenth-century gothic idiom, tempera, ink and burnished gold on parchment, vertical format. In the upper left, a large historiated initial about one third of the page high: a rounded letter shape painted in blue and rose with white filigree, on a square burnished-gold field, and inside the letter a small seated figure of a scribe monk in a grey habit writing at a sloped desk. From the initial a bar border in blue, rose and gold runs down the left margin and along the top and bottom, sprouting curling vine tendrils with small ivy leaves in blue, red and green and many small burnished gold dots and gold ivy leaves; a small bird perches in the lower border. The text block is two columns of dense, regular gothic book-hand in dark brown ink with a few small red and blue line-fillers and small coloured initials: the writing is illegible pseudo-script, rhythmic strokes that cannot be read as any real letters or words. Faint ruled lines. Creamy, slightly yellowed vellum with soft mottling, a few follicle marks, slight cockling stains and worn edges. The image shows only the flat leaf itself, photographed perfectly frontally like a flat library scan under even, diffuse, shadowless light, the vellum filling the image edge to edge. No book gutter, no second page, no background, no wall, no table, no frame, no shadow, no glare, no glints on the gold, no vignette, no readable text, no watermark.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp",
+  "raw": "raw/medart/md08-20261113-060300.webp",
+  "post": "pale backing visible around the leaf (rim, rounded corners, notches: 28709 px) filled with colours diffused in from the vellum edge + fine grain; trim 8 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88",
+  "mode": "RGB",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   0.5,
+   0.75
+  ],
+  "mean_linear": [
+   0.6278,
+   0.4387,
+   0.2828
+  ]
+ },
+ {
+  "file": "assets/art/md09.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original illuminated calendar leaf on vellum from a medieval book of hours, in a generic early-fifteenth-century gothic idiom, tempera, ink and gold on parchment, vertical format. In the upper half, a framed rectangular miniature with a thin burnished-gold frame: a summer labour of the month, two peasants reaping a field of ripe golden wheat with sickles while a third binds sheaves, a low green hill with a small thatched barn behind them, under a deep blue sky patterned with fine gold tendrils; flat, bright colours, small doll-like figures, no perspective depth. Below the miniature, about twelve lines of gothic book-hand in dark brown ink, with some lines in red and blue and a few small gold initials: the writing is illegible pseudo-script, rhythmic strokes that cannot be read as any real letters, words or numerals. All around runs a wide foliate border of fine black-ink tendrils with small gold ivy leaves, blue and red flowers and strawberries, inhabited by small beasts: a hare, a snail, a small dragon with a curling tail, a bird and a monkey. Creamy, slightly yellowed vellum with soft mottling, a few follicle marks and worn edges. The image shows only the flat leaf itself, photographed perfectly frontally like a flat library scan under even, diffuse, shadowless light, the vellum filling the image edge to edge. No book gutter, no second page, no background, no wall, no table, no frame, no shadow, no glare, no glints on the gold, no vignette, no readable text, no watermark.",
+  "gen_args": "size 1024x1536, quality high, outputFormat webp",
+  "raw": "raw/medart/md09-20261113-060405.webp",
+  "post": "pale backing visible around the leaf (rim, rounded corners, notches: 29057 px) filled with colours diffused in from the vellum edge + fine grain; trim 8 px off every edge; centre crop to 2:3; Lanczos resize to 683x1024; WebP q88",
+  "mode": "RGB",
+  "px": [
+   683,
+   1024
+  ],
+  "tile_m": null,
+  "hang_m": [
+   0.5,
+   0.75
+  ],
+  "mean_linear": [
+   0.5911,
+   0.4059,
+   0.2565
+  ]
+ },
+ {
+  "file": "assets/art/md10.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original detached medieval wall painting, a fresco fragment transferred to a flat support, in a generic late-fourteenth-century idiom, horizontal format. Three angel musicians stand side by side, shown from the knees up: the left angel plays a lute, the middle angel bows a vielle (a medieval fiddle) held at the shoulder, the right angel plays a small portative organ held on the arm. They have gentle faces, curled fair hair, plain disc halos in dull yellow ochre with traces of gilding, large wings in soft rose, green and ochre, and long robes in pale rose, sage green and warm white. Behind them a dark blue ground (azurite, uneven and partly worn to a grey-black underlayer) scattered with small eight-pointed stars in worn gilt. Matt, dry, chalky fresco surface: visible plaster grain, fine cracks, abraded passages, a few areas of loss filled with plain neutral beige plaster, the joins of the day's work faintly visible. The fragment has irregular worn edges, but the pale plaster of the support continues to all four borders so that plaster and painting completely fill the image. The image shows only this flat surface, photographed perfectly frontally like a flat museum scan under even, diffuse, shadowless light, edge to edge. No frame, no wall beyond the plaster, no margin, no shadow, no glare, no highlights, no vignette, no text, no lettering, no inscription, no watermark.",
+  "gen_args": "size 1536x1024, quality high, outputFormat webp",
+  "raw": "raw/medart/md10-20261113-060516.webp",
+  "post": "trim 4 px off every edge; centre crop to 3:2; Lanczos resize to 1024x683; WebP q88",
+  "mode": "RGB",
+  "px": [
+   1024,
+   683
+  ],
+  "tile_m": null,
+  "hang_m": [
+   1.8,
+   1.2
+  ],
+  "mean_linear": [
+   0.3403,
+   0.2234,
+   0.1514
+  ]
+ },
+ {
+  "file": "assets/art/md11.webp",
+  "source": "generated",
+  "model": "gpt-image-2.6-sunburst (tool default)",
+  "prompt": "An original medieval predella panel, egg tempera and gold leaf on a wooden panel, in a generic fourteenth-century idiom: one single long, narrow, continuous scene with no divisions. The scene is composed as a wide panoramic band for a 3:1 crop: everything important lies in the middle half of the image height, in a horizontal band running across the full width from the left edge to the right edge. In this band a procession of many small figures moves from left to right along a pale road: riders on white, bay and grey horses with red and blue harness, men on foot in short tunics and pointed hoods carrying banners (plain coloured, no emblems or letters) and long trumpets, a pair of pack mules, two small dogs. Behind them, at the right, a walled town with crenellated pink and cream walls, an open gate, tall towers and red tiled roofs, and at the left rounded rocky hills with a few small dark trees. Small doll-like figures, flat bright colours, no real perspective. Above the band, the top quarter of the image is nothing but plain burnished gold-leaf sky; below the band, the bottom quarter is nothing but plain dark green-brown ground with a few tufts of grass and small stones. Aged surface: fine craquelure, worn gilding with red-brown bole showing through, small scattered paint losses. The image shows only the painted surface itself, photographed perfectly frontally like a flat museum scan under even, diffuse, shadowless light, the painting filling the image edge to edge. No frame, no border, no wall, no margin, no shadow, no glare, no reflections or glints on the gold, no vignette, no text, no lettering, no inscription, no heraldry, no watermark.",
+  "gen_args": "size 1536x1024, quality high, outputFormat webp",
+  "raw": "raw/medart/md11-20261113-060616.webp",
+  "post": "crop x=4..1532 y=204..752 (1528x548: the whole scene band from 12 px of gold above the tallest tower to 7 px of ground below the road; the middle 512 rows would cut one of them); non-uniform Lanczos resize to 1024x341 (vertical squeeze 7.1 % relative to horizontal); WebP q88",
+  "mode": "RGB",
+  "px": [
+   1024,
+   341
+  ],
+  "tile_m": null,
+  "hang_m": [
+   2.1,
+   0.7
+  ],
+  "mean_linear": [
+   0.5121,
+   0.2479,
+   0.0779
+  ]
+ }
+]

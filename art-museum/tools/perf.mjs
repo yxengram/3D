@@ -45,8 +45,9 @@ await p.addInitScript(() => {
 const t0 = Date.now();
 await p.goto(`http://localhost:${server.address().port}/${path.basename(root)}/${pagePath}?dpr=${dpr}${arg('query') ? '&' + arg('query') : ''}`);
 await p.waitForFunction('window.__ready===true', null, { timeout: 180000 }); const load = Date.now() - t0;
+const startTex = await p.evaluate(async () => { await new Promise((r) => setTimeout(r, 800)); return window.__gpuTally().texturesMB; });
 const views = {};
-for (const v of ['exterior', 'lobby', 'gallery']) {
+for (const v of ['exterior', 'lobby', 'gallery', 'medieval']) {
   views[v] = await p.evaluate(async (v) => {
     const m = window.__museum; m.ctl.setView(v, true); m.ctl.touched = false; await new Promise((r) => setTimeout(r, 1200));
     const ts = []; let last = performance.now();
@@ -60,5 +61,5 @@ const g = await p.evaluate(() => { const m = window.__museum, c = m.renderer.get
   const w = m.renderer.domElement.width, h = m.renderer.domElement.height, samples = c.getParameter(c.SAMPLES) || 1;
   const back = (w * h * 4 * (samples + 1) + w * h * 4 * samples) / 1048576;   // MSAA colour + resolve + depth
   return { gpu: e && c.getParameter(e.UNMASKED_RENDERER_WEBGL), canvas: [w, h], samples, ...t, backbufferEstMB: +back.toFixed(1), totalMB: +(t.buffersMB + t.texturesMB + t.renderbuffersMB + back).toFixed(1), loadMsInPage: m.loadMs }; });
-console.log(JSON.stringify({ viewport: [W, H], dpr, loadMs: load, downloadMB: +(bytes / 1048576).toFixed(2), requests: reqs, views, gpu: g }, null, 1));
+console.log(JSON.stringify({ viewport: [W, H], dpr, loadMs: load, texturesAtStartMB: startTex, downloadMB: +(bytes / 1048576).toFixed(2), requests: reqs, views, gpu: g }, null, 1));
 await b.close(); server.close();

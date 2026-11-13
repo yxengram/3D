@@ -5,7 +5,7 @@
 import bpy, bmesh, math, json, os, sys, time
 from mathutils import Vector
 
-ZONES = ('ext', 'lobby', 'gallery')
+ZONES = ('ext', 'lobby', 'gallery', 'med')
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 ASSETS = os.path.join(ROOT, 'assets')
 WALK = []      # walkable rectangles [x0, y0, x1, y1] (Blender XY)
@@ -69,6 +69,14 @@ def bmat(name):
         b.inputs['Color'].default_value = (*d['color'], 1); gt = nt.nodes.new('ShaderNodeMath'); gt.operation = 'GREATER_THAN'; gt.inputs[1].default_value = 0.4
         nt.links.new(t.outputs['Alpha'], gt.inputs[0]); nt.links.new(gt.outputs[0], mix.inputs[0]); nt.links.new(tr.outputs[0], mix.inputs[1]); nt.links.new(b.outputs[0], mix.inputs[2])
         nt.links.new(mix.outputs[0], out.inputs[0])
+    elif d['kind'] == 'lit' and d.get('alpha') and d.get('tex') and os.path.exists(os.path.join(ASSETS, d['tex'])):
+        # shaped panel: lit like any surface, but shadow rays pass where the image is transparent, so it casts its own silhouette
+        img = bpy.data.images.load(os.path.join(ASSETS, d['tex'])); t = nt.nodes.new('ShaderNodeTexImage'); t.image = img
+        b = nt.nodes.new('ShaderNodeBsdfDiffuse'); b.inputs['Color'].default_value = (*d.get('bake', d['color']), 1); tr = nt.nodes.new('ShaderNodeBsdfTransparent')
+        lp = nt.nodes.new('ShaderNodeLightPath'); inv = nt.nodes.new('ShaderNodeMath'); inv.operation = 'LESS_THAN'; inv.inputs[1].default_value = 0.5
+        mul = nt.nodes.new('ShaderNodeMath'); mul.operation = 'MULTIPLY'; mix = nt.nodes.new('ShaderNodeMixShader')
+        nt.links.new(t.outputs['Alpha'], inv.inputs[0]); nt.links.new(inv.outputs[0], mul.inputs[0]); nt.links.new(lp.outputs['Is Shadow Ray'], mul.inputs[1])
+        nt.links.new(mul.outputs[0], mix.inputs[0]); nt.links.new(b.outputs[0], mix.inputs[1]); nt.links.new(tr.outputs[0], mix.inputs[2]); nt.links.new(mix.outputs[0], out.inputs[0])
     elif d['kind'] in ('glass', 'ghost', 'decal', 'cutout'):
         t = nt.nodes.new('ShaderNodeBsdfTransparent'); tint = d.get('bake_tint', 1.0); t.inputs['Color'].default_value = (tint, tint, tint, 1); nt.links.new(t.outputs[0], out.inputs[0])
     elif d['kind'] == 'emit':
@@ -220,6 +228,29 @@ def cyl(name, x, y, z0, z1, r, mat, zone='ext', lm=1.0, segs=20, caps='', r1=Non
             l[lml].uv = (u, vv); l[uvl].uv = (u / sx, (z0 + (z1 - z0) * top) / sy)
         fa.smooth = True
     for fa in bm.faces[nside:]: fa.smooth = False
+    bm.to_mesh(ob.data); bm.free()
+    return ob
+
+
+def sweep_x(name, prof, x0, x1, mat, zone='ext', lm=1.0, toward=None):
+    """Ruled surface: the polyline prof [(y, z), ...] extruded from x0 to x1 (vaults, arch soffits, door reveals).
+    toward = (y, z) the faces must look at. The whole strip is ONE unrolled lightmap chart (u = x, v = arc length), so a curved
+    vault shades continuously instead of facet by facet; UV0 runs x along u and arc length along v."""
+    d = MATS[mat]; sx, sy = d['size']; n = len(prof)
+    v = [(x0, p[0], p[1]) for p in prof] + [(x1, p[0], p[1]) for p in prof]
+    ob = mesh(name, v, [(i, i + 1, n + i + 1, n + i) for i in range(n - 1)], mat, zone, lm)
+    arc = [0.0]
+    for i in range(1, n): arc.append(arc[-1] + math.hypot(prof[i][0] - prof[i - 1][0], prof[i][1] - prof[i - 1][1]))
+    _chart[0] += 1; cid = _chart[0]
+    bm = bmesh.new(); bm.from_mesh(ob.data); bm.normal_update()
+    uvl = bm.loops.layers.uv['UVMap']; lml = bm.loops.layers.uv['LM']; cl = bm.faces.layers.int['chart']
+    for f in bm.faces:
+        if toward is not None:
+            c = f.calc_center_median()
+            if f.normal.dot(Vector((c.x, toward[0], toward[1])) - c) < 0: f.normal_flip()
+        f[cl] = cid
+        for l in f.loops:
+            i = l.vert.index % n; l[lml].uv = (l.vert.co.x - x0, arc[i]); l[uvl].uv = (l.vert.co.x / sx, arc[i] / sy)
     bm.to_mesh(ob.data); bm.free()
     return ob
 
