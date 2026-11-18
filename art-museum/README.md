@@ -36,7 +36,7 @@
   ```
 
   然后打开 http://localhost:8765/ 。
-- **想要双击就能打开的单文件版**：在本目录运行 `npm install && node tools/bundle.mjs`，会生成 `dist/艺术博物馆.html`（约 20 MB，three.js、模型和全部贴图都内嵌在里面，不需要服务器，也不需要联网）。
+- **单文件版**：下载 [`dist/艺术博物馆.html`](./dist/艺术博物馆.html)，双击就能打开。它约 20 MB，three.js、模型和全部贴图都内嵌在里面，不需要服务器，也不需要联网。改动源码后在本目录运行 `npm install && node tools/bundle.mjs` 可以重新生成它。
 
 ### 操作
 
@@ -110,6 +110,7 @@ tools/tex/        贴图后处理与排版脚本，以及当时给生成任务�
 tools/*.mjs       bundle（打包）、shot（无头截图）、perf（帧率与显存）、walktest（交互测试）
 sources/          每张素材的提示词与处理记录
 preview/          预览图
+dist/             单文件版 艺术博物馆.html，双击打开
 ```
 
 ## 重新构建
