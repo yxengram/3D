@@ -2,6 +2,7 @@ node_modules/
 .venv/
 raw/
 build/
-dist/
+dist/*
+!dist/艺术博物馆.html
 .shots/
 __pycache__/
